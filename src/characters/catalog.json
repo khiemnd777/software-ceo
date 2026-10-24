@@ -1,0 +1,50 @@
+{
+  "male-trousers": {
+    "gender": "male",
+    "bottom": "trousers",
+    "hair": "short",
+    "label": "Nam · Quần dài"
+  },
+  "male-shorts": {
+    "gender": "male",
+    "bottom": "shorts",
+    "hair": "short",
+    "label": "Nam · Quần đùi"
+  },
+  "female-trousers-short": {
+    "gender": "female",
+    "bottom": "trousers",
+    "hair": "short",
+    "label": "Nữ · Quần dài · Tóc ngắn"
+  },
+  "female-trousers-long": {
+    "gender": "female",
+    "bottom": "trousers",
+    "hair": "long",
+    "label": "Nữ · Quần dài · Tóc dài"
+  },
+  "female-skirt-long-short": {
+    "gender": "female",
+    "bottom": "skirt-long",
+    "hair": "short",
+    "label": "Nữ · Chân váy dài · Tóc ngắn"
+  },
+  "female-skirt-long-long": {
+    "gender": "female",
+    "bottom": "skirt-long",
+    "hair": "long",
+    "label": "Nữ · Chân váy dài · Tóc dài"
+  },
+  "female-skirt-short-short": {
+    "gender": "female",
+    "bottom": "skirt-short",
+    "hair": "short",
+    "label": "Nữ · Chân váy ngắn · Tóc ngắn"
+  },
+  "female-skirt-short-long": {
+    "gender": "female",
+    "bottom": "skirt-short",
+    "hair": "long",
+    "label": "Nữ · Chân váy ngắn · Tóc dài"
+  }
+}

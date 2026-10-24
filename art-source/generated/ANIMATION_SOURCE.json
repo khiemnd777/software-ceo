@@ -1,0 +1,88 @@
+{
+  "roles": {
+    "developer": [
+      "#356B74",
+      "#49858B",
+      "#28575F",
+      "#2F2C35",
+      "#E7B89A"
+    ],
+    "qa": [
+      "#687B52",
+      "#8B9E6A",
+      "#495B3A",
+      "#584433",
+      "#DDB08D"
+    ],
+    "designer": [
+      "#8B6581",
+      "#B38DA3",
+      "#704D69",
+      "#3E3034",
+      "#DFAB86"
+    ],
+    "growth": [
+      "#B27C4D",
+      "#C99A66",
+      "#8D633E",
+      "#684B35",
+      "#EBC3A2"
+    ],
+    "ops": [
+      "#526C8C",
+      "#8095B5",
+      "#3E5671",
+      "#38313D",
+      "#C68C6D"
+    ]
+  },
+  "states": [
+    "idle",
+    "working",
+    "meeting",
+    "alert",
+    "walk",
+    "walkBack",
+    "stand",
+    "turn",
+    "walkRight",
+    "walkLeft",
+    "turnRight",
+    "turnLeft"
+  ],
+  "frames": 8,
+  "fps": 8,
+  "projection": {
+    "frameSize": 256,
+    "anchor": [
+      128.0,
+      189.15931127415624
+    ],
+    "pixelsPerMeter": 88.27586206896552,
+    "framesPerState": 8,
+    "frameDurationMs": 125,
+    "states": [
+      "idle",
+      "working",
+      "meeting",
+      "alert",
+      "walk",
+      "walkBack",
+      "stand",
+      "turn"
+    ],
+    "roles": [
+      "developer",
+      "qa",
+      "designer",
+      "growth",
+      "ops"
+    ],
+    "source": "scripts/build-production-art.py",
+    "method": "authored 3D geometry frame sequences rendered with VTK; not a skeletal rig"
+  },
+  "preservedBaseline": "V4",
+  "rig": "none; explicit pose construction, smooth joint endpoints",
+  "footMinZ": 0.0025,
+  "authoringSource": "scripts/build-production-art.py"
+}

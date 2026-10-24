@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software CEO · QA LOCAL"
+  short_description: "Kiểm thử LOCAL, bằng chứng và hồ sơ bàn giao"
+  default_prompt: "Dùng $ceo-local-qa-handoff để chọn gate kiểm thử phù hợp và cập nhật checkpoint LOCAL."

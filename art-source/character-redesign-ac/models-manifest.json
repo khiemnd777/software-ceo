@@ -1,0 +1,1769 @@
+{
+  "stage": "A-C ONLY; owner model review D OPEN",
+  "generator": "scripts/character-review/build.py",
+  "dependencies": [
+    "numpy"
+  ],
+  "rig": "15 independently driven glTF joints, four-weight linear skinning; no IK solver or cloth physics",
+  "models": [
+    {
+      "file": "male-trousers.glb",
+      "sha256": "a551473b624656d2fd974e7135f33cd4c124b25da8531b53c1562d0cb7542694",
+      "bytes": 1365384,
+      "vertices": 16888,
+      "triangles": 32618,
+      "meshes": [
+        {
+          "name": "shirt-continuous-shoulders",
+          "vertices": 3540,
+          "triangles": 7076
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "neck",
+          "vertices": 676,
+          "triangles": 1316
+        },
+        {
+          "name": "skin-arm-L",
+          "vertices": 1364,
+          "triangles": 2724
+        },
+        {
+          "name": "thumb-L",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "skin-arm-R",
+          "vertices": 1454,
+          "triangles": 2904
+        },
+        {
+          "name": "thumb-R",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "trousers-connected-pelvis",
+          "vertices": 4520,
+          "triangles": 8996
+        },
+        {
+          "name": "waistband",
+          "vertices": 120,
+          "triangles": 160
+        },
+        {
+          "name": "sneaker-L",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-L",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "sneaker-R",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-R",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "face-integrated-nose",
+          "vertices": 768,
+          "triangles": 1472
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "mouth",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "hair-unified-cap",
+          "vertices": 512,
+          "triangles": 960
+        }
+      ],
+      "joints": 15,
+      "clips": [
+        "idle",
+        "working",
+        "walk",
+        "stand-up",
+        "alert",
+        "meeting"
+      ]
+    },
+    {
+      "file": "male-shorts.glb",
+      "sha256": "2e3e611707f39d011b94081a954b17f4d99d7fbe6237b7828302d57e61f13d0d",
+      "bytes": 1412432,
+      "vertices": 17532,
+      "triangles": 33859,
+      "meshes": [
+        {
+          "name": "shirt-continuous-shoulders",
+          "vertices": 3540,
+          "triangles": 7076
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "neck",
+          "vertices": 676,
+          "triangles": 1316
+        },
+        {
+          "name": "skin-arm-L",
+          "vertices": 1364,
+          "triangles": 2724
+        },
+        {
+          "name": "thumb-L",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "skin-arm-R",
+          "vertices": 1454,
+          "triangles": 2904
+        },
+        {
+          "name": "thumb-R",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "legs-under-garment",
+          "vertices": 2000,
+          "triangles": 3913
+        },
+        {
+          "name": "shorts-connected-pelvis",
+          "vertices": 3164,
+          "triangles": 6324
+        },
+        {
+          "name": "waistband",
+          "vertices": 120,
+          "triangles": 160
+        },
+        {
+          "name": "sneaker-L",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-L",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "sneaker-R",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-R",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "face-integrated-nose",
+          "vertices": 768,
+          "triangles": 1472
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "mouth",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "hair-unified-cap",
+          "vertices": 512,
+          "triangles": 960
+        }
+      ],
+      "joints": 15,
+      "clips": [
+        "idle",
+        "working",
+        "walk",
+        "stand-up",
+        "alert",
+        "meeting"
+      ]
+    },
+    {
+      "file": "female-short-long.glb",
+      "sha256": "5e1e89243af1546aa87c2142cae90957d5fd86ad2bdca2c4f1db0fb956ea2ce7",
+      "bytes": 1281568,
+      "vertices": 15510,
+      "triangles": 29596,
+      "meshes": [
+        {
+          "name": "shirt-continuous-shoulders",
+          "vertices": 3274,
+          "triangles": 6544
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "neck",
+          "vertices": 676,
+          "triangles": 1316
+        },
+        {
+          "name": "skin-arm-L",
+          "vertices": 1316,
+          "triangles": 2628
+        },
+        {
+          "name": "thumb-L",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "skin-arm-R",
+          "vertices": 1396,
+          "triangles": 2788
+        },
+        {
+          "name": "thumb-R",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "legs-under-garment",
+          "vertices": 1306,
+          "triangles": 2536
+        },
+        {
+          "name": "separate-skirt-long",
+          "vertices": 1152,
+          "triangles": 2208
+        },
+        {
+          "name": "waistband",
+          "vertices": 120,
+          "triangles": 160
+        },
+        {
+          "name": "sneaker-L",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-L",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "sneaker-R",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-R",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "face-integrated-nose",
+          "vertices": 768,
+          "triangles": 1472
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "mouth",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "hair-unified-cap",
+          "vertices": 512,
+          "triangles": 960
+        },
+        {
+          "name": "hair-bob",
+          "vertices": 1056,
+          "triangles": 1974
+        }
+      ],
+      "joints": 15,
+      "clips": [
+        "idle",
+        "working",
+        "walk",
+        "stand-up",
+        "alert",
+        "meeting"
+      ]
+    },
+    {
+      "file": "female-short-short.glb",
+      "sha256": "aed89b0a592e7055e00303a42d56ca7f4e956f09eabaa5dffdff4aedd11b4f64",
+      "bytes": 1366464,
+      "vertices": 16690,
+      "triangles": 31947,
+      "meshes": [
+        {
+          "name": "shirt-continuous-shoulders",
+          "vertices": 3274,
+          "triangles": 6544
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "neck",
+          "vertices": 676,
+          "triangles": 1316
+        },
+        {
+          "name": "skin-arm-L",
+          "vertices": 1316,
+          "triangles": 2628
+        },
+        {
+          "name": "thumb-L",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "skin-arm-R",
+          "vertices": 1396,
+          "triangles": 2788
+        },
+        {
+          "name": "thumb-R",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "legs-under-garment",
+          "vertices": 2486,
+          "triangles": 4887
+        },
+        {
+          "name": "separate-skirt-short",
+          "vertices": 1152,
+          "triangles": 2208
+        },
+        {
+          "name": "waistband",
+          "vertices": 120,
+          "triangles": 160
+        },
+        {
+          "name": "sneaker-L",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-L",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "sneaker-R",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-R",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "face-integrated-nose",
+          "vertices": 768,
+          "triangles": 1472
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "mouth",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "hair-unified-cap",
+          "vertices": 512,
+          "triangles": 960
+        },
+        {
+          "name": "hair-bob",
+          "vertices": 1056,
+          "triangles": 1974
+        }
+      ],
+      "joints": 15,
+      "clips": [
+        "idle",
+        "working",
+        "walk",
+        "stand-up",
+        "alert",
+        "meeting"
+      ]
+    },
+    {
+      "file": "female-short-trousers.glb",
+      "sha256": "3d7ecdea71fa204e0e92ea1c0d8a93c2b6a71be8513c169a93d850ee96d970ff",
+      "bytes": 1417600,
+      "vertices": 17618,
+      "triangles": 33942,
+      "meshes": [
+        {
+          "name": "shirt-continuous-shoulders",
+          "vertices": 3274,
+          "triangles": 6544
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "neck",
+          "vertices": 676,
+          "triangles": 1316
+        },
+        {
+          "name": "skin-arm-L",
+          "vertices": 1316,
+          "triangles": 2628
+        },
+        {
+          "name": "thumb-L",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "skin-arm-R",
+          "vertices": 1396,
+          "triangles": 2788
+        },
+        {
+          "name": "thumb-R",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "trousers-connected-pelvis",
+          "vertices": 4566,
+          "triangles": 9090
+        },
+        {
+          "name": "waistband",
+          "vertices": 120,
+          "triangles": 160
+        },
+        {
+          "name": "sneaker-L",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-L",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "sneaker-R",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-R",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "face-integrated-nose",
+          "vertices": 768,
+          "triangles": 1472
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "mouth",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "hair-unified-cap",
+          "vertices": 512,
+          "triangles": 960
+        },
+        {
+          "name": "hair-bob",
+          "vertices": 1056,
+          "triangles": 1974
+        }
+      ],
+      "joints": 15,
+      "clips": [
+        "idle",
+        "working",
+        "walk",
+        "stand-up",
+        "alert",
+        "meeting"
+      ]
+    },
+    {
+      "file": "female-long-long.glb",
+      "sha256": "dd2f576fd38c04a756f66b7150695bc880dd453e944414a0413d6828b3ef0ce2",
+      "bytes": 1281568,
+      "vertices": 15510,
+      "triangles": 29596,
+      "meshes": [
+        {
+          "name": "shirt-continuous-shoulders",
+          "vertices": 3274,
+          "triangles": 6544
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "neck",
+          "vertices": 676,
+          "triangles": 1316
+        },
+        {
+          "name": "skin-arm-L",
+          "vertices": 1316,
+          "triangles": 2628
+        },
+        {
+          "name": "thumb-L",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "skin-arm-R",
+          "vertices": 1396,
+          "triangles": 2788
+        },
+        {
+          "name": "thumb-R",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "legs-under-garment",
+          "vertices": 1306,
+          "triangles": 2536
+        },
+        {
+          "name": "separate-skirt-long",
+          "vertices": 1152,
+          "triangles": 2208
+        },
+        {
+          "name": "waistband",
+          "vertices": 120,
+          "triangles": 160
+        },
+        {
+          "name": "sneaker-L",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-L",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "sneaker-R",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-R",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "face-integrated-nose",
+          "vertices": 768,
+          "triangles": 1472
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "mouth",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "hair-unified-cap",
+          "vertices": 512,
+          "triangles": 960
+        },
+        {
+          "name": "hair-long",
+          "vertices": 1056,
+          "triangles": 1974
+        }
+      ],
+      "joints": 15,
+      "clips": [
+        "idle",
+        "working",
+        "walk",
+        "stand-up",
+        "alert",
+        "meeting"
+      ]
+    },
+    {
+      "file": "female-long-short.glb",
+      "sha256": "4a5e6a84cdfd578821b6f8c1deb7fd767ca6f8796100793ac49e03650f79806a",
+      "bytes": 1366464,
+      "vertices": 16690,
+      "triangles": 31947,
+      "meshes": [
+        {
+          "name": "shirt-continuous-shoulders",
+          "vertices": 3274,
+          "triangles": 6544
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "neck",
+          "vertices": 676,
+          "triangles": 1316
+        },
+        {
+          "name": "skin-arm-L",
+          "vertices": 1316,
+          "triangles": 2628
+        },
+        {
+          "name": "thumb-L",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "skin-arm-R",
+          "vertices": 1396,
+          "triangles": 2788
+        },
+        {
+          "name": "thumb-R",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "legs-under-garment",
+          "vertices": 2486,
+          "triangles": 4887
+        },
+        {
+          "name": "separate-skirt-short",
+          "vertices": 1152,
+          "triangles": 2208
+        },
+        {
+          "name": "waistband",
+          "vertices": 120,
+          "triangles": 160
+        },
+        {
+          "name": "sneaker-L",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-L",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "sneaker-R",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-R",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "face-integrated-nose",
+          "vertices": 768,
+          "triangles": 1472
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "mouth",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "hair-unified-cap",
+          "vertices": 512,
+          "triangles": 960
+        },
+        {
+          "name": "hair-long",
+          "vertices": 1056,
+          "triangles": 1974
+        }
+      ],
+      "joints": 15,
+      "clips": [
+        "idle",
+        "working",
+        "walk",
+        "stand-up",
+        "alert",
+        "meeting"
+      ]
+    },
+    {
+      "file": "female-long-trousers.glb",
+      "sha256": "02feee8ac6f93aeda946bf0389aafed6835bcec60814ac6085024bb7ba680191",
+      "bytes": 1417600,
+      "vertices": 17618,
+      "triangles": 33942,
+      "meshes": [
+        {
+          "name": "shirt-continuous-shoulders",
+          "vertices": 3274,
+          "triangles": 6544
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "neck",
+          "vertices": 676,
+          "triangles": 1316
+        },
+        {
+          "name": "skin-arm-L",
+          "vertices": 1316,
+          "triangles": 2628
+        },
+        {
+          "name": "thumb-L",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "skin-arm-R",
+          "vertices": 1396,
+          "triangles": 2788
+        },
+        {
+          "name": "thumb-R",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "trousers-connected-pelvis",
+          "vertices": 4566,
+          "triangles": 9090
+        },
+        {
+          "name": "waistband",
+          "vertices": 120,
+          "triangles": 160
+        },
+        {
+          "name": "sneaker-L",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-L",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "sneaker-R",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-R",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "face-integrated-nose",
+          "vertices": 768,
+          "triangles": 1472
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "mouth",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "hair-unified-cap",
+          "vertices": 512,
+          "triangles": 960
+        },
+        {
+          "name": "hair-long",
+          "vertices": 1056,
+          "triangles": 1974
+        }
+      ],
+      "joints": 15,
+      "clips": [
+        "idle",
+        "working",
+        "walk",
+        "stand-up",
+        "alert",
+        "meeting"
+      ]
+    }
+  ]
+}

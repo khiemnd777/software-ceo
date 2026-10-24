@@ -1,0 +1,94 @@
+{
+  "stage": "E",
+  "blender": "4.5.3 LTS",
+  "source_blend_sha256": "f3dc02a397c1e0f0749f49f2d4c250fe9a4dc52b48087a8776e36defb826e9fe",
+  "approved_female_head_glb_sha256": "e01ce899621463c5bcbf7970442ffd9096a339605ec09821f41f6288fddd686a",
+  "approved_head_mesh_hashes": {
+    "Female V3 · clipped curved iris.001 [static head]": "d546e46929ee2d2fc058eb5de2f3e574a59bb634fb53005afb20b8eb3d463048",
+    "Female V3 · side-swept fringe [static head]": "45b2442fd9bc0e988741e8819122b83134c43626d79306769e2e8524fd5b1d77",
+    "Female V3 · inner ear.001 [static head]": "2e109a78d471b6936e6be3743c57f4775f5499eca98b2900d25edfc561cc1aaf",
+    "Female V3 · rounded bob back with ear tuck [static head]": "2fd88f0144a7fe5d2fcce8c24c4e9c4be9dea417a105bde0bac3f4b38aa30eaf",
+    "Female V3 · tucked temple section [static head]": "bb8f566194938eb4c786f5a554b5a2d8b6e3d44df4b1ed8a33e787c7be309f73",
+    "Female V3 · ear [static head]": "8c40342314e663bf3b6d90fe1bc82a6663add461f9110e6e87cbec3a3749534b",
+    "Female V3 · soft upper lash line.001 [static head]": "2956b7446558666fab9556d8be9405cfd58fb5f0e2ee9b16847aeee0de19e674",
+    "Female V3 · almond eye white.001 [static head]": "56e76e92b9a5cea500261336d240633970ccc6636898c7963f1039679454a570",
+    "Female V3 · pupil [static head]": "97f1d4bdeeb691e1557ce43c14a46516e65d10e4175f2a0e16c7a94177948168",
+    "Female V3 · inner ear [static head]": "6aa334d2321eabb0dc8e03c8cac93348000bce22cc9d51698204631b940066ff",
+    "Female V3 · face with connected eyelids and lips [static head]": "6d31004184df0c25c4b1f35f3acadd0a9c24abeee88feb48f4d8f52bf139cc3a",
+    "Female V3 · tapered expressive brow.001 [static head]": "bc5c7912290cd01141ae5e0746340fcf3d913dfb16c63f31783b02f296d4641a",
+    "Female V3 · covered part-root volume [static head]": "dae817d2321311f66137651774cca7e29074791a62a31acb1b17279a396ba9f1",
+    "Female V3 · soft upper lash line [static head]": "ae9714ae9bab307e36739b6cb785c6f2487be372b31eb9b9f353b20f18194405",
+    "Female V3 · mouth cavity [static head]": "e243379663727c58087e9a67a3d889c4adad8cbc2e4b11bbc0eced090dc2b956",
+    "Female V3 · fitted scalp below swept sections [static head]": "b51fd7c02125ca63b93a2e573fab3e68564c6970b99033b16b51990a46fe6d19",
+    "Female V3 · ear.001 [static head]": "73f91a0bca5c0d2448669b62d645c7a08ee356bd5210dfa6a48fdbb9e474299a",
+    "Female V3 · tapered expressive brow [static head]": "5350491e3232ce582fee82ea04f5bf48799e12c3e4d051424169f4ae12b3c7b7",
+    "Female V3 · almond eye white [static head]": "b93d2f2591ac7bd02e5178655aa1966134478b3fb54a83931c0cc40b8ba2e81e",
+    "Female V3 · clipped curved iris [static head]": "f6fa006befdc8a174f1f81c1e5b6e36245eb08c15131bb7e637b547275e166e1",
+    "Female V3 · pupil.001 [static head]": "c5ac5407d9557c6522024e19517a1674c4eea9ec24eed8d4fa6aa6970a629ba1"
+  },
+  "approved_head_geometry_changed": false,
+  "source_file": "base-models-e.blend",
+  "source_sha256": "7732f7505b6d65557a013bbf00fffd9d239141503c3dd69c32be860853bb7732",
+  "models": [
+    {
+      "file": "male-base-e.glb",
+      "gender": "male",
+      "sha256": "02d5aa38ce9cd8cfc88020e73491c75c1e8b16fc3c0bd0c1f1bc5e7ac447d180",
+      "bytes": 9144968,
+      "triangles": 463300,
+      "bounds_z_up": {
+        "min": [
+          -0.32059961557388306,
+          -0.19078175723552704,
+          0.004007487557828426
+        ],
+        "max": [
+          0.32059961557388306,
+          0.1443810611963272,
+          1.816558837890625
+        ]
+      },
+      "rig": false
+    },
+    {
+      "file": "female-base-e.glb",
+      "gender": "female",
+      "sha256": "4edefc9e045320a6c7cc51df49d186f840526bb6f0b6fb378c51962df1ade629",
+      "bytes": 4585700,
+      "triangles": 262514,
+      "bounds_z_up": {
+        "min": [
+          -0.2792961001396179,
+          -0.19078175723552704,
+          0.0038271367084234953
+        ],
+        "max": [
+          0.2792970538139343,
+          0.14438103139400482,
+          1.7201706171035767
+        ]
+      },
+      "rig": false
+    }
+  ],
+  "trouser_retopology": [
+    {
+      "object": "Male · continuous trousers | E retopology",
+      "vertices": 652,
+      "faces": 628,
+      "all_quads": true,
+      "knee_support_rings": 5
+    },
+    {
+      "object": "Female · continuous trousers | E retopology",
+      "vertices": 652,
+      "faces": 628,
+      "all_quads": true,
+      "knee_support_rings": 5
+    }
+  ],
+  "rig": false,
+  "deformation_tested": false,
+  "full_body_owner_review": "OPEN",
+  "next_authorized_scope": "F-H, after planned review gates"
+}

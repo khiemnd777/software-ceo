@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software CEO · Save và phục hồi"
+  short_description: "IndexedDB, import/export và phục hồi save an toàn"
+  default_prompt: "Dùng $ceo-save-recovery để kiểm tra hoặc sửa save, migration và xung đột giữa các tab."

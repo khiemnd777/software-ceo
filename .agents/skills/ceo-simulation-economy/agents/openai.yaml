@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software CEO · Mô phỏng"
+  short_description: "Luật mô phỏng, nhân sự và kinh tế Software CEO"
+  default_prompt: "Dùng $ceo-simulation-economy để triển khai luật game qua public commands và kiểm tra invariants."

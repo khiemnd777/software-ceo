@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software CEO · Thiết kế game"
+  short_description: "Thiết kế vòng lặp chơi, lựa chọn và nhịp tiến trình"
+  default_prompt: "Dùng $ceo-game-design để đánh giá vòng lặp CEO và lập design brief có tiêu chí playtest, giữ V4 và T0.3."

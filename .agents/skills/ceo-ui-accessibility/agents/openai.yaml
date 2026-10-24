@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software CEO · UI và tiếp cận"
+  short_description: "HUD, bàn phím, EN/VI và khả năng tiếp cận"
+  default_prompt: "Dùng $ceo-ui-accessibility để sửa UI quản lý và xác minh thao tác bàn phím, focus, EN/VI."

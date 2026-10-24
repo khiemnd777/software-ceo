@@ -1,0 +1,4418 @@
+[
+  {
+    "options": {
+      "name": "Character preservation",
+      "strategy": "product",
+      "seed": 731,
+      "difficulty": "standard"
+    },
+    "initial": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 731,
+      "rng": 2399461017,
+      "nextId": 11,
+      "day": 0,
+      "name": "Character preservation",
+      "strategy": "product",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 7000000,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 350000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "designer",
+          "skill": 3,
+          "salary": 300000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-4",
+          "name": "Phương Lê",
+          "role": "ops",
+          "skill": 5,
+          "salary": 550000,
+          "traits": [
+            "mentor",
+            "steady"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-5",
+          "name": "Hải Đỗ",
+          "role": "developer",
+          "skill": 1,
+          "salary": 190000,
+          "traits": [
+            "learner",
+            "creative"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-6",
+          "name": "Alex Trần",
+          "role": "developer",
+          "skill": 5,
+          "salary": 620000,
+          "traits": [
+            "mentor",
+            "outspoken"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-7",
+          "name": "Mai Trần",
+          "role": "qa",
+          "skill": 5,
+          "salary": 540000,
+          "traits": [
+            "mentor",
+            "outspoken"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-8",
+          "name": "Tú Lê",
+          "role": "growth",
+          "skill": 2,
+          "salary": 260000,
+          "traits": [
+            "friendly",
+            "learner"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [
+        {
+          "id": "work-9",
+          "label": {
+            "vi": "MVP đang hoạt động",
+            "en": "Live MVP"
+          },
+          "kind": "mvp",
+          "estimated": 12,
+          "actual": 12.346,
+          "done": 12.346,
+          "effort": 0,
+          "qa": 0,
+          "debt": 0,
+          "bugs": [],
+          "status": "released",
+          "labor": 0,
+          "discovered": false,
+          "created": 0
+        }
+      ],
+      "contracts": [],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 7000000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 7000000,
+          "revenue": 0,
+          "expense": 0
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": true,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": true,
+        "paid": 35,
+        "free": 0,
+        "fit": 50,
+        "reliability": 80,
+        "awareness": 12,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 0,
+        "lastNew": 0,
+        "lastChurn": 0,
+        "churnRate": 0.04,
+        "conversion": 0.12,
+        "support": 0,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-10",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        }
+      ],
+      "months": [],
+      "weeks": [],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 7000000,
+        "monthStartCash": 7000000,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    },
+    "after": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 731,
+      "rng": 503954007,
+      "nextId": 26,
+      "day": 35,
+      "name": "Character preservation",
+      "strategy": "product",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 5862900,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 350000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "designer",
+          "skill": 3,
+          "salary": 300000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        },
+        {
+          "id": "employee-12",
+          "name": "Phương Lê",
+          "role": "ops",
+          "skill": 5,
+          "salary": 550000,
+          "traits": [
+            "mentor",
+            "steady"
+          ],
+          "variant": 0,
+          "morale": 77.5,
+          "energy": 100,
+          "hiredDay": 0,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": 0
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-16",
+          "name": "Jamie Lê",
+          "role": "qa",
+          "skill": 3,
+          "salary": 300000,
+          "traits": [
+            "meticulous",
+            "steady"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-17",
+          "name": "Chris Phạm",
+          "role": "ops",
+          "skill": 3,
+          "salary": 330000,
+          "traits": [
+            "meticulous",
+            "friendly"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-18",
+          "name": "Tâm Vũ",
+          "role": "growth",
+          "skill": 3,
+          "salary": 330000,
+          "traits": [
+            "friendly",
+            "steady"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-19",
+          "name": "Đức Phạm",
+          "role": "qa",
+          "skill": 4,
+          "salary": 420000,
+          "traits": [
+            "creative",
+            "driven"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-20",
+          "name": "Long Nguyễn",
+          "role": "ops",
+          "skill": 4,
+          "salary": 430000,
+          "traits": [
+            "outspoken",
+            "driven"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [
+        {
+          "id": "work-9",
+          "label": {
+            "vi": "MVP đang hoạt động",
+            "en": "Live MVP"
+          },
+          "kind": "mvp",
+          "estimated": 12,
+          "actual": 12.346,
+          "done": 12.346,
+          "effort": 0,
+          "qa": 0,
+          "debt": 0,
+          "bugs": [],
+          "status": "released",
+          "labor": 0,
+          "discovered": false,
+          "created": 0
+        }
+      ],
+      "contracts": [],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 7000000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 7000000,
+          "revenue": 0,
+          "expense": 0
+        },
+        {
+          "id": "txn-11",
+          "day": 0,
+          "category": "expense",
+          "label": {
+            "vi": "Chi phí tuyển dụng",
+            "en": "Recruitment fee"
+          },
+          "cash": -82500,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 82500
+        },
+        {
+          "id": "txn-21",
+          "day": 30,
+          "category": "subscription",
+          "label": {
+            "vi": "Thanh toán thuê bao tháng",
+            "en": "Monthly subscriptions"
+          },
+          "cash": 347600,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 347600,
+          "expense": 0
+        },
+        {
+          "id": "txn-23",
+          "day": 30,
+          "category": "payroll",
+          "label": {
+            "vi": "Lương tháng và tăng ca",
+            "en": "Monthly payroll and overtime"
+          },
+          "cash": -1200000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 1200000
+        },
+        {
+          "id": "txn-24",
+          "day": 30,
+          "category": "operations",
+          "label": {
+            "vi": "Văn phòng, hạ tầng và marketing",
+            "en": "Office, hosting and marketing"
+          },
+          "cash": -202200,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 202200
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": true,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": true,
+        "paid": 44,
+        "free": 0,
+        "fit": 50,
+        "reliability": 81,
+        "awareness": 11,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 92,
+        "lastNew": 11,
+        "lastChurn": 2,
+        "churnRate": 0.045038,
+        "conversion": 0.12,
+        "support": 5.988,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [
+        {
+          "id": "event-14",
+          "templateId": "people-recovery",
+          "announced": 28,
+          "due": 35,
+          "expires": 49,
+          "resolved": false
+        }
+      ],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-10",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        },
+        {
+          "id": "h-13",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Đón đồng đội mới",
+            "en": "Welcome a new teammate"
+          },
+          "body": {
+            "vi": "Phương Lê: tuần đầu 50% năng suất, tuần hai 75%.",
+            "en": "Phương Lê: 50% output in week one, 75% in week two."
+          },
+          "cause": "hire"
+        },
+        {
+          "id": "h-15",
+          "day": 28,
+          "type": "warning",
+          "title": {
+            "vi": "Tín hiệu cần theo dõi",
+            "en": "Something to watch"
+          },
+          "body": {
+            "vi": "Nhóm muốn trao đổi về nhịp làm việc trước sprint tiếp theo.",
+            "en": "Your team wants to discuss workload before the next sprint."
+          },
+          "cause": "people-recovery"
+        },
+        {
+          "id": "h-22",
+          "day": 30,
+          "type": "info",
+          "title": {
+            "vi": "Chu kỳ khách hàng mới",
+            "en": "A new customer cycle"
+          },
+          "body": {
+            "vi": "11 khách mới, 2 rời đi. Khách trả phí hiện tại: 44.",
+            "en": "11 new, 2 churned. Active paying customers: 44."
+          },
+          "cause": "product-cohort"
+        },
+        {
+          "id": "h-25",
+          "day": 30,
+          "type": "info",
+          "title": {
+            "vi": "Báo cáo tháng đã sẵn sàng",
+            "en": "Monthly review is ready"
+          },
+          "body": {
+            "vi": "Xem doanh thu, chi phí và dòng tiền thực trong Tài chính.",
+            "en": "Review revenue, expenses and cleared cash flow in Finance."
+          },
+          "cause": "month-review"
+        }
+      ],
+      "months": [
+        {
+          "month": 1,
+          "cash": 5862900,
+          "revenue": 347600,
+          "expense": 1402200,
+          "cashFlow": -1137100,
+          "operatingCashFlow": -1054600,
+          "paid": 44,
+          "free": 0,
+          "churn": 0.045038,
+          "morale": 77.66666666666667,
+          "reputation": 45,
+          "debt": 0
+        }
+      ],
+      "weeks": [
+        {
+          "week": 1,
+          "cashDelta": -82500,
+          "work": 0,
+          "morale": 76.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 2,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 76.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 3,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 4,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 5,
+          "cashDelta": -1054600,
+          "work": 0,
+          "morale": 78.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        }
+      ],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 5862900,
+        "monthStartCash": 5862900,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    }
+  },
+  {
+    "options": {
+      "name": "Character preservation",
+      "strategy": "product",
+      "seed": 2026,
+      "difficulty": "standard"
+    },
+    "initial": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 2026,
+      "rng": 2399462312,
+      "nextId": 11,
+      "day": 0,
+      "name": "Character preservation",
+      "strategy": "product",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 7000000,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 350000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "designer",
+          "skill": 3,
+          "salary": 300000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-4",
+          "name": "Kim Vũ",
+          "role": "qa",
+          "skill": 3,
+          "salary": 310000,
+          "traits": [
+            "friendly",
+            "meticulous"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-5",
+          "name": "Jamie Lê",
+          "role": "qa",
+          "skill": 3,
+          "salary": 300000,
+          "traits": [
+            "meticulous",
+            "steady"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-6",
+          "name": "Quân Trần",
+          "role": "growth",
+          "skill": 3,
+          "salary": 350000,
+          "traits": [
+            "friendly",
+            "driven"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-7",
+          "name": "Emma Phạm",
+          "role": "designer",
+          "skill": 4,
+          "salary": 440000,
+          "traits": [
+            "meticulous",
+            "steady"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-8",
+          "name": "An Lê",
+          "role": "developer",
+          "skill": 4,
+          "salary": 460000,
+          "traits": [
+            "driven",
+            "creative"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [
+        {
+          "id": "work-9",
+          "label": {
+            "vi": "MVP đang hoạt động",
+            "en": "Live MVP"
+          },
+          "kind": "mvp",
+          "estimated": 12,
+          "actual": 10.931,
+          "done": 10.931,
+          "effort": 0,
+          "qa": 0,
+          "debt": 0,
+          "bugs": [],
+          "status": "released",
+          "labor": 0,
+          "discovered": false,
+          "created": 0
+        }
+      ],
+      "contracts": [],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 7000000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 7000000,
+          "revenue": 0,
+          "expense": 0
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": true,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": true,
+        "paid": 35,
+        "free": 0,
+        "fit": 50,
+        "reliability": 80,
+        "awareness": 12,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 0,
+        "lastNew": 0,
+        "lastChurn": 0,
+        "churnRate": 0.04,
+        "conversion": 0.12,
+        "support": 0,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-10",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        }
+      ],
+      "months": [],
+      "weeks": [],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 7000000,
+        "monthStartCash": 7000000,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    },
+    "after": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 2026,
+      "rng": 503955302,
+      "nextId": 26,
+      "day": 35,
+      "name": "Character preservation",
+      "strategy": "product",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 6138900,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 350000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "designer",
+          "skill": 3,
+          "salary": 300000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        },
+        {
+          "id": "employee-12",
+          "name": "Kim Vũ",
+          "role": "qa",
+          "skill": 3,
+          "salary": 310000,
+          "traits": [
+            "friendly",
+            "meticulous"
+          ],
+          "variant": 0,
+          "morale": 77.5,
+          "energy": 100,
+          "hiredDay": 0,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": 0
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-16",
+          "name": "Tâm Vũ",
+          "role": "growth",
+          "skill": 3,
+          "salary": 330000,
+          "traits": [
+            "friendly",
+            "steady"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-17",
+          "name": "Thảo Nguyễn",
+          "role": "qa",
+          "skill": 2,
+          "salary": 240000,
+          "traits": [
+            "meticulous",
+            "learner"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-18",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 2,
+          "salary": 270000,
+          "traits": [
+            "learner",
+            "driven"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-19",
+          "name": "Alex Trần",
+          "role": "developer",
+          "skill": 5,
+          "salary": 620000,
+          "traits": [
+            "mentor",
+            "outspoken"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-20",
+          "name": "Tú Lê",
+          "role": "growth",
+          "skill": 2,
+          "salary": 260000,
+          "traits": [
+            "friendly",
+            "learner"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [
+        {
+          "id": "work-9",
+          "label": {
+            "vi": "MVP đang hoạt động",
+            "en": "Live MVP"
+          },
+          "kind": "mvp",
+          "estimated": 12,
+          "actual": 10.931,
+          "done": 10.931,
+          "effort": 0,
+          "qa": 0,
+          "debt": 0,
+          "bugs": [],
+          "status": "released",
+          "labor": 0,
+          "discovered": false,
+          "created": 0
+        }
+      ],
+      "contracts": [],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 7000000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 7000000,
+          "revenue": 0,
+          "expense": 0
+        },
+        {
+          "id": "txn-11",
+          "day": 0,
+          "category": "expense",
+          "label": {
+            "vi": "Chi phí tuyển dụng",
+            "en": "Recruitment fee"
+          },
+          "cash": -46500,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 46500
+        },
+        {
+          "id": "txn-21",
+          "day": 30,
+          "category": "subscription",
+          "label": {
+            "vi": "Thanh toán thuê bao tháng",
+            "en": "Monthly subscriptions"
+          },
+          "cash": 347600,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 347600,
+          "expense": 0
+        },
+        {
+          "id": "txn-23",
+          "day": 30,
+          "category": "payroll",
+          "label": {
+            "vi": "Lương tháng và tăng ca",
+            "en": "Monthly payroll and overtime"
+          },
+          "cash": -960000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 960000
+        },
+        {
+          "id": "txn-24",
+          "day": 30,
+          "category": "operations",
+          "label": {
+            "vi": "Văn phòng, hạ tầng và marketing",
+            "en": "Office, hosting and marketing"
+          },
+          "cash": -202200,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 202200
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": true,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": true,
+        "paid": 44,
+        "free": 0,
+        "fit": 50,
+        "reliability": 81,
+        "awareness": 11,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 92,
+        "lastNew": 11,
+        "lastChurn": 2,
+        "churnRate": 0.045038,
+        "conversion": 0.12,
+        "support": 5.988,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [
+        {
+          "id": "event-14",
+          "templateId": "warm-referral",
+          "announced": 28,
+          "due": 35,
+          "expires": 49,
+          "resolved": false
+        }
+      ],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-10",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        },
+        {
+          "id": "h-13",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Đón đồng đội mới",
+            "en": "Welcome a new teammate"
+          },
+          "body": {
+            "vi": "Kim Vũ: tuần đầu 50% năng suất, tuần hai 75%.",
+            "en": "Kim Vũ: 50% output in week one, 75% in week two."
+          },
+          "cause": "hire"
+        },
+        {
+          "id": "h-15",
+          "day": 28,
+          "type": "warning",
+          "title": {
+            "vi": "Tín hiệu cần theo dõi",
+            "en": "Something to watch"
+          },
+          "body": {
+            "vi": "Một đối tác đề nghị giới thiệu công ty với mạng lưới của họ.",
+            "en": "A partner is considering introducing your company to their network."
+          },
+          "cause": "warm-referral"
+        },
+        {
+          "id": "h-22",
+          "day": 30,
+          "type": "info",
+          "title": {
+            "vi": "Chu kỳ khách hàng mới",
+            "en": "A new customer cycle"
+          },
+          "body": {
+            "vi": "11 khách mới, 2 rời đi. Khách trả phí hiện tại: 44.",
+            "en": "11 new, 2 churned. Active paying customers: 44."
+          },
+          "cause": "product-cohort"
+        },
+        {
+          "id": "h-25",
+          "day": 30,
+          "type": "info",
+          "title": {
+            "vi": "Báo cáo tháng đã sẵn sàng",
+            "en": "Monthly review is ready"
+          },
+          "body": {
+            "vi": "Xem doanh thu, chi phí và dòng tiền thực trong Tài chính.",
+            "en": "Review revenue, expenses and cleared cash flow in Finance."
+          },
+          "cause": "month-review"
+        }
+      ],
+      "months": [
+        {
+          "month": 1,
+          "cash": 6138900,
+          "revenue": 347600,
+          "expense": 1162200,
+          "cashFlow": -861100,
+          "operatingCashFlow": -814600,
+          "paid": 44,
+          "free": 0,
+          "churn": 0.045038,
+          "morale": 77.66666666666667,
+          "reputation": 45,
+          "debt": 0
+        }
+      ],
+      "weeks": [
+        {
+          "week": 1,
+          "cashDelta": -46500,
+          "work": 0,
+          "morale": 76.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 2,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 76.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 3,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 4,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 5,
+          "cashDelta": -814600,
+          "work": 0,
+          "morale": 78.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        }
+      ],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 6138900,
+        "monthStartCash": 6138900,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    }
+  },
+  {
+    "options": {
+      "name": "Character preservation",
+      "strategy": "outsourcing",
+      "seed": 731,
+      "difficulty": "standard"
+    },
+    "initial": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 731,
+      "rng": 2399461017,
+      "nextId": 12,
+      "day": 0,
+      "name": "Character preservation",
+      "strategy": "outsourcing",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 4500000,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 330000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "qa",
+          "skill": 3,
+          "salary": 270000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-4",
+          "name": "Phương Lê",
+          "role": "ops",
+          "skill": 5,
+          "salary": 550000,
+          "traits": [
+            "mentor",
+            "steady"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-5",
+          "name": "Hải Đỗ",
+          "role": "developer",
+          "skill": 1,
+          "salary": 190000,
+          "traits": [
+            "learner",
+            "creative"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-6",
+          "name": "Alex Trần",
+          "role": "developer",
+          "skill": 5,
+          "salary": 620000,
+          "traits": [
+            "mentor",
+            "outspoken"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-7",
+          "name": "Mai Trần",
+          "role": "qa",
+          "skill": 5,
+          "salary": 540000,
+          "traits": [
+            "mentor",
+            "outspoken"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-8",
+          "name": "Tú Lê",
+          "role": "growth",
+          "skill": 2,
+          "salary": 260000,
+          "traits": [
+            "friendly",
+            "learner"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [
+        {
+          "id": "work-10",
+          "label": {
+            "vi": "Cổng quản lý cửa hàng",
+            "en": "Retail operations portal"
+          },
+          "kind": "contract",
+          "estimated": 40,
+          "actual": 41.154,
+          "done": 0,
+          "effort": 0,
+          "qa": 0,
+          "debt": 0,
+          "bugs": [],
+          "status": "active",
+          "labor": 0,
+          "discovered": false,
+          "created": 0,
+          "projectId": "contract-9"
+        }
+      ],
+      "contracts": [
+        {
+          "id": "contract-9",
+          "templateId": "retail-launch",
+          "client": "Mộc Retail",
+          "segment": "retail",
+          "type": "fixed",
+          "stage": "quoted",
+          "workId": "work-10",
+          "price": 3000000,
+          "rate": 75000,
+          "estimated": 40,
+          "deadline": 70,
+          "trust": 60,
+          "deposit": 0,
+          "midAccepted": false,
+          "finalAccepted": false,
+          "lateProfile": 5,
+          "revenue": 0,
+          "invoiced": 0,
+          "changeCount": 0,
+          "changePending": false,
+          "discount": 0,
+          "completedDay": null
+        }
+      ],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 4500000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 4500000,
+          "revenue": 0,
+          "expense": 0
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": false,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": false,
+        "paid": 0,
+        "free": 0,
+        "fit": 20,
+        "reliability": 80,
+        "awareness": 12,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 0,
+        "lastNew": 0,
+        "lastChurn": 0,
+        "churnRate": 0.04,
+        "conversion": 0.12,
+        "support": 0,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-11",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        }
+      ],
+      "months": [],
+      "weeks": [],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 4500000,
+        "monthStartCash": 4500000,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    },
+    "after": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 731,
+      "rng": 503954007,
+      "nextId": 25,
+      "day": 35,
+      "name": "Character preservation",
+      "strategy": "outsourcing",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 3067500,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 330000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "qa",
+          "skill": 3,
+          "salary": 270000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        },
+        {
+          "id": "employee-13",
+          "name": "Phương Lê",
+          "role": "ops",
+          "skill": 5,
+          "salary": 550000,
+          "traits": [
+            "mentor",
+            "steady"
+          ],
+          "variant": 0,
+          "morale": 77.5,
+          "energy": 100,
+          "hiredDay": 0,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": 0
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-17",
+          "name": "Jamie Lê",
+          "role": "qa",
+          "skill": 3,
+          "salary": 300000,
+          "traits": [
+            "meticulous",
+            "steady"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-18",
+          "name": "Chris Phạm",
+          "role": "ops",
+          "skill": 3,
+          "salary": 330000,
+          "traits": [
+            "meticulous",
+            "friendly"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-19",
+          "name": "Tâm Vũ",
+          "role": "growth",
+          "skill": 3,
+          "salary": 330000,
+          "traits": [
+            "friendly",
+            "steady"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-20",
+          "name": "Đức Phạm",
+          "role": "qa",
+          "skill": 4,
+          "salary": 420000,
+          "traits": [
+            "creative",
+            "driven"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-21",
+          "name": "Long Nguyễn",
+          "role": "ops",
+          "skill": 4,
+          "salary": 430000,
+          "traits": [
+            "outspoken",
+            "driven"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [
+        {
+          "id": "work-10",
+          "label": {
+            "vi": "Cổng quản lý cửa hàng",
+            "en": "Retail operations portal"
+          },
+          "kind": "contract",
+          "estimated": 40,
+          "actual": 41.154,
+          "done": 0,
+          "effort": 0,
+          "qa": 0,
+          "debt": 0,
+          "bugs": [],
+          "status": "active",
+          "labor": 0,
+          "discovered": false,
+          "created": 0,
+          "projectId": "contract-9"
+        }
+      ],
+      "contracts": [
+        {
+          "id": "contract-9",
+          "templateId": "retail-launch",
+          "client": "Mộc Retail",
+          "segment": "retail",
+          "type": "fixed",
+          "stage": "quoted",
+          "workId": "work-10",
+          "price": 3000000,
+          "rate": 75000,
+          "estimated": 40,
+          "deadline": 70,
+          "trust": 60,
+          "deposit": 0,
+          "midAccepted": false,
+          "finalAccepted": false,
+          "lateProfile": 5,
+          "revenue": 0,
+          "invoiced": 0,
+          "changeCount": 0,
+          "changePending": false,
+          "discount": 0,
+          "completedDay": null
+        }
+      ],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 4500000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 4500000,
+          "revenue": 0,
+          "expense": 0
+        },
+        {
+          "id": "txn-12",
+          "day": 0,
+          "category": "expense",
+          "label": {
+            "vi": "Chi phí tuyển dụng",
+            "en": "Recruitment fee"
+          },
+          "cash": -82500,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 82500
+        },
+        {
+          "id": "txn-22",
+          "day": 30,
+          "category": "payroll",
+          "label": {
+            "vi": "Lương tháng và tăng ca",
+            "en": "Monthly payroll and overtime"
+          },
+          "cash": -1150000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 1150000
+        },
+        {
+          "id": "txn-23",
+          "day": 30,
+          "category": "operations",
+          "label": {
+            "vi": "Văn phòng, hạ tầng và marketing",
+            "en": "Office, hosting and marketing"
+          },
+          "cash": -200000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 200000
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": false,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": false,
+        "paid": 0,
+        "free": 0,
+        "fit": 20,
+        "reliability": 80,
+        "awareness": 12,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 0,
+        "lastNew": 0,
+        "lastChurn": 0,
+        "churnRate": 0.04,
+        "conversion": 0.12,
+        "support": 0,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [
+        {
+          "id": "event-15",
+          "templateId": "people-recovery",
+          "announced": 28,
+          "due": 35,
+          "expires": 49,
+          "resolved": false
+        }
+      ],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-11",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        },
+        {
+          "id": "h-14",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Đón đồng đội mới",
+            "en": "Welcome a new teammate"
+          },
+          "body": {
+            "vi": "Phương Lê: tuần đầu 50% năng suất, tuần hai 75%.",
+            "en": "Phương Lê: 50% output in week one, 75% in week two."
+          },
+          "cause": "hire"
+        },
+        {
+          "id": "h-16",
+          "day": 28,
+          "type": "warning",
+          "title": {
+            "vi": "Tín hiệu cần theo dõi",
+            "en": "Something to watch"
+          },
+          "body": {
+            "vi": "Nhóm muốn trao đổi về nhịp làm việc trước sprint tiếp theo.",
+            "en": "Your team wants to discuss workload before the next sprint."
+          },
+          "cause": "people-recovery"
+        },
+        {
+          "id": "h-24",
+          "day": 30,
+          "type": "info",
+          "title": {
+            "vi": "Báo cáo tháng đã sẵn sàng",
+            "en": "Monthly review is ready"
+          },
+          "body": {
+            "vi": "Xem doanh thu, chi phí và dòng tiền thực trong Tài chính.",
+            "en": "Review revenue, expenses and cleared cash flow in Finance."
+          },
+          "cause": "month-review"
+        }
+      ],
+      "months": [
+        {
+          "month": 1,
+          "cash": 3067500,
+          "revenue": 0,
+          "expense": 1350000,
+          "cashFlow": -1432500,
+          "operatingCashFlow": -1350000,
+          "paid": 0,
+          "free": 0,
+          "churn": 0.04,
+          "morale": 77.66666666666667,
+          "reputation": 45,
+          "debt": 0
+        }
+      ],
+      "weeks": [
+        {
+          "week": 1,
+          "cashDelta": -82500,
+          "work": 0,
+          "morale": 76.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 2,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 76.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 3,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 4,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 5,
+          "cashDelta": -1350000,
+          "work": 0,
+          "morale": 78.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        }
+      ],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 3067500,
+        "monthStartCash": 3067500,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    }
+  },
+  {
+    "options": {
+      "name": "Character preservation",
+      "strategy": "outsourcing",
+      "seed": 2026,
+      "difficulty": "standard"
+    },
+    "initial": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 2026,
+      "rng": 2399462312,
+      "nextId": 12,
+      "day": 0,
+      "name": "Character preservation",
+      "strategy": "outsourcing",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 4500000,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 330000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "qa",
+          "skill": 3,
+          "salary": 270000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-4",
+          "name": "Kim Vũ",
+          "role": "qa",
+          "skill": 3,
+          "salary": 310000,
+          "traits": [
+            "friendly",
+            "meticulous"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-5",
+          "name": "Jamie Lê",
+          "role": "qa",
+          "skill": 3,
+          "salary": 300000,
+          "traits": [
+            "meticulous",
+            "steady"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-6",
+          "name": "Quân Trần",
+          "role": "growth",
+          "skill": 3,
+          "salary": 350000,
+          "traits": [
+            "friendly",
+            "driven"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-7",
+          "name": "Emma Phạm",
+          "role": "designer",
+          "skill": 4,
+          "salary": 440000,
+          "traits": [
+            "meticulous",
+            "steady"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-8",
+          "name": "An Lê",
+          "role": "developer",
+          "skill": 4,
+          "salary": 460000,
+          "traits": [
+            "driven",
+            "creative"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [
+        {
+          "id": "work-10",
+          "label": {
+            "vi": "Cổng quản lý cửa hàng",
+            "en": "Retail operations portal"
+          },
+          "kind": "contract",
+          "estimated": 40,
+          "actual": 36.437,
+          "done": 0,
+          "effort": 0,
+          "qa": 0,
+          "debt": 0,
+          "bugs": [],
+          "status": "active",
+          "labor": 0,
+          "discovered": false,
+          "created": 0,
+          "projectId": "contract-9"
+        }
+      ],
+      "contracts": [
+        {
+          "id": "contract-9",
+          "templateId": "retail-launch",
+          "client": "Mộc Retail",
+          "segment": "retail",
+          "type": "fixed",
+          "stage": "quoted",
+          "workId": "work-10",
+          "price": 3000000,
+          "rate": 75000,
+          "estimated": 40,
+          "deadline": 70,
+          "trust": 60,
+          "deposit": 0,
+          "midAccepted": false,
+          "finalAccepted": false,
+          "lateProfile": 5,
+          "revenue": 0,
+          "invoiced": 0,
+          "changeCount": 0,
+          "changePending": false,
+          "discount": 0,
+          "completedDay": null
+        }
+      ],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 4500000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 4500000,
+          "revenue": 0,
+          "expense": 0
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": false,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": false,
+        "paid": 0,
+        "free": 0,
+        "fit": 20,
+        "reliability": 80,
+        "awareness": 12,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 0,
+        "lastNew": 0,
+        "lastChurn": 0,
+        "churnRate": 0.04,
+        "conversion": 0.12,
+        "support": 0,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-11",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        }
+      ],
+      "months": [],
+      "weeks": [],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 4500000,
+        "monthStartCash": 4500000,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    },
+    "after": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 2026,
+      "rng": 503955302,
+      "nextId": 25,
+      "day": 35,
+      "name": "Character preservation",
+      "strategy": "outsourcing",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 3343500,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 330000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "qa",
+          "skill": 3,
+          "salary": 270000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        },
+        {
+          "id": "employee-13",
+          "name": "Kim Vũ",
+          "role": "qa",
+          "skill": 3,
+          "salary": 310000,
+          "traits": [
+            "friendly",
+            "meticulous"
+          ],
+          "variant": 0,
+          "morale": 77.5,
+          "energy": 100,
+          "hiredDay": 0,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": 0
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-17",
+          "name": "Tâm Vũ",
+          "role": "growth",
+          "skill": 3,
+          "salary": 330000,
+          "traits": [
+            "friendly",
+            "steady"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-18",
+          "name": "Thảo Nguyễn",
+          "role": "qa",
+          "skill": 2,
+          "salary": 240000,
+          "traits": [
+            "meticulous",
+            "learner"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-19",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 2,
+          "salary": 270000,
+          "traits": [
+            "learner",
+            "driven"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-20",
+          "name": "Alex Trần",
+          "role": "developer",
+          "skill": 5,
+          "salary": 620000,
+          "traits": [
+            "mentor",
+            "outspoken"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-21",
+          "name": "Tú Lê",
+          "role": "growth",
+          "skill": 2,
+          "salary": 260000,
+          "traits": [
+            "friendly",
+            "learner"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [
+        {
+          "id": "work-10",
+          "label": {
+            "vi": "Cổng quản lý cửa hàng",
+            "en": "Retail operations portal"
+          },
+          "kind": "contract",
+          "estimated": 40,
+          "actual": 36.437,
+          "done": 0,
+          "effort": 0,
+          "qa": 0,
+          "debt": 0,
+          "bugs": [],
+          "status": "active",
+          "labor": 0,
+          "discovered": false,
+          "created": 0,
+          "projectId": "contract-9"
+        }
+      ],
+      "contracts": [
+        {
+          "id": "contract-9",
+          "templateId": "retail-launch",
+          "client": "Mộc Retail",
+          "segment": "retail",
+          "type": "fixed",
+          "stage": "quoted",
+          "workId": "work-10",
+          "price": 3000000,
+          "rate": 75000,
+          "estimated": 40,
+          "deadline": 70,
+          "trust": 60,
+          "deposit": 0,
+          "midAccepted": false,
+          "finalAccepted": false,
+          "lateProfile": 5,
+          "revenue": 0,
+          "invoiced": 0,
+          "changeCount": 0,
+          "changePending": false,
+          "discount": 0,
+          "completedDay": null
+        }
+      ],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 4500000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 4500000,
+          "revenue": 0,
+          "expense": 0
+        },
+        {
+          "id": "txn-12",
+          "day": 0,
+          "category": "expense",
+          "label": {
+            "vi": "Chi phí tuyển dụng",
+            "en": "Recruitment fee"
+          },
+          "cash": -46500,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 46500
+        },
+        {
+          "id": "txn-22",
+          "day": 30,
+          "category": "payroll",
+          "label": {
+            "vi": "Lương tháng và tăng ca",
+            "en": "Monthly payroll and overtime"
+          },
+          "cash": -910000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 910000
+        },
+        {
+          "id": "txn-23",
+          "day": 30,
+          "category": "operations",
+          "label": {
+            "vi": "Văn phòng, hạ tầng và marketing",
+            "en": "Office, hosting and marketing"
+          },
+          "cash": -200000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 200000
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": false,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": false,
+        "paid": 0,
+        "free": 0,
+        "fit": 20,
+        "reliability": 80,
+        "awareness": 12,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 0,
+        "lastNew": 0,
+        "lastChurn": 0,
+        "churnRate": 0.04,
+        "conversion": 0.12,
+        "support": 0,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [
+        {
+          "id": "event-15",
+          "templateId": "warm-referral",
+          "announced": 28,
+          "due": 35,
+          "expires": 49,
+          "resolved": false
+        }
+      ],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-11",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        },
+        {
+          "id": "h-14",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Đón đồng đội mới",
+            "en": "Welcome a new teammate"
+          },
+          "body": {
+            "vi": "Kim Vũ: tuần đầu 50% năng suất, tuần hai 75%.",
+            "en": "Kim Vũ: 50% output in week one, 75% in week two."
+          },
+          "cause": "hire"
+        },
+        {
+          "id": "h-16",
+          "day": 28,
+          "type": "warning",
+          "title": {
+            "vi": "Tín hiệu cần theo dõi",
+            "en": "Something to watch"
+          },
+          "body": {
+            "vi": "Một đối tác đề nghị giới thiệu công ty với mạng lưới của họ.",
+            "en": "A partner is considering introducing your company to their network."
+          },
+          "cause": "warm-referral"
+        },
+        {
+          "id": "h-24",
+          "day": 30,
+          "type": "info",
+          "title": {
+            "vi": "Báo cáo tháng đã sẵn sàng",
+            "en": "Monthly review is ready"
+          },
+          "body": {
+            "vi": "Xem doanh thu, chi phí và dòng tiền thực trong Tài chính.",
+            "en": "Review revenue, expenses and cleared cash flow in Finance."
+          },
+          "cause": "month-review"
+        }
+      ],
+      "months": [
+        {
+          "month": 1,
+          "cash": 3343500,
+          "revenue": 0,
+          "expense": 1110000,
+          "cashFlow": -1156500,
+          "operatingCashFlow": -1110000,
+          "paid": 0,
+          "free": 0,
+          "churn": 0.04,
+          "morale": 77.66666666666667,
+          "reputation": 45,
+          "debt": 0
+        }
+      ],
+      "weeks": [
+        {
+          "week": 1,
+          "cashDelta": -46500,
+          "work": 0,
+          "morale": 76.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 2,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 76.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 3,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 4,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 5,
+          "cashDelta": -1110000,
+          "work": 0,
+          "morale": 78.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        }
+      ],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 3343500,
+        "monthStartCash": 3343500,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    }
+  },
+  {
+    "options": {
+      "name": "Character preservation",
+      "strategy": "startup",
+      "seed": 731,
+      "difficulty": "standard"
+    },
+    "initial": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 731,
+      "rng": 567895204,
+      "nextId": 10,
+      "day": 0,
+      "name": "Character preservation",
+      "strategy": "startup",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 10000000,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 400000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "growth",
+          "skill": 3,
+          "salary": 350000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-4",
+          "name": "Phương Lê",
+          "role": "ops",
+          "skill": 5,
+          "salary": 550000,
+          "traits": [
+            "mentor",
+            "steady"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-5",
+          "name": "Hải Đỗ",
+          "role": "developer",
+          "skill": 1,
+          "salary": 190000,
+          "traits": [
+            "learner",
+            "creative"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-6",
+          "name": "Alex Trần",
+          "role": "developer",
+          "skill": 5,
+          "salary": 620000,
+          "traits": [
+            "mentor",
+            "outspoken"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-7",
+          "name": "Mai Trần",
+          "role": "qa",
+          "skill": 5,
+          "salary": 540000,
+          "traits": [
+            "mentor",
+            "outspoken"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-8",
+          "name": "Tú Lê",
+          "role": "growth",
+          "skill": 2,
+          "salary": 260000,
+          "traits": [
+            "friendly",
+            "learner"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [],
+      "contracts": [],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 10000000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 10000000,
+          "revenue": 0,
+          "expense": 0
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": true,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": false,
+        "paid": 0,
+        "free": 0,
+        "fit": 20,
+        "reliability": 80,
+        "awareness": 12,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 0,
+        "lastNew": 0,
+        "lastChurn": 0,
+        "churnRate": 0.04,
+        "conversion": 0.12,
+        "support": 0,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-9",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        }
+      ],
+      "months": [],
+      "weeks": [],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 10000000,
+        "monthStartCash": 10000000,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    },
+    "after": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 731,
+      "rng": 2967355490,
+      "nextId": 23,
+      "day": 35,
+      "name": "Character preservation",
+      "strategy": "startup",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 8317500,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 400000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "growth",
+          "skill": 3,
+          "salary": 350000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        },
+        {
+          "id": "employee-11",
+          "name": "Phương Lê",
+          "role": "ops",
+          "skill": 5,
+          "salary": 550000,
+          "traits": [
+            "mentor",
+            "steady"
+          ],
+          "variant": 0,
+          "morale": 77.5,
+          "energy": 100,
+          "hiredDay": 0,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": 0
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-15",
+          "name": "Linh Phạm",
+          "role": "developer",
+          "skill": 3,
+          "salary": 350000,
+          "traits": [
+            "meticulous",
+            "steady"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-16",
+          "name": "Mai Trần",
+          "role": "qa",
+          "skill": 5,
+          "salary": 540000,
+          "traits": [
+            "mentor",
+            "outspoken"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-17",
+          "name": "Chris Phạm",
+          "role": "ops",
+          "skill": 3,
+          "salary": 330000,
+          "traits": [
+            "meticulous",
+            "friendly"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-18",
+          "name": "Tâm Vũ",
+          "role": "growth",
+          "skill": 3,
+          "salary": 330000,
+          "traits": [
+            "friendly",
+            "steady"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-19",
+          "name": "Kim Vũ",
+          "role": "qa",
+          "skill": 3,
+          "salary": 310000,
+          "traits": [
+            "friendly",
+            "meticulous"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [],
+      "contracts": [],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 10000000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 10000000,
+          "revenue": 0,
+          "expense": 0
+        },
+        {
+          "id": "txn-10",
+          "day": 0,
+          "category": "expense",
+          "label": {
+            "vi": "Chi phí tuyển dụng",
+            "en": "Recruitment fee"
+          },
+          "cash": -82500,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 82500
+        },
+        {
+          "id": "txn-20",
+          "day": 30,
+          "category": "payroll",
+          "label": {
+            "vi": "Lương tháng và tăng ca",
+            "en": "Monthly payroll and overtime"
+          },
+          "cash": -1300000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 1300000
+        },
+        {
+          "id": "txn-21",
+          "day": 30,
+          "category": "operations",
+          "label": {
+            "vi": "Văn phòng, hạ tầng và marketing",
+            "en": "Office, hosting and marketing"
+          },
+          "cash": -300000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 300000
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": true,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": false,
+        "paid": 0,
+        "free": 0,
+        "fit": 20,
+        "reliability": 80,
+        "awareness": 12,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 0,
+        "lastNew": 0,
+        "lastChurn": 0,
+        "churnRate": 0.04,
+        "conversion": 0.12,
+        "support": 0,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [
+        {
+          "id": "event-13",
+          "templateId": "people-recovery",
+          "announced": 28,
+          "due": 35,
+          "expires": 49,
+          "resolved": false
+        }
+      ],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-9",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        },
+        {
+          "id": "h-12",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Đón đồng đội mới",
+            "en": "Welcome a new teammate"
+          },
+          "body": {
+            "vi": "Phương Lê: tuần đầu 50% năng suất, tuần hai 75%.",
+            "en": "Phương Lê: 50% output in week one, 75% in week two."
+          },
+          "cause": "hire"
+        },
+        {
+          "id": "h-14",
+          "day": 28,
+          "type": "warning",
+          "title": {
+            "vi": "Tín hiệu cần theo dõi",
+            "en": "Something to watch"
+          },
+          "body": {
+            "vi": "Nhóm muốn trao đổi về nhịp làm việc trước sprint tiếp theo.",
+            "en": "Your team wants to discuss workload before the next sprint."
+          },
+          "cause": "people-recovery"
+        },
+        {
+          "id": "h-22",
+          "day": 30,
+          "type": "info",
+          "title": {
+            "vi": "Báo cáo tháng đã sẵn sàng",
+            "en": "Monthly review is ready"
+          },
+          "body": {
+            "vi": "Xem doanh thu, chi phí và dòng tiền thực trong Tài chính.",
+            "en": "Review revenue, expenses and cleared cash flow in Finance."
+          },
+          "cause": "month-review"
+        }
+      ],
+      "months": [
+        {
+          "month": 1,
+          "cash": 8317500,
+          "revenue": 0,
+          "expense": 1600000,
+          "cashFlow": -1682500,
+          "operatingCashFlow": -1600000,
+          "paid": 0,
+          "free": 0,
+          "churn": 0.04,
+          "morale": 77.66666666666667,
+          "reputation": 45,
+          "debt": 0
+        }
+      ],
+      "weeks": [
+        {
+          "week": 1,
+          "cashDelta": -82500,
+          "work": 0,
+          "morale": 76.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 2,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 76.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 3,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 4,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 5,
+          "cashDelta": -1600000,
+          "work": 0,
+          "morale": 78.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        }
+      ],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 8317500,
+        "monthStartCash": 8317500,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    }
+  },
+  {
+    "options": {
+      "name": "Character preservation",
+      "strategy": "startup",
+      "seed": 2026,
+      "difficulty": "standard"
+    },
+    "initial": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 2026,
+      "rng": 567896499,
+      "nextId": 10,
+      "day": 0,
+      "name": "Character preservation",
+      "strategy": "startup",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 10000000,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 400000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "growth",
+          "skill": 3,
+          "salary": 350000,
+          "morale": 76,
+          "energy": 90,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-4",
+          "name": "Kim Vũ",
+          "role": "qa",
+          "skill": 3,
+          "salary": 310000,
+          "traits": [
+            "friendly",
+            "meticulous"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-5",
+          "name": "Jamie Lê",
+          "role": "qa",
+          "skill": 3,
+          "salary": 300000,
+          "traits": [
+            "meticulous",
+            "steady"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-6",
+          "name": "Quân Trần",
+          "role": "growth",
+          "skill": 3,
+          "salary": 350000,
+          "traits": [
+            "friendly",
+            "driven"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-7",
+          "name": "Emma Phạm",
+          "role": "designer",
+          "skill": 4,
+          "salary": 440000,
+          "traits": [
+            "meticulous",
+            "steady"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-8",
+          "name": "An Lê",
+          "role": "developer",
+          "skill": 4,
+          "salary": 460000,
+          "traits": [
+            "driven",
+            "creative"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [],
+      "contracts": [],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 10000000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 10000000,
+          "revenue": 0,
+          "expense": 0
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": true,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": false,
+        "paid": 0,
+        "free": 0,
+        "fit": 20,
+        "reliability": 80,
+        "awareness": 12,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 0,
+        "lastNew": 0,
+        "lastChurn": 0,
+        "churnRate": 0.04,
+        "conversion": 0.12,
+        "support": 0,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-9",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        }
+      ],
+      "months": [],
+      "weeks": [],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 10000000,
+        "monthStartCash": 10000000,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    },
+    "after": {
+      "version": 2,
+      "balanceVersion": "T0.3",
+      "seed": 2026,
+      "rng": 2967356785,
+      "nextId": 23,
+      "day": 35,
+      "name": "Character preservation",
+      "strategy": "startup",
+      "secondary": null,
+      "difficulty": "standard",
+      "mode": "career",
+      "status": "playing",
+      "campaignWon": null,
+      "reviewedQuarter": 0,
+      "cash": 8593500,
+      "reputation": 45,
+      "actions": 3,
+      "borrowedActions": 0,
+      "lastEmergencyMonth": -1,
+      "policy": "balanced",
+      "overtime": false,
+      "officeTier": 1,
+      "employees": [
+        {
+          "id": "employee-2",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 3,
+          "salary": 400000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "learner"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 0
+        },
+        {
+          "id": "employee-3",
+          "name": "Linh Trần",
+          "role": "growth",
+          "skill": 3,
+          "salary": 350000,
+          "morale": 78.5,
+          "energy": 100,
+          "traits": [
+            "meticulous"
+          ],
+          "hiredDay": -14,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": -30,
+          "variant": 1
+        },
+        {
+          "id": "employee-11",
+          "name": "Kim Vũ",
+          "role": "qa",
+          "skill": 3,
+          "salary": 310000,
+          "traits": [
+            "friendly",
+            "meticulous"
+          ],
+          "variant": 0,
+          "morale": 77.5,
+          "energy": 100,
+          "hiredDay": 0,
+          "assignments": [],
+          "xp": 0,
+          "retentionSince": null,
+          "lastRaise": 0
+        }
+      ],
+      "candidates": [
+        {
+          "id": "candidate-15",
+          "name": "Quân Trần",
+          "role": "growth",
+          "skill": 3,
+          "salary": 350000,
+          "traits": [
+            "friendly",
+            "driven"
+          ],
+          "variant": 0
+        },
+        {
+          "id": "candidate-16",
+          "name": "Tâm Vũ",
+          "role": "growth",
+          "skill": 3,
+          "salary": 330000,
+          "traits": [
+            "friendly",
+            "steady"
+          ],
+          "variant": 1
+        },
+        {
+          "id": "candidate-17",
+          "name": "Thảo Nguyễn",
+          "role": "qa",
+          "skill": 2,
+          "salary": 240000,
+          "traits": [
+            "meticulous",
+            "learner"
+          ],
+          "variant": 2
+        },
+        {
+          "id": "candidate-18",
+          "name": "Minh Nguyễn",
+          "role": "developer",
+          "skill": 2,
+          "salary": 270000,
+          "traits": [
+            "learner",
+            "driven"
+          ],
+          "variant": 3
+        },
+        {
+          "id": "candidate-19",
+          "name": "Alex Trần",
+          "role": "developer",
+          "skill": 5,
+          "salary": 620000,
+          "traits": [
+            "mentor",
+            "outspoken"
+          ],
+          "variant": 4
+        }
+      ],
+      "work": [],
+      "contracts": [],
+      "invoices": [],
+      "ledger": [
+        {
+          "id": "txn-1",
+          "day": 0,
+          "category": "capital",
+          "label": {
+            "vi": "Vốn sáng lập",
+            "en": "Founder capital"
+          },
+          "cash": 10000000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 10000000,
+          "revenue": 0,
+          "expense": 0
+        },
+        {
+          "id": "txn-10",
+          "day": 0,
+          "category": "expense",
+          "label": {
+            "vi": "Chi phí tuyển dụng",
+            "en": "Recruitment fee"
+          },
+          "cash": -46500,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 46500
+        },
+        {
+          "id": "txn-20",
+          "day": 30,
+          "category": "payroll",
+          "label": {
+            "vi": "Lương tháng và tăng ca",
+            "en": "Monthly payroll and overtime"
+          },
+          "cash": -1060000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 1060000
+        },
+        {
+          "id": "txn-21",
+          "day": 30,
+          "category": "operations",
+          "label": {
+            "vi": "Văn phòng, hạ tầng và marketing",
+            "en": "Office, hosting and marketing"
+          },
+          "cash": -300000,
+          "receivable": 0,
+          "liability": 0,
+          "deferred": 0,
+          "capital": 0,
+          "revenue": 0,
+          "expense": 300000
+        }
+      ],
+      "liabilities": [],
+      "product": {
+        "exists": true,
+        "concept": "retail",
+        "segment": "retail",
+        "name": {
+          "vi": "Mộc · vận hành cửa hàng",
+          "en": "Moc · retail operations"
+        },
+        "launched": false,
+        "paid": 0,
+        "free": 0,
+        "fit": 20,
+        "reliability": 80,
+        "awareness": 12,
+        "price": 7900,
+        "marketing": 0,
+        "debt": 0,
+        "features": [],
+        "lastLeads": 0,
+        "lastNew": 0,
+        "lastChurn": 0,
+        "churnRate": 0.04,
+        "conversion": 0.12,
+        "support": 0,
+        "releasedDay": 0,
+        "needs": [],
+        "surveyed": false
+      },
+      "venture": {
+        "evidence": 0,
+        "results": [],
+        "rounds": 0,
+        "founderEquity": 100,
+        "investorEquity": 0,
+        "offered": false,
+        "investor": null,
+        "pivotUntil": 0,
+        "hypothesis": "retail",
+        "committedGoal": 0,
+        "commitmentDue": null
+      },
+      "events": [
+        {
+          "id": "event-13",
+          "templateId": "people-recovery",
+          "announced": 28,
+          "due": 35,
+          "expires": 49,
+          "resolved": false
+        }
+      ],
+      "deferred": [],
+      "promises": [],
+      "history": [
+        {
+          "id": "h-9",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Công ty bắt đầu hoạt động",
+            "en": "Your company is open"
+          },
+          "body": {
+            "vi": "Mỗi tuần có 3 lượt CEO. Phân công nhân viên không tốn lượt.",
+            "en": "You have 3 CEO actions per week. Assigning employees is free."
+          },
+          "cause": "new-game"
+        },
+        {
+          "id": "h-12",
+          "day": 0,
+          "type": "good",
+          "title": {
+            "vi": "Đón đồng đội mới",
+            "en": "Welcome a new teammate"
+          },
+          "body": {
+            "vi": "Kim Vũ: tuần đầu 50% năng suất, tuần hai 75%.",
+            "en": "Kim Vũ: 50% output in week one, 75% in week two."
+          },
+          "cause": "hire"
+        },
+        {
+          "id": "h-14",
+          "day": 28,
+          "type": "warning",
+          "title": {
+            "vi": "Tín hiệu cần theo dõi",
+            "en": "Something to watch"
+          },
+          "body": {
+            "vi": "Nhóm muốn trao đổi về nhịp làm việc trước sprint tiếp theo.",
+            "en": "Your team wants to discuss workload before the next sprint."
+          },
+          "cause": "people-recovery"
+        },
+        {
+          "id": "h-22",
+          "day": 30,
+          "type": "info",
+          "title": {
+            "vi": "Báo cáo tháng đã sẵn sàng",
+            "en": "Monthly review is ready"
+          },
+          "body": {
+            "vi": "Xem doanh thu, chi phí và dòng tiền thực trong Tài chính.",
+            "en": "Review revenue, expenses and cleared cash flow in Finance."
+          },
+          "cause": "month-review"
+        }
+      ],
+      "months": [
+        {
+          "month": 1,
+          "cash": 8593500,
+          "revenue": 0,
+          "expense": 1360000,
+          "cashFlow": -1406500,
+          "operatingCashFlow": -1360000,
+          "paid": 0,
+          "free": 0,
+          "churn": 0.04,
+          "morale": 77.66666666666667,
+          "reputation": 45,
+          "debt": 0
+        }
+      ],
+      "weeks": [
+        {
+          "week": 1,
+          "cashDelta": -46500,
+          "work": 0,
+          "morale": 76.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 2,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 76.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 3,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 4,
+          "cashDelta": 0,
+          "work": 0,
+          "morale": 77.66666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        },
+        {
+          "week": 5,
+          "cashDelta": -1360000,
+          "work": 0,
+          "morale": 78.16666666666667,
+          "message": {
+            "vi": "Phân công, chất lượng và lịch thanh toán giải thích kết quả tuần này.",
+            "en": "Assignments, quality and collection dates explain this week’s results."
+          }
+        }
+      ],
+      "market": {
+        "retail": {
+          "demand": 80,
+          "trend": 0,
+          "competition": 1
+        },
+        "creative": {
+          "demand": 90,
+          "trend": 0,
+          "competition": 1
+        },
+        "education": {
+          "demand": 70,
+          "trend": 0,
+          "competition": 1
+        }
+      },
+      "tutorial": {
+        "seen": [],
+        "completed": false
+      },
+      "metrics": {
+        "completedContracts": 0,
+        "repeatClients": [],
+        "clients": [],
+        "milestones": 0,
+        "onTime": 0,
+        "incidents": 0,
+        "crises": 0,
+        "workWeek": 0,
+        "weekCash": 8593500,
+        "monthStartCash": 8593500,
+        "lastWarningDay": -100,
+        "quarterChanges": 0,
+        "releases": 0,
+        "decisions": 0
+      }
+    }
+  }
+]

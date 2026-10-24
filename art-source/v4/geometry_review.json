@@ -1,0 +1,61 @@
+{
+  "project": "Software CEO - one workstation geometry review",
+  "status": "NOT ART LOCK - UNAPPROVED - prototype geometry",
+  "unit": "meter",
+  "axis": "Z up",
+  "employee_forward": [
+    0,
+    1,
+    0
+  ],
+  "monitor_display_normal": [
+    0,
+    -1,
+    0
+  ],
+  "head_body_yaw_deviation_degrees": 0,
+  "reference_eye": [
+    0,
+    -0.157,
+    1.555
+  ],
+  "reference_display_center": [
+    -0.05,
+    0.509,
+    1.228
+  ],
+  "eye_to_monitor_center_distance_m": 0.744,
+  "desktop_top_m": 0.769,
+  "seat_cushion_top_m": 0.538,
+  "pelvis_bottom_m": 0.508,
+  "seat_cushion_compression_overlap_m": 0.03,
+  "keyboard_keytop_m": 0.817,
+  "typing_wrist_height_m": 0.828,
+  "shoe_sole_bottom_m": 0.0025,
+  "camera_render": "orthographic",
+  "renderer": "VTK from glTF binaries",
+  "scene_stat": {
+    "01_workstation_typing": {
+      "meshes": 231,
+      "triangles": 34208,
+      "glb_bytes": 519884
+    },
+    "03_developer_typing": {
+      "meshes": 106,
+      "triangles": 27860,
+      "glb_bytes": 404792
+    },
+    "07_studio_full": {
+      "meshes": 238,
+      "triangles": 34388,
+      "glb_bytes": 525388
+    }
+  },
+  "important_limitations": [
+    "Mesh is procedural prototype geometry, not artist-sculpted production artwork.",
+    "No skeleton/rig; idle/typing/thinking are discrete hand-authored static poses.",
+    "No automated collision test across every triangle, no motion physics verification.",
+    "Facial sculpting, hair, garment folds, surface shading and arm pose still need visual refinement.",
+    "A rendered pose cannot establish good animation biomechanics."
+  ]
+}

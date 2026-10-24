@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Review model thật — Mốc D</title>
+<link rel="icon" href="data:,">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#e6e3dc;color:#27333b;font:15px system-ui,sans-serif}header{padding:18px 24px;background:#f5f2ec;border-bottom:1px solid #c6c7c2}h1{font-size:23px;margin:0 0 5px}p{margin:6px 0}main{display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 102px)}aside{padding:20px;background:#f2efe9;border-right:1px solid #cbc9c2}label{display:block;font-weight:650;margin:16px 0 6px}select,button,input{font:inherit;padding:9px;width:100%;color:inherit}button{cursor:pointer;margin:8px 0;background:#d8e4df;border:1px solid #8c9e98;border-radius:5px}button:focus-visible,select:focus-visible{outline:3px solid #2b807a}small{display:block;line-height:1.5;margin-top:18px}canvas{width:100%;height:calc(100vh - 102px);display:block;touch-action:none}.note{font-size:13px;color:#546269}#info{font-size:13px;line-height:1.6}@media(max-width:800px){main{grid-template-columns:210px 1fr}aside{padding:10px}h1{font-size:20px}}
+</style>
+<header><h1>Review model thật — Dừng tại mốc D</h1><p>Ảnh trực tiếp từ mesh và animation GLB LOCAL. Chưa tích hợp game; chất lượng thẩm mỹ chờ Khiêm review.</p></header>
+<main><aside>
+<label for="model">Ngoại hình thử</label><select id="model"></select>
+<label for="clip">Tư thế / chuyển động</label><select id="clip"><option value="rest">Đứng cơ sở</option><option value="idle">Đứng nghỉ</option><option value="working">Ngồi gõ bàn phím</option><option value="walk">Đi bộ tại chỗ</option><option value="stand-up">Đứng lên</option><option value="alert">Nâng tay</option><option value="meeting">Ngồi trao đổi</option></select>
+<label for="camera">Góc kiểm tra</label><select id="camera"><option value="beauty">Ba phần tư phía trước</option><option value="front">Chính diện</option><option value="side">Bên hông</option><option value="back">Phía sau</option><option value="game">Camera isometric của game</option><option value="face">Cận mặt</option><option value="shoulder">Vai / khuỷu</option></select>
+<button id="pause">Tạm dừng</button><label for="time">Tiến trình chuyển động</label><input id="time" type="range" min="0" max="1" value="0" step="0.001">
+<label><input type="checkbox" id="desk" style="width:auto"> Hiện bàn ghế V4 gốc</label>
+<label><input type="checkbox" id="wire" style="width:auto"> Xem lưới tam giác</label>
+<p id="info">Đang đọc model…</p><small>Kéo trên hình để xoay, cuộn để phóng to. Chân váy và tóc dài là mẫu biến dạng thử, chưa có mô phỏng vải/tóc.</small>
+<small class="note">Nguồn hình học: scripts/character-review/build.py. Không sử dụng ảnh AI để tạo pixel của model review.</small>
+</aside><canvas id="stage" aria-label="Khung xem model nhân vật 3D thật"></canvas></main>
+<script type="module" src="review.js"></script>
+</html>

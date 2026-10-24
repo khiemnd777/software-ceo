@@ -1,0 +1,58 @@
+{
+  "stage": "F",
+  "models": [
+    {
+      "gender": "female",
+      "glb": "female-rigged-f.glb",
+      "glb_sha256": "0cd334270bffe2b91d45cac8905eb0f4329ffec2e124a32e47ad100dbcf1c586",
+      "bytes": 7474596,
+      "control_source": "female-controls-f.blend",
+      "control_source_sha256": "19e7cb02db0bf27f54092474b8685d68f912da070557109b4bd34892c2c5a9c7",
+      "baked_source": "female-baked-f.blend",
+      "baked_source_sha256": "5cdc2c40473113ed5509c55622d1aec2cf9bae61d11f067673b2df5b697057f2",
+      "input_e_sha256": "4883aa93598873c86ce2e887d44513f5629c0ce749c891d78109b1892070eeb5",
+      "fps": 24,
+      "frames": 49,
+      "duration_seconds": 2,
+      "clips": [
+        "alert",
+        "idle",
+        "meeting",
+        "stand-up",
+        "walk",
+        "working"
+      ],
+      "deform_bones": 22,
+      "source_geometry_unchanged": true,
+      "ik_goal_max_error": 3.952468770344025e-05
+    },
+    {
+      "gender": "male",
+      "glb": "male-rigged-f.glb",
+      "glb_sha256": "55a531a29ad2ce4cb09aa3306afaedc783baa22b22c137fe32f68568a0589884",
+      "bytes": 14047520,
+      "control_source": "male-controls-f.blend",
+      "control_source_sha256": "b44614e28ac945bdf70b64eb7135502b25899a030b0dea1054246db3889454cc",
+      "baked_source": "male-baked-f.blend",
+      "baked_source_sha256": "fa6d30d18e7ad20bb9af785cf5aa113a1bed7a0f82bb5cd29c255b9413f6ab6c",
+      "input_e_sha256": "4883aa93598873c86ce2e887d44513f5629c0ce749c891d78109b1892070eeb5",
+      "fps": 24,
+      "frames": 49,
+      "duration_seconds": 2,
+      "clips": [
+        "alert",
+        "idle",
+        "meeting",
+        "stand-up",
+        "walk",
+        "working"
+      ],
+      "deform_bones": 22,
+      "source_geometry_unchanged": true,
+      "ik_goal_max_error": 5.331654840802546e-05
+    }
+  ],
+  "source": "Accepted E geometry with editable IK and standard skeletal skinning",
+  "owner_motion_acceptance": "OPEN",
+  "game_integration": false
+}

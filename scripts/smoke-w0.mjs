@@ -1,0 +1,12 @@
+import { chromium } from 'playwright';
+import chromiumBinary from '@sparticuz/chromium';
+import fs from 'node:fs/promises';
+const browser=await chromium.launch({executablePath:await chromiumBinary.executablePath(),args:chromiumBinary.args,headless:true});
+const page=await browser.newPage({viewport:{width:1440,height:900}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.goto('http://127.0.0.1:5173');await page.locator('canvas').waitFor();await page.waitForTimeout(1200);
+await page.getByRole('button',{name:'Linh Trần →'}).click();
+if(await page.locator('aside h3').innerText()!=='Linh Trần')throw Error('Selection failed');
+await page.getByRole('button',{name:'Zoom in'}).click();await page.getByRole('button',{name:'Căn giữa'}).click();
+await page.screenshot({path:'evidence/W0-canvas.png',fullPage:true});
+await fs.writeFile('evidence/W0-browser.json',JSON.stringify({browser:browser.version(),viewport:'1440x900',selection:true,zoom:true,errors},null,2));
+await browser.close();if(errors.length)throw Error(errors.join('\n'));console.log('W0 browser smoke PASS');

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="data:," />
+    <title>Công việc · Tổng quan gọn · Mockup LOCAL</title>
+    <link rel="stylesheet" href="overview.css" />
+    <script src="overview.js" defer></script>
+  </head>
+  <body>
+    <aside class="review" aria-label="Điều khiển mockup">
+      <div>
+        <strong>MOCKUP · CÔNG VIỆC → PHÂN CÔNG</strong
+        ><span>Dữ liệu minh họa · Chỉ xem bố cục · Không ghi save</span>
+      </div>
+      <label
+        >Tình huống<select id="scene">
+          <option value="three">3 dự án · ngày 77</option>
+          <option value="six">6 công việc</option>
+          <option value="empty">Chưa có công việc</option>
+        </select></label
+      >
+      <label
+        >UI<select id="scale">
+          <option value="100">100%</option>
+          <option value="150">150%</option>
+        </select></label
+      >
+      <button id="language" hidden>EN</button>
+      <button id="hide-review">Ẩn thanh review</button>
+    </aside>
+    <div class="game-frame">
+      <header class="hud">
+        <div class="brand">&lt;/&gt;<span>CEO</span></div>
+        <div>
+          <small data-vi="TIỀN MẶT" data-en="CASH"></small
+          ><strong class="green">$59,295</strong>
+        </div>
+        <div>
+          <small data-vi="VIỆC CÒN LẠI" data-en="WORK REMAINING"></small
+          ><strong>78 <em>WP</em></strong>
+        </div>
+        <div>
+          <small data-vi="TINH THẦN" data-en="MORALE"></small
+          ><strong>77<em>%</em></strong>
+        </div>
+        <div>
+          <small data-vi="UY TÍN" data-en="REPUTATION"></small
+          ><strong>53<em>/100</em></strong>
+        </div>
+        <span class="hud-end">CEO</span>
+      </header>
+      <div class="company-bar">
+        <div>
+          <i></i><strong>KNA SOFTWARE</strong
+          ><span class="business">OUTSOURCING</span>
+        </div>
+        <div>
+          <span
+            class="date"
+            data-vi="THÁNG 3 · NGÀY 77"
+            data-en="MONTH 2 · DAY 53"
+          ></span
+          ><span
+            class="time-state"
+            data-vi="Ⅱ TẠM DỪNG"
+            data-en="Ⅱ PAUSED"
+          ></span
+          ><span class="speed">1×</span><span class="speed">2×</span
+          ><span class="speed">4×</span>
+        </div>
+      </div>
+      <div class="tutorial">
+        <span
+          data-vi="Những tuần đầu tiên · 2/6"
+          data-en="Your first weeks · 2/6"
+        ></span
+        ><span aria-hidden="true">＋</span>
+      </div>
+      <main id="workspace" tabindex="0" aria-label="Công việc">
+        <div class="work-toolbar">
+          <div class="work-title">
+            <span class="module-icon" aria-hidden="true">▤</span>
+            <h1 data-vi="Công việc" data-en="Work"></h1>
+            <span id="total-count" class="count"></span>
+          </div>
+          <div class="tools">
+            <label class="search-label"
+              ><span
+                class="sr-only"
+                data-vi="Tìm công việc"
+                data-en="Search work"
+              ></span
+              ><input
+                type="search"
+                id="search"
+                placeholder="Tìm dự án, khách hàng…" /></label
+            ><label class="sort-label"
+              ><span class="sr-only" data-vi="Sắp xếp" data-en="Sort"></span
+              ><select id="sort">
+                <option
+                  value="attention"
+                  data-vi="Cần chú ý trước"
+                  data-en="Attention first"
+                ></option>
+                <option
+                  value="deadline"
+                  data-vi="Hạn giao gần nhất"
+                  data-en="Nearest deadline"
+                ></option></select
+            ></label>
+          </div>
+        </div>
+        <div class="overview-strip" id="overview-strip"></div>
+        <div class="list-toolbar">
+          <nav id="filters" aria-label="Lọc công việc"></nav>
+          <span
+            class="view-hint"
+            data-vi="Chọn hàng để xem chi tiết ↗"
+            data-en="Select a row to inspect ↗"
+          ></span>
+        </div>
+        <div class="table-frame">
+          <table class="work-table">
+            <caption
+              class="sr-only"
+              data-vi="Tổng quan công việc và năng lực được phân công"
+              data-en="Work overview and assigned capacity"
+            ></caption>
+            <colgroup>
+              <col class="col-project" />
+              <col class="col-status" />
+              <col class="col-due" />
+              <col class="col-dev" />
+              <col class="col-qa" />
+              <col class="col-team" />
+              <col class="col-action" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th
+                  data-vi="DỰ ÁN / KHÁCH HÀNG"
+                  data-en="PROJECT / CLIENT"
+                ></th>
+                <th data-vi="TRẠNG THÁI" data-en="STATUS"></th>
+                <th data-vi="HẠN GIAO" data-en="DUE"></th>
+                <th data-vi="PHÁT TRIỂN" data-en="DEVELOPMENT"></th>
+                <th>QA</th>
+                <th data-vi="ĐANG PHỤ TRÁCH" data-en="ASSIGNED TEAM"></th>
+                <th>
+                  <span
+                    class="sr-only"
+                    data-vi="Chi tiết"
+                    data-en="Details"
+                  ></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="work-rows"></tbody>
+          </table>
+          <div id="empty" class="empty" hidden></div>
+        </div>
+        <p
+          class="table-note"
+          data-vi="WP = điểm việc · Phạm vi chưa rõ hiển thị khoảng ước tính · QA phát hiện lỗi; Dev cần sửa lỗi · Nghiệm thu chưa có nghĩa đã thu tiền."
+          data-en="WP = work points · Unknown scope shows an estimate range · QA finds defects; developers fix them · Acceptance does not mean payment cleared."
+        ></p>
+        <p id="result-count" role="status" class="sr-only"></p>
+      </main>
+      <section id="assignment-screen" hidden aria-label="Phân công theo dự án"><div class="flow-bar"><button id="return-overview">← Về tổng quan</button><strong id="flow-title">Phân công đội ngũ</strong><span id="pending-total" role="status"></span></div><iframe id="assignment-frame" title="Bảng phân công đội ngũ" src="assignments/index.html"></iframe></section>
+      <section id="finance-screen" hidden><small>TÀI CHÍNH</small><h1>Khoản phải thu</h1><h2>Mộc Retail · $28,500</h2><p>Đã nghiệm thu. Tiền chưa về tài khoản.</p><button id="resume-assignment">← Tiếp tục phân công</button></section>
+      <footer>
+        <span>⌂ <b data-vi="Văn phòng" data-en="Office"></b></span
+        ><button id="nav-work" class="active">▤ Công việc</button
+        ><span>♙ <b data-vi="Nhân sự" data-en="People"></b></span
+        ><span>↗ <b data-vi="Thị trường" data-en="Market"></b></span
+        ><button id="nav-finance">$ Tài chính</button
+        ><span>⚑ <b data-vi="Chiến lược" data-en="Strategy"></b></span
+        ><span>▣ <b data-vi="Nhật ký" data-en="History"></b></span>
+      </footer>
+    </div>
+    <button id="show-review" hidden>Hiện thanh review</button>
+    <dialog id="inspector" aria-labelledby="detail-title">
+      <div class="drawer-header">
+        <div>
+          <span class="eyebrow" id="detail-type"></span>
+          <h2 id="detail-title"></h2>
+          <p id="detail-client"></p>
+        </div>
+        <button id="close-detail" autofocus aria-label="Đóng chi tiết">
+          ×
+        </button>
+      </div>
+      <nav id="detail-tabs" aria-label="Các phần chi tiết"></nav>
+      <div id="detail-body" class="drawer-body"></div>
+      <div class="drawer-footer">
+        <span
+          data-vi="Xem chi tiết không tốn lượt CEO"
+          data-en="Inspecting costs no CEO actions"
+        ></span
+        ><button
+          id="back-to-board"
+          data-vi="Về tổng quan"
+          data-en="Back to overview"
+        ></button>
+      </div>
+    </dialog>
+  </body>
+</html>

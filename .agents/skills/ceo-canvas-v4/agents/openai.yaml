@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software CEO · Canvas V4"
+  short_description: "Canvas 2D, camera và bảo toàn baseline art V4"
+  default_prompt: "Dùng $ceo-canvas-v4 để sửa Canvas hoặc animation trong baseline V4 đã duyệt."

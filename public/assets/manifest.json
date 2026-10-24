@@ -1,0 +1,332 @@
+{
+  "version": 2,
+  "projection": {
+    "camera": [
+      6,
+      -6,
+      5.698979486
+    ],
+    "target": [
+      0,
+      0,
+      0.8
+    ],
+    "parallelScale": 1.45,
+    "pixelsPerMeter": 132.41379310344828,
+    "tileRatio": 0.5
+  },
+  "sprites": {
+    "desk": {
+      "file": "desk.png",
+      "width": 384,
+      "height": 384,
+      "anchor": [
+        192,
+        283.73896691123434
+      ],
+      "bbox": [
+        120,
+        71,
+        357,
+        310
+      ],
+      "frames": 1,
+      "durationMs": 1000,
+      "source": "art-source/v4/models/06_desk_only.glb"
+    },
+    "worker": {
+      "file": "worker.png",
+      "width": 384,
+      "height": 384,
+      "anchor": [
+        192,
+        283.73896691123434
+      ],
+      "bbox": [
+        103,
+        79,
+        236,
+        325
+      ],
+      "frames": 1,
+      "durationMs": 1000,
+      "source": "art-source/v4/models/03_developer_typing.glb"
+    },
+    "idle": {
+      "file": "idle.png",
+      "width": 384,
+      "height": 384,
+      "anchor": [
+        192,
+        283.73896691123434
+      ],
+      "bbox": [
+        103,
+        79,
+        236,
+        325
+      ],
+      "frames": 1,
+      "durationMs": 1000,
+      "source": "art-source/v4/models/04_developer_idle.glb"
+    },
+    "thinking": {
+      "file": "thinking.png",
+      "width": 384,
+      "height": 384,
+      "anchor": [
+        192,
+        283.73896691123434
+      ],
+      "bbox": [
+        103,
+        79,
+        236,
+        325
+      ],
+      "frames": 1,
+      "durationMs": 1000,
+      "source": "art-source/v4/models/05_developer_thinking.glb"
+    },
+    "chair": {
+      "file": "chair.webp",
+      "width": 512,
+      "height": 512,
+      "anchor": [
+        256,
+        378.3186225483125
+      ],
+      "bbox": [
+        137,
+        204,
+        283,
+        433
+      ],
+      "frames": 1,
+      "durationMs": 1000,
+      "pixelsPerMeter": 176.55172413793105,
+      "source": "art-source/generated/prop-chair.glb"
+    },
+    "plant": {
+      "file": "plant.webp",
+      "width": 512,
+      "height": 512,
+      "anchor": [
+        256,
+        378.3186225483125
+      ],
+      "bbox": [
+        185,
+        185,
+        331,
+        398
+      ],
+      "frames": 1,
+      "durationMs": 1000,
+      "pixelsPerMeter": 176.55172413793105,
+      "source": "art-source/generated/prop-plant.glb"
+    },
+    "meeting": {
+      "file": "meeting.webp",
+      "width": 512,
+      "height": 512,
+      "anchor": [
+        256,
+        349.34842247108054
+      ],
+      "bbox": [
+        92,
+        130,
+        420,
+        428
+      ],
+      "frames": 1,
+      "durationMs": 1000,
+      "pixelsPerMeter": 134.73684210526315,
+      "source": "art-source/generated/prop-meeting.glb"
+    },
+    "pantry": {
+      "file": "pantry.webp",
+      "width": 512,
+      "height": 512,
+      "anchor": [
+        256,
+        378.3186225483125
+      ],
+      "bbox": [
+        110,
+        130,
+        402,
+        446
+      ],
+      "frames": 1,
+      "durationMs": 1000,
+      "pixelsPerMeter": 176.55172413793105,
+      "source": "art-source/generated/prop-pantry.glb"
+    },
+    "sofa": {
+      "file": "sofa.webp",
+      "width": 512,
+      "height": 512,
+      "anchor": [
+        256,
+        378.3186225483125
+      ],
+      "bbox": [
+        111,
+        164,
+        402,
+        433
+      ],
+      "frames": 1,
+      "durationMs": 1000,
+      "pixelsPerMeter": 176.55172413793105,
+      "source": "art-source/generated/prop-sofa.glb"
+    },
+    "finance": {
+      "file": "finance.webp",
+      "width": 512,
+      "height": 512,
+      "anchor": [
+        256,
+        378.3186225483125
+      ],
+      "bbox": [
+        141,
+        98,
+        371,
+        430
+      ],
+      "frames": 1,
+      "durationMs": 1000,
+      "pixelsPerMeter": 176.55172413793105,
+      "source": "art-source/generated/prop-finance.glb"
+    },
+    "entry": {
+      "file": "entry.webp",
+      "width": 512,
+      "height": 512,
+      "anchor": [
+        256,
+        378.3186225483125
+      ],
+      "bbox": [
+        166,
+        175,
+        346,
+        404
+      ],
+      "frames": 1,
+      "durationMs": 1000,
+      "pixelsPerMeter": 176.55172413793105,
+      "source": "art-source/generated/prop-entry.glb"
+    }
+  },
+  "animation": {
+    "frameSize": 256,
+    "anchor": [
+      128.0,
+      189.15931127415624
+    ],
+    "pixelsPerMeter": 88.27586206896552,
+    "framesPerState": 8,
+    "frameDurationMs": 125,
+    "states": [
+      "idle",
+      "working",
+      "meeting",
+      "alert",
+      "walk",
+      "walkBack",
+      "stand",
+      "turn",
+      "walkRight",
+      "walkLeft",
+      "turnRight",
+      "turnLeft"
+    ],
+    "roles": [
+      "developer",
+      "qa",
+      "designer",
+      "growth",
+      "ops"
+    ],
+    "source": "scripts/build-production-art.py",
+    "method": "authored 3D geometry frame sequences rendered with VTK; not a skeletal rig",
+    "bounds": {
+      "idle": [
+        78,
+        52,
+        157,
+        198
+      ],
+      "working": [
+        78,
+        52,
+        157,
+        198
+      ],
+      "meeting": [
+        78,
+        52,
+        161,
+        198
+      ],
+      "alert": [
+        78,
+        52,
+        157,
+        198
+      ],
+      "walk": [
+        87,
+        27,
+        171,
+        205
+      ],
+      "walkBack": [
+        85,
+        22,
+        169,
+        210
+      ],
+      "stand": [
+        78,
+        28,
+        157,
+        198
+      ],
+      "turn": [
+        92,
+        24,
+        163,
+        203
+      ],
+      "walkRight": [
+        87,
+        22,
+        171,
+        210
+      ],
+      "walkLeft": [
+        85,
+        27,
+        169,
+        205
+      ],
+      "turnRight": [
+        94,
+        23,
+        157,
+        203
+      ],
+      "turnLeft": [
+        92,
+        28,
+        164,
+        198
+      ]
+    }
+  }
+}

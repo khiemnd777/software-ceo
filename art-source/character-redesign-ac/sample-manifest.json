@@ -1,0 +1,228 @@
+{
+  "stage": "A-C ONLY; owner model review D OPEN",
+  "generator": "scripts/character-review/build.py",
+  "dependencies": [
+    "numpy"
+  ],
+  "rig": "15 independently driven glTF joints, four-weight linear skinning; no IK solver or cloth physics",
+  "models": [
+    {
+      "file": "male-trousers.glb",
+      "sha256": "f396c23ec556ab351e77699a25efcaa9971a470fb5e6f0dc49480d98eb6df2a4",
+      "bytes": 2859752,
+      "vertices": 37650,
+      "triangles": 73984,
+      "meshes": [
+        {
+          "name": "shirt-continuous-shoulders",
+          "vertices": 8916,
+          "triangles": 17828
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "collar",
+          "vertices": 3,
+          "triangles": 1
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "shirt-button",
+          "vertices": 96,
+          "triangles": 168
+        },
+        {
+          "name": "neck",
+          "vertices": 2298,
+          "triangles": 4540
+        },
+        {
+          "name": "skin-arm-L",
+          "vertices": 3776,
+          "triangles": 7536
+        },
+        {
+          "name": "thumb-L",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "skin-arm-R",
+          "vertices": 3984,
+          "triangles": 7956
+        },
+        {
+          "name": "thumb-R",
+          "vertices": 140,
+          "triangles": 252
+        },
+        {
+          "name": "trousers-connected-pelvis",
+          "vertices": 11646,
+          "triangles": 23226
+        },
+        {
+          "name": "waistband",
+          "vertices": 120,
+          "triangles": 160
+        },
+        {
+          "name": "sneaker-L",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-L",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "sneaker-R",
+          "vertices": 336,
+          "triangles": 624
+        },
+        {
+          "name": "sole-R",
+          "vertices": 96,
+          "triangles": 128
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "lace",
+          "vertices": 48,
+          "triangles": 80
+        },
+        {
+          "name": "face-integrated-nose",
+          "vertices": 1536,
+          "triangles": 2976
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "ear",
+          "vertices": 252,
+          "triangles": 468
+        },
+        {
+          "name": "eye-white",
+          "vertices": 240,
+          "triangles": 440
+        },
+        {
+          "name": "iris",
+          "vertices": 216,
+          "triangles": 396
+        },
+        {
+          "name": "pupil",
+          "vertices": 160,
+          "triangles": 288
+        },
+        {
+          "name": "eye-glint",
+          "vertices": 80,
+          "triangles": 140
+        },
+        {
+          "name": "eyebrow",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "mouth",
+          "vertices": 72,
+          "triangles": 128
+        },
+        {
+          "name": "hair-unified-cap",
+          "vertices": 1056,
+          "triangles": 2016
+        },
+        {
+          "name": "hair-swept-fringe",
+          "vertices": 384,
+          "triangles": 736
+        }
+      ],
+      "joints": 15,
+      "clips": [
+        "idle",
+        "working",
+        "walk",
+        "stand-up",
+        "alert",
+        "meeting"
+      ]
+    }
+  ]
+}

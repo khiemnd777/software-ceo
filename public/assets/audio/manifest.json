@@ -1,0 +1,49 @@
+{
+  "title": "Studio Hours",
+  "composer": "Software CEO project; original authored score",
+  "license": "Provided as part of this project; no third-party recordings",
+  "tracks": [
+    {
+      "file": "studio-hours.mp3",
+      "alternate": "studio-hours.ogg",
+      "durationSeconds": 41.739,
+      "origin": "original procedural composition; no external samples",
+      "source": "scripts/build-audio.py"
+    },
+    {
+      "file": "click.mp3",
+      "alternate": "click.ogg",
+      "durationSeconds": 0.6,
+      "origin": "original procedural composition; no external samples",
+      "source": "scripts/build-audio.py"
+    },
+    {
+      "file": "decision.mp3",
+      "alternate": "decision.ogg",
+      "durationSeconds": 0.8,
+      "origin": "original procedural composition; no external samples",
+      "source": "scripts/build-audio.py"
+    },
+    {
+      "file": "cash.mp3",
+      "alternate": "cash.ogg",
+      "durationSeconds": 1.0,
+      "origin": "original procedural composition; no external samples",
+      "source": "scripts/build-audio.py"
+    },
+    {
+      "file": "release.mp3",
+      "alternate": "release.ogg",
+      "durationSeconds": 1.2,
+      "origin": "original procedural composition; no external samples",
+      "source": "scripts/build-audio.py"
+    },
+    {
+      "file": "alert.mp3",
+      "alternate": "alert.ogg",
+      "durationSeconds": 0.8,
+      "origin": "original procedural composition; no external samples",
+      "source": "scripts/build-audio.py"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "blender": "4.5.3 LTS",
+  "scope": "two static models, separate trousers, male short hair and female bob; no rig or game integration",
+  "models": [
+    {
+      "vertices": 18189,
+      "triangles": 34887,
+      "objects": 64,
+      "armatures": 0,
+      "bounds_blender_z_up": {
+        "min": [
+          -0.32059961557388306,
+          -0.19078175723552704,
+          0.004030127078294754
+        ],
+        "max": [
+          0.32061490416526794,
+          0.14482365548610687,
+          1.8165544271469116
+        ]
+      },
+      "finite_positions": true,
+      "gender": "Male",
+      "file": "male-static-v2.glb",
+      "bytes": 715624,
+      "sha256": "140cd079debd4fb9d0448347a0605b66327f7a8082194c991d54cbbaf8d6155b",
+      "source_evaluated_triangles": 485408,
+      "pose": "static standing; no rig",
+      "reduction": "per-feature collapse; source cages preserved",
+      "roundtrip": {
+        "vertices": 18555,
+        "triangles": 34887,
+        "objects": 64,
+        "armatures": 0,
+        "bounds_blender_z_up": {
+          "min": [
+            -0.32059961557388306,
+            -0.19078175723552704,
+            0.004030127078294754
+          ],
+          "max": [
+            0.32061490416526794,
+            0.14482365548610687,
+            1.8165544271469116
+          ]
+        },
+        "finite_positions": true
+      }
+    },
+    {
+      "vertices": 17982,
+      "triangles": 34525,
+      "objects": 62,
+      "armatures": 0,
+      "bounds_blender_z_up": {
+        "min": [
+          -0.2793627679347992,
+          -0.19078177213668823,
+          0.0038487743586301804
+        ],
+        "max": [
+          0.27936622500419617,
+          0.144598126411438,
+          1.7316328287124634
+        ]
+      },
+      "finite_positions": true,
+      "gender": "Female",
+      "file": "female-static-v2.glb",
+      "bytes": 707192,
+      "sha256": "f4782f4ce1cc30d522532e42ae7189d1abab20916657dceac39a2eafbb249307",
+      "source_evaluated_triangles": 423560,
+      "pose": "static standing; no rig",
+      "reduction": "per-feature collapse; source cages preserved",
+      "roundtrip": {
+        "vertices": 18348,
+        "triangles": 34525,
+        "objects": 62,
+        "armatures": 0,
+        "bounds_blender_z_up": {
+          "min": [
+            -0.2793627679347992,
+            -0.19078177213668823,
+            0.0038487743586301804
+          ],
+          "max": [
+            0.27936622500419617,
+            0.144598126411438,
+            1.7316328287124634
+          ]
+        },
+        "finite_positions": true
+      }
+    }
+  ],
+  "owner_art_acceptance": "OPEN",
+  "technical_limits": [
+    "static collapse meshes are not deformation retopology",
+    "no motion, skirt, long hair or other wardrobe variant acceptance",
+    "no performance or shipping acceptance"
+  ]
+}

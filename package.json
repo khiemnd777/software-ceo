@@ -1,0 +1,53 @@
+{
+  "name": "software-ceo",
+  "version": "0.9.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests --max-warnings=0",
+    "test": "vitest run",
+    "test:simulation": "vitest run tests/simulation",
+    "test:e2e": "playwright test",
+    "test:balance": "tsx scripts/balance.ts",
+    "verify": "npm run typecheck && npm run lint && npm test && npm run test:qa-harness && npm run build",
+    "test:content": "tsx scripts/validate-content.ts",
+    "test:assets": "python3 scripts/check-assets.py",
+    "test:profile": "node scripts/profile-browser.mjs",
+    "test:soak": "node scripts/soak.mjs 30",
+    "build:standalone": "npm run build && node scripts/build-standalone.mjs",
+    "package": "python3 scripts/package.py",
+    "format": "prettier --write src tests scripts/*.ts *.ts *.json",
+    "test:qa-harness": "node --test scripts/soak-evidence.test.mjs",
+    "test:balance:markets": "tsx scripts/balance-markets.ts",
+    "test:balance:policy": "tsx scripts/policy-experiment.ts"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zod": "4.1.12"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "1.56.1",
+    "@sparticuz/chromium": "141.0.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.1.0",
+    "eslint": "^9.39.0",
+    "fake-indexeddb": "^6.2.4",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vite": "^7.2.2",
+    "vitest": "^5.0.5"
+  },
+  "engines": {
+    "node": "^22.13.0 || ^24.0.0 || >=26.0.0"
+  }
+}

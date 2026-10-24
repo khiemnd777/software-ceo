@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software CEO · Balance"
+  short_description: "Thí nghiệm balance và quan sát người chơi W5"
+  default_prompt: "Dùng $ceo-balance-playtest để đánh giá giả thuyết balance với seed đối chứng và dữ liệu người chơi."

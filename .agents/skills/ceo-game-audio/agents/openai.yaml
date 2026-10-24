@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software CEO · Thiết kế âm thanh"
+  short_description: "Thiết kế cue, nhạc, mix và kiểm chứng audio game"
+  default_prompt: "Dùng $ceo-game-audio để rà cue và nhạc Software CEO, kiểm opt-in/mute/lifecycle và lập kế hoạch nghe thử."

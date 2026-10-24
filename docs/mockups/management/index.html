@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Software CEO · Bộ thiết kế quản lý</title>
+    <link rel="stylesheet" href="../shared/theme.css" />
+    <link rel="stylesheet" href="management.css" />
+  </head>
+  <body>
+    <svg
+      aria-hidden="true"
+      style="position: absolute; width: 0; height: 0; overflow: hidden"
+    >
+      <defs>
+        <symbol id="i-work" viewBox="0 0 24 24">
+          <path d="M4 4h16v16H4zM9 4v16M15 4v16M6 8h1m4 4h2m4-4h1" />
+        </symbol>
+        <symbol id="i-team" viewBox="0 0 24 24">
+          <circle cx="9" cy="8" r="3" />
+          <path
+            d="M3 20v-3a6 6 0 0 1 12 0v3m1-15a3 3 0 0 1 0 6m2 2a5 5 0 0 1 3 5v2"
+          />
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 6v6l4 2" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="m5 12 4 4L19 6" />
+        </symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24">
+          <path d="m12 3 10 18H2L12 3zM12 9v5m0 3h.01" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h15m-5-5 5 5-5 5" />
+        </symbol>
+        <symbol id="i-office" viewBox="0 0 24 24">
+          <path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8" />
+        </symbol>
+        <symbol id="i-market" viewBox="0 0 24 24">
+          <path d="M3 19V5m0 14h18M6 15l4-5 4 2 6-8" />
+        </symbol>
+        <symbol id="i-money" viewBox="0 0 24 24">
+          <path d="M12 2v20m5-16H9a4 4 0 0 0 0 8h6a4 4 0 0 1 0 8H6" />
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24">
+          <path d="M5 22V3c5-4 9 4 15 0v11c-6 4-10-4-15 0" />
+        </symbol>
+        <symbol id="i-history" viewBox="0 0 24 24">
+          <path d="M4 6h16v15H4zM8 3h8M8 11h8m-8 5h5" />
+        </symbol>
+      </defs>
+    </svg>
+    <aside class="review" aria-label="Điều khiển bản thiết kế">
+      <div class="review-label">
+        <strong>SOFTWARE CEO / BẢN THIẾT KẾ 07</strong
+        ><small>Mockup LOCAL · Tình huống độc lập · Không ghi save</small>
+      </div>
+      <div
+        id="scenarios"
+        class="scenarios"
+        role="group"
+        aria-label="Trạng thái minh họa"
+      ></div>
+      <label id="variant-wrap" hidden
+        ><select
+          id="review-variant"
+          aria-label="Biến thể minh họa"
+        ></select></label
+      ><label class="scale"
+        >UI
+        <select id="scale" aria-label="Tỷ lệ giao diện">
+          <option value="100">100%</option>
+          <option value="150">150%</option>
+        </select></label
+      >
+    </aside>
+    <div id="game-frame" class="management-ui">
+      <header class="hud">
+        <div class="brand">&lt;/&gt;<span>CEO</span></div>
+        <div class="hud-stat">
+          <small>TIỀN MẶT</small
+          ><strong class="green" id="cash">$38,200</strong>
+        </div>
+        <div class="hud-stat">
+          <small>VIỆC CÒN LẠI</small><strong>16 WP</strong>
+        </div>
+        <div class="hud-stat">
+          <small>TINH THẦN</small
+          ><strong>76<span class="muted">%</span></strong>
+        </div>
+        <div class="hud-stat">
+          <small>UY TÍN</small
+          ><strong>45<span class="muted">/100</span></strong>
+        </div>
+      </header>
+      <div class="company">
+        <strong
+          >KNA SOFTWARE
+          <span class="muted" id="strategy-label"> / OUTSOURCING</span></strong
+        >
+        <div class="time">
+          <span id="day">THÁNG 2 · NGÀY 42</span
+          ><span class="pause">Ⅱ TẠM DỪNG</span>
+        </div>
+      </div>
+      <main id="screen" tabindex="-1"></main>
+      <nav class="bottom-nav" aria-label="Điều hướng bản thiết kế">
+        <span class="nav-item"
+          ><svg aria-hidden="true"><use href="#i-office" /></svg>Văn phòng</span
+        ><a class="nav-item" href="../work/index.html"
+          ><svg aria-hidden="true"><use href="#i-work" /></svg>Công việc</a
+        ><a class="nav-item" href="#people" data-page="people"
+          ><svg aria-hidden="true"><use href="#i-team" /></svg>Nhân sự</a
+        ><a class="nav-item" href="#market" data-page="market"
+          ><svg aria-hidden="true"><use href="#i-market" /></svg>Thị trường</a
+        ><a class="nav-item" href="#finance" data-page="finance"
+          ><svg aria-hidden="true"><use href="#i-money" /></svg>Tài chính</a
+        ><a class="nav-item" href="#strategy" data-page="strategy"
+          ><svg aria-hidden="true"><use href="#i-flag" /></svg>Chiến lược</a
+        ><a class="nav-item" href="#history" data-page="history"
+          ><svg aria-hidden="true"><use href="#i-history" /></svg>Nhật ký</a
+        >
+      </nav>
+    </div>
+    <dialog
+      id="action-dialog"
+      aria-labelledby="dialog-title"
+      aria-describedby="dialog-copy"
+    >
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow" id="dialog-eyebrow">QUYẾT ĐỊNH CỦA CEO</span>
+          <h2 id="dialog-title"></h2>
+        </div>
+        <button class="quiet" id="dialog-close" aria-label="Đóng xác nhận">
+          ×
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p id="dialog-copy" class="confirm-summary"></p>
+        <div id="dialog-effects" class="effect-summary"></div>
+      </div>
+      <div class="dialog-foot">
+        <button class="quiet" id="dialog-cancel">Quay lại</button
+        ><button class="primary" id="dialog-confirm">Xác nhận</button>
+      </div>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script src="management.js"></script>
+  </body>
+</html>

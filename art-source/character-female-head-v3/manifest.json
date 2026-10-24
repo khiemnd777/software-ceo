@@ -1,0 +1,10 @@
+{
+  "file": "female-head-v3.glb",
+  "sha256": "e01ce899621463c5bcbf7970442ffd9096a339605ec09821f41f6288fddd686a",
+  "bytes": 437464,
+  "triangles": 21458,
+  "source_evaluated_triangles": 245936,
+  "source_blend_sha256": "f3dc02a397c1e0f0749f49f2d4c250fe9a4dc52b48087a8776e36defb826e9fe",
+  "scope": "Head only. Original body and male are not exported or changed.",
+  "rig": false
+}

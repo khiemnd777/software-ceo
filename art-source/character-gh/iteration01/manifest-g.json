@@ -1,0 +1,88 @@
+{
+  "stage": "G",
+  "models": [
+    {
+      "id": "male-shorts",
+      "gender": "male",
+      "bottom": "shorts",
+      "hair": "short",
+      "label": "Nam · Quần đùi",
+      "source": "male-shorts-controls.blend",
+      "source_sha256": "e8eb19a0d79983b616dcb09f212296c5a07130fa8a56994d886d6b7205728159",
+      "glb": "male-shorts.glb",
+      "glb_sha256": "7cebbcf93c65f36d85a5ff1de2fa0195cfbd14ed14631e477cbd07fc86c383d8",
+      "input_f_sha256": "b44614e28ac945bdf70b64eb7135502b25899a030b0dea1054246db3889454cc",
+      "clips": [
+        "alert",
+        "idle",
+        "meeting",
+        "stand-up",
+        "walk",
+        "working"
+      ],
+      "skin_joints": 22,
+      "changed_parts": [
+        "Male · continuous trousers | E retopology"
+      ],
+      "unchanged_original_parts": 62,
+      "max_skin_influences": 4
+    },
+    {
+      "id": "female-skirt-long-long",
+      "gender": "female",
+      "bottom": "skirt-long",
+      "hair": "long",
+      "label": "Nữ · Chân váy dài · Tóc dài",
+      "source": "female-skirt-long-long-controls.blend",
+      "source_sha256": "4677fb25f974a2651e53050a2f61f7e821447230d2e154d9040bf9ec5d167b42",
+      "glb": "female-skirt-long-long.glb",
+      "glb_sha256": "d0a5f6a10b7c63a4ca2ca6f62ad1bab35dec4e01fdace44c1a1e291eaa159b13",
+      "input_f_sha256": "19e7cb02db0bf27f54092474b8685d68f912da070557109b4bd34892c2c5a9c7",
+      "clips": [
+        "alert",
+        "idle",
+        "meeting",
+        "stand-up",
+        "walk",
+        "working"
+      ],
+      "skin_joints": 22,
+      "changed_parts": [
+        "Female V3 · rounded bob back with ear tuck [static head]",
+        "Female · continuous trousers | E retopology",
+        "Female · slanted trouser pocket | E base",
+        "Female · slanted trouser pocket.001 | E base"
+      ],
+      "unchanged_original_parts": 56,
+      "max_skin_influences": 4
+    },
+    {
+      "id": "female-skirt-short-short",
+      "gender": "female",
+      "bottom": "skirt-short",
+      "hair": "short",
+      "label": "Nữ · Chân váy ngắn · Tóc ngắn",
+      "source": "female-skirt-short-short-controls.blend",
+      "source_sha256": "38aaa4b82de032e976542cc505270a3f76d91a09f956aa77877a06773cbd0b91",
+      "glb": "female-skirt-short-short.glb",
+      "glb_sha256": "f1ce34ad5c7e011723c0cee8dba9d3bd6419ae960fa8c7ba1d0c59560bff26a7",
+      "input_f_sha256": "19e7cb02db0bf27f54092474b8685d68f912da070557109b4bd34892c2c5a9c7",
+      "clips": [
+        "alert",
+        "idle",
+        "meeting",
+        "stand-up",
+        "walk",
+        "working"
+      ],
+      "skin_joints": 22,
+      "changed_parts": [
+        "Female · continuous trousers | E retopology",
+        "Female · slanted trouser pocket | E base",
+        "Female · slanted trouser pocket.001 | E base"
+      ],
+      "unchanged_original_parts": 57,
+      "max_skin_influences": 4
+    }
+  ]
+}

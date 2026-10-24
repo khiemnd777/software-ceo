@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Công việc — Software CEO · Mockup LOCAL</title>
+    <link rel="stylesheet" href="../shared/theme.css" />
+  </head>
+  <body>
+    <svg
+      aria-hidden="true"
+      style="position: absolute; width: 0; height: 0; overflow: hidden"
+    >
+      <defs>
+        <symbol id="i-work" viewBox="0 0 24 24">
+          <path d="M4 4h16v16H4zM9 4v16M15 4v16M6 8h1m4 4h2m4-4h1" />
+        </symbol>
+        <symbol id="i-team" viewBox="0 0 24 24">
+          <circle cx="9" cy="8" r="3" />
+          <path
+            d="M3 20v-3a6 6 0 0 1 12 0v3m1-15a3 3 0 0 1 0 6m2 2a5 5 0 0 1 3 5v2"
+          />
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 6v6l4 2" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="m5 12 4 4L19 6" />
+        </symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24">
+          <path d="m12 3 10 18H2L12 3zM12 9v5m0 3h.01" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h15m-5-5 5 5-5 5" />
+        </symbol>
+        <symbol id="i-office" viewBox="0 0 24 24">
+          <path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8" />
+        </symbol>
+        <symbol id="i-market" viewBox="0 0 24 24">
+          <path d="M3 19V5m0 14h18M6 15l4-5 4 2 6-8" />
+        </symbol>
+        <symbol id="i-money" viewBox="0 0 24 24">
+          <path d="M12 2v20m5-16H9a4 4 0 0 0 0 8h6a4 4 0 0 1 0 8H6" />
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24">
+          <path d="M5 22V3c5-4 9 4 15 0v11c-6 4-10-4-15 0" />
+        </symbol>
+        <symbol id="i-history" viewBox="0 0 24 24">
+          <path d="M4 6h16v15H4zM8 3h8M8 11h8m-8 5h5" />
+        </symbol>
+      </defs>
+    </svg>
+    <aside class="review" aria-label="Điều khiển bản thiết kế">
+      <div class="review-label">
+        <strong>SOFTWARE CEO / BẢN THIẾT KẾ 06</strong
+        ><small>Mockup LOCAL · Dữ liệu minh họa · Không ghi save</small>
+      </div>
+      <div class="scenarios" role="group" aria-label="Trạng thái minh họa">
+        <button data-scene="offer" aria-pressed="true">01 · Chờ ký</button
+        ><button data-scene="blocked" aria-pressed="false">02 · Thiếu QA</button
+        ><button data-scene="ready" aria-pressed="false">
+          03 · Sẵn sàng giao
+        </button>
+      </div>
+      <label id="variant-control" hidden
+        ><select id="variant" aria-label="Loại công việc sẵn sàng">
+          <option value="contract">Nghiệm thu hợp đồng</option>
+          <option value="product">Phát hành sản phẩm</option>
+        </select></label
+      >
+      <label class="scale"
+        >UI
+        <select id="scale" aria-label="Tỷ lệ giao diện">
+          <option value="100">100%</option>
+          <option value="150">150%</option>
+        </select></label
+      >
+    </aside>
+    <div id="game-frame">
+      <header class="hud">
+        <div class="brand">&lt;/&gt;<span>CEO</span></div>
+        <div class="hud-stat">
+          <small>TIỀN MẶT</small
+          ><strong class="green" id="cash">$45,000</strong>
+        </div>
+        <div class="hud-stat">
+          <small>VIỆC CÒN LẠI</small
+          ><strong id="remaining"
+            >32–52 <small style="display: inline">WP</small></strong
+          >
+        </div>
+        <div class="hud-stat">
+          <small>TINH THẦN</small
+          ><strong
+            >76<span class="muted" style="font-size: 11px">%</span></strong
+          >
+        </div>
+        <div class="hud-stat">
+          <small>UY TÍN</small
+          ><strong
+            >45<span class="muted" style="font-size: 11px">/100</span></strong
+          >
+        </div>
+      </header>
+      <div class="company">
+        <strong
+          >KNA SOFTWARE
+          <span class="muted" id="strategy"> / OUTSOURCING</span></strong
+        >
+        <div class="time">
+          <span id="day">THÁNG 1 · NGÀY 0</span
+          ><span class="pause">Ⅱ TẠM DỪNG</span>
+        </div>
+      </div>
+      <main>
+        <div class="heading">
+          <div>
+            <h1>Công việc<span class="blue">.</span></h1>
+            <p>Tiến độ, điểm nghẽn và đội ngũ trong cùng một nơi.</p>
+          </div>
+          <div class="week">
+            <strong id="action-count">3 / 3</strong> lượt CEO<br /><small
+              >Làm mới mỗi 7 ngày</small
+            >
+          </div>
+        </div>
+        <div class="board">
+          <aside class="queue" aria-label="Danh sách công việc">
+            <div class="queue-title">
+              <h3>Dự án của bạn</h3>
+              <span id="job-count">01 CÔNG VIỆC</span>
+            </div>
+            <div class="filters" role="group" aria-label="Lọc công việc">
+              <button data-filter="all" aria-pressed="true">Tất cả</button
+              ><button data-filter="attention" aria-pressed="false">
+                Cần xử lý</button
+              ><button data-filter="done" aria-pressed="false">Hoàn tất</button>
+            </div>
+            <div id="job-list"></div>
+            <div class="queue-note">
+              <strong>Chọn việc, rồi chọn cách làm.</strong><br />Phát triển, QA
+              và sửa lỗi có thể diễn ra song song.
+            </div>
+          </aside>
+          <section
+            class="detail"
+            id="project"
+            aria-label="Chi tiết công việc"
+          ></section>
+        </div>
+      </main>
+      <nav class="bottom-nav" aria-label="Điều hướng bản thiết kế">
+        <span class="nav-item"
+          ><svg aria-hidden="true"><use href="#i-office" /></svg>Văn phòng</span
+        ><span class="nav-item active" aria-current="page"
+          ><svg aria-hidden="true"><use href="#i-work" /></svg>Công việc</span
+        ><a class="nav-item" href="../management/index.html#people"
+          ><svg aria-hidden="true"><use href="#i-team" /></svg>Nhân sự</a
+        ><a class="nav-item" href="../management/index.html#market"
+          ><svg aria-hidden="true"><use href="#i-market" /></svg>Thị trường</a
+        ><a class="nav-item" href="../management/index.html#finance"
+          ><svg aria-hidden="true"><use href="#i-money" /></svg>Tài chính</a
+        ><a class="nav-item" href="../management/index.html#strategy"
+          ><svg aria-hidden="true"><use href="#i-flag" /></svg>Chiến lược</a
+        ><a class="nav-item" href="../management/index.html#history"
+          ><svg aria-hidden="true"><use href="#i-history" /></svg>Nhật ký</a
+        >
+      </nav>
+    </div>
+    <dialog id="assign-dialog" aria-labelledby="assign-title">
+      <div class="dialog-head">
+        <div>
+          <h2 id="assign-title">Phân công QA</h2>
+          <p id="assign-project">Cổng vận hành bán lẻ · Mộc Retail</p>
+        </div>
+        <button
+          class="quiet"
+          data-close="assign-dialog"
+          aria-label="Đóng phân công"
+        >
+          ×
+        </button>
+      </div>
+      <form id="assign-form">
+        <div class="dialog-body">
+          <label class="field" for="task-kind">Loại công việc</label
+          ><select id="task-kind">
+            <option value="qa">Kiểm thử (QA)</option>
+            <option value="develop">Phát triển</option>
+            <option value="fix">Sửa lỗi</option>
+            <option value="refactor">Giảm nợ kỹ thuật</option>
+          </select>
+          <h3 style="margin-bottom: 12px">Chọn người phụ trách</h3>
+          <label class="candidate"
+            ><input type="radio" name="employee" value="linh" checked /><span
+              ><strong>Linh Trần</strong
+              ><small id="linh-assignment">QA · Chưa phân công</small></span
+            ><span class="badge info" id="linh-fit"
+              >Đúng chuyên môn</span
+            ></label
+          ><label class="candidate"
+            ><input type="radio" name="employee" value="minh" /><span
+              ><strong>Minh Nguyễn</strong
+              ><small id="minh-assignment"
+                >Developer · Đang phát triển dự án này</small
+              ></span
+            ></label
+          ><label class="checkline" id="append-field" hidden
+            ><input type="checkbox" id="append" />Giữ việc hiện tại và thêm việc
+            thứ hai</label
+          >
+          <p class="dialog-note" id="assignment-note">
+            Linh sẽ nhận công việc QA của dự án này.
+          </p>
+          <p class="signature">
+            Phân công không dùng lượt CEO. Tiến độ chỉ thay đổi khi thời gian
+            game chạy.
+          </p>
+        </div>
+        <div class="dialog-foot">
+          <button type="button" class="quiet" data-close="assign-dialog">
+            Hủy</button
+          ><button type="submit" class="primary">Xác nhận phân công</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+      <div class="dialog-head">
+        <h2 id="confirm-title">Ký hợp đồng?</h2>
+        <button
+          class="quiet"
+          data-close="confirm-dialog"
+          aria-label="Đóng xác nhận"
+        >
+          ×
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p id="confirm-copy" class="confirm-summary"></p>
+      </div>
+      <div class="dialog-foot">
+        <button class="quiet" data-close="confirm-dialog">Quay lại</button
+        ><button class="primary" id="confirm-action">Ký · 1 lượt CEO</button>
+      </div>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      const icon = (name) =>
+        `<svg aria-hidden="true"><use href="#i-${name}"/></svg>`;
+      const base = {
+        scene: "offer",
+        variant: "contract",
+        signed: false,
+        qaAssigned: false,
+        accepted: false,
+        released: false,
+        filter: "all",
+        crew: { linh: [], minh: [] },
+      };
+      let state = structuredClone(base),
+        opener = null,
+        confirmType = "",
+        toastTimer;
+      const tasks = {
+        qa: "QA",
+        develop: "Phát triển",
+        fix: "Sửa lỗi",
+        refactor: "Giảm nợ",
+      };
+      const title = () =>
+        state.variant === "product"
+          ? "Báo cáo doanh thu"
+          : "Cổng vận hành bán lẻ";
+      const personName = (id) => (id === "linh" ? "Linh Trần" : "Minh Nguyễn");
+      function notify(message) {
+        clearTimeout(toastTimer);
+        $("toast").textContent = message;
+        $("toast").hidden = false;
+        toastTimer = setTimeout(() => ($("toast").hidden = true), 6500);
+      }
+      function qaNames() {
+        return Object.entries(state.crew)
+          .filter(([, list]) => list.includes("qa"))
+          .map(([id]) => personName(id))
+          .join(" và ");
+      }
+      function done() {
+        return state.accepted || state.released;
+      }
+      function badge(text, type = "") {
+        return `<span class="badge ${type}">${icon(type === "ok" ? "check" : type === "info" ? "clock" : "alert")}${text}</span>`;
+      }
+      function status() {
+        if (done()) return state.released ? "Đã phát hành" : "Đã nghiệm thu";
+        if (state.scene === "offer")
+          return state.signed ? "Cần phân công" : "Chờ ký hợp đồng";
+        if (state.scene === "blocked")
+          return state.qaAssigned
+            ? "Đang làm · QA chưa đủ"
+            : "Thiếu người làm QA";
+        return state.variant === "product"
+          ? "Sẵn sàng phát hành"
+          : "Sẵn sàng nghiệm thu";
+      }
+      function render() {
+        const offer = state.scene === "offer",
+          blocked = state.scene === "blocked",
+          ready = state.scene === "ready",
+          product = state.variant === "product";
+        const percent = offer ? 0 : blocked ? 60 : 100,
+          day = offer ? 0 : blocked ? 42 : 56;
+        $("variant-control").hidden = !ready;
+        $("strategy").textContent = product ? " / PRODUCT" : " / OUTSOURCING";
+        $("cash").textContent = offer
+          ? state.signed
+            ? "$51,000"
+            : "$45,000"
+          : product
+            ? "$28,700"
+            : "$38,200";
+        $("remaining").textContent = offer
+          ? "32–52 WP"
+          : blocked
+            ? "16 WP"
+            : "0 WP";
+        $("day").textContent =
+          `THÁNG ${Math.floor(day / 30) + 1} · NGÀY ${day}`;
+        $("action-count").textContent = state.signed ? "2 / 3" : "3 / 3";
+        document
+          .querySelectorAll("[data-scene]")
+          .forEach((b) =>
+            b.setAttribute("aria-pressed", b.dataset.scene === state.scene),
+          );
+        document
+          .querySelectorAll("[data-filter]")
+          .forEach((b) =>
+            b.setAttribute("aria-pressed", b.dataset.filter === state.filter),
+          );
+        const visible =
+          state.filter === "all" ||
+          (state.filter === "done" ? done() : !done());
+        $("job-count").textContent = visible ? "01 CÔNG VIỆC" : "00 CÔNG VIỆC";
+        $("job-list").innerHTML = visible
+          ? `<button class="job" aria-pressed="true" aria-controls="project"><div class="row">${badge(status(), done() || ready ? "ok" : offer ? "info" : "")}</div><strong>${title()}</strong><p>${product ? "Retail SaaS · Tính năng" : "Mộc Retail · Giá cố định"}</p><div class="mini-track" aria-hidden="true"><i style="width:${percent}%"></i></div><div class="job-foot"><span>${offer ? "Chưa bắt đầu" : `Phát triển ${percent}%`}</span><span>${product ? "10 WP" : "Hạn: ngày 70"}</span></div></button>`
+          : `<div class="empty">${state.filter === "done" ? "Chưa có công việc hoàn tất." : "Không còn công việc cần xử lý."}<br><button class="quiet small" data-all style="margin-top:14px">Xem tất cả</button></div>`;
+        if (!visible) {
+          $("project").innerHTML =
+            `<div class="completed"><h2>${state.filter === "done" ? "Chưa có dự án hoàn tất" : "Mọi việc đã được xử lý"}</h2><p>${state.filter === "done" ? "Dự án sau nghiệm thu hoặc tính năng sau phát hành sẽ xuất hiện ở đây." : "Mở mục Hoàn tất để xem kết quả và bước tiếp theo."}</p></div>`;
+          return;
+        }
+        if (done()) {
+          renderDone(product);
+          return;
+        }
+        const next = offer
+          ? state.signed
+            ? {
+                tone: "info",
+                title: "Hợp đồng đã ký. Chọn đội ngũ thực hiện.",
+                copy: Object.values(state.crew).some((list) => list.length)
+                  ? "Phân công đã cập nhật bên dưới. Kiểm tra đủ người làm phát triển và QA trước khi tiếp tục thời gian game."
+                  : "Chưa có người làm phát triển và QA. Phân công trước khi tiếp tục thời gian game.",
+                action: "Phân công đội ngũ",
+                kind: "assign",
+              }
+            : {
+                tone: "info",
+                title: "Ký hợp đồng để bắt đầu dự án.",
+                copy: "Cam kết giao trước ngày 70. Nhận cọc 20% khi ký; các mốc tiếp theo tạo hóa đơn có kỳ hạn thanh toán.",
+                action: "Ký hợp đồng · 1 lượt CEO",
+                kind: "sign",
+              }
+          : blocked
+            ? state.qaAssigned
+              ? {
+                  tone: "",
+                  title: "QA đã có người phụ trách. Mốc kiểm thử chưa đạt.",
+                  copy:
+                    qaNames() +
+                    " đã nhận việc. QA vẫn là 0 / 4,8 WP; tiến độ sẽ cập nhật khi thời gian game chạy. Nghiệm thu giữa kỳ hiện chưa khả dụng.",
+                  action: "Xem phân công",
+                  kind: "assign",
+                }
+              : {
+                  tone: "",
+                  title: "Thiếu QA. Dự án chưa thể nghiệm thu.",
+                  copy: "Phát triển đã qua mốc giữa kỳ, nhưng chưa có điểm kiểm thử. Giao QA cho người phù hợp để kiểm tra chất lượng.",
+                  action: "Phân công QA",
+                  kind: "assign",
+                }
+            : {
+                tone: "ok",
+                title: product
+                  ? "Tính năng đã đủ điều kiện phát hành."
+                  : "Dự án đã đủ điều kiện nghiệm thu cuối kỳ.",
+                copy: product
+                  ? "Phát triển và QA đã đạt mốc. Không có lỗi nghiêm trọng đã biết; lỗi ẩn vẫn có thể xuất hiện sau phát hành."
+                  : "Mốc giữa kỳ đã nghiệm thu. Phát triển và QA đạt yêu cầu, không có lỗi nghiêm trọng đã biết.",
+                action: product ? "Phát hành tính năng" : "Nghiệm thu cuối kỳ",
+                kind: product ? "release" : "accept",
+              };
+        $("project").innerHTML =
+          `<div class="detail-top"><div class="eyebrow">${product ? "PRODUCT / LỘ TRÌNH SẢN PHẨM" : "OUTSOURCING / HỢP ĐỒNG KHÁCH HÀNG"}</div><div class="title-row"><div><h2>${title()}</h2><p>${product ? "Retail SaaS · Giúp cửa hàng biết mặt hàng nào đáng nhập thêm" : "Mộc Retail · Cổng quản lý vận hành cửa hàng"}</p></div>${badge(offer ? "Giá cố định" : ready ? "Đủ điều kiện" : "Đang thực hiện", ready ? "ok" : "info")}</div><div class="facts">${product ? '<div><small>NHU CẦU</small><strong>Khách đang cần</strong></div><div><small>ĐỘ PHÙ HỢP</small><strong>+6 <span class="unit">đúng phân khúc</span></strong></div>' : '<div><small>GIÁ TRỊ HỢP ĐỒNG</small><strong>$30,000</strong></div><div><small>HẠN GIAO</small><strong>Ngày 70 <span class="unit">· còn ' + (70 - day) + " ngày</span></strong></div>"}<div><small>${product ? "KHỐI LƯỢNG" : "TIN CẬY KHÁCH HÀNG"}</small><strong>${product ? "10 WP" : '60<span class="unit"> / 100</span>'}</strong></div></div></div><div class="detail-body"><section class="next ${next.tone}" aria-labelledby="next-title"><div class="next-label">${icon(ready ? "check" : offer ? "arrow" : "alert")}BƯỚC TIẾP THEO</div><h3 id="next-title">${next.title}</h3><p>${next.copy}</p><div class="next-bottom"><button class="primary" data-action="${next.kind}">${next.action}${icon("arrow")}</button><small>${offer && !state.signed ? "Cọc $6,000 · Chưa ghi nhận doanh thu" : ready ? (product ? "Không dùng lượt CEO" : "40% cuối kỳ → hóa đơn, chưa phải tiền mặt") : "Không dùng lượt CEO"}</small></div></section>
+ <div class="work-overview"><section aria-labelledby="progress-title"><div class="section-label"><h3 id="progress-title">Tiến độ & chất lượng</h3><small>${offer ? "Ước tính ban đầu" : ready ? "Các mốc đã đạt" : "Hai luồng chạy song song"}</small></div><div class="tracks"><div class="track"><div class="track-label"><span>Phát triển</span><strong>${offer ? "0 / 32–52" : product ? "10 / 10" : blocked ? "24 / 40" : "40 / 40"} WP</strong></div><div class="bar" role="progressbar" aria-label="Tiến độ phát triển" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}"><span style="width:${percent}%"></span></div><p>${offer ? "Phạm vi thực tế chưa được làm rõ." : blocked ? "Còn 16 WP phát triển." : "Đã hoàn thành khối lượng phát triển."}</p></div><div class="track"><div class="track-label"><span>Kiểm thử · QA</span><strong>${offer ? "Chưa kiểm thử" : blocked ? "0 / 4,8 WP" : product ? "1,2 / 1,2 WP" : "5 / 4,8 WP"}</strong></div><div class="bar qa" role="progressbar" aria-label="Tiến độ QA" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${ready ? 100 : 0}"><span style="width:${ready ? 100 : 0}%"></span></div><p>${ready ? "Đạt mức QA yêu cầu." : offer ? "Lỗi ẩn vẫn có thể tồn tại." : state.qaAssigned ? "Đã phân công " + qaNames() + " · chờ thời gian game chạy." : "Chưa có người kiểm thử."}</p></div></div><div class="quality-line"><span>${ready ? icon("check") : ""} Lỗi nghiêm trọng đã biết: <strong>0</strong></span><span>Nợ kỹ thuật: <strong>0</strong></span><span>${ready ? "Chất lượng đã biết: <strong>100%</strong>" : "Chất lượng: <strong>Chưa kiểm chứng bằng QA</strong>"}</span></div></section>
+ <section class="crew" aria-labelledby="crew-title"><div class="section-label"><h3 id="crew-title">${icon("team")} Đội ngũ dự án</h3>${offer && !state.signed ? "<small>Mở sau khi ký</small>" : '<button class="quiet small" data-action="assign">' + (ready ? "Xem phân công" : "Phân công") + "</button>"}</div>${offer && !state.signed ? '<div class="notice"><strong>Chưa thể phân công dự án này.</strong>Ký hợp đồng trước, sau đó chọn người làm phát triển, kiểm thử hoặc sửa lỗi.</div>' : crewHTML(offer, ready)}
+ ${!offer && !ready ? '<p class="signature">' + (state.qaAssigned ? "Đã có người làm QA. Nghiệm thu vẫn chờ các mốc phát triển và kiểm thử." : "Chưa thể dự báo giao hàng: còn việc QA chưa có người phụ trách.") + "</p>" : ""}</section></div>
+ <details class="details"><summary>${offer ? "Điều khoản & báo giá" : product ? "Tác động & điều kiện phát hành" : "Mốc nghiệm thu & điều khoản"}</summary><p>${product ? "Tăng độ phù hợp khi đúng phân khúc. Không cam kết số khách mới hoặc doanh thu tức thì." : "20% cọc khi ký · 40% giữa kỳ · 40% cuối kỳ. Nghiệm thu tạo hóa đơn; tiền chỉ về khi hóa đơn được thanh toán."}</p>${offer && !state.signed ? "<p>Báo giá hiện tại: chiết khấu 0%. Mỗi 5% chiết khấu tăng tin cậy 2,5.</p>" : blocked ? "<button disabled>Nghiệm thu giữa kỳ · cần QA</button><p>Chưa đạt kiểm thử hoặc chất lượng. Phân công QA và Dev sửa lỗi nếu phát hiện lỗi.</p>" : ready ? "<p>" + (product ? "Phát triển và QA đã đạt yêu cầu." : "Mốc giữa kỳ đã nghiệm thu. Hóa đơn cuối kỳ chiếm 40% giá trị hợp đồng.") + "</p>" : ""}</details></div>`;
+      }
+      function crewHTML(offer, ready) {
+        if (offer && !state.crew.linh.length && !state.crew.minh.length)
+          return '<div class="notice"><strong>Đội ngũ chưa nhận dự án này.</strong>Chọn Phân công để giao việc cho Minh hoặc Linh.</div>';
+        return ["minh", "linh"]
+          .map((id) => {
+            const list = state.crew[id];
+            return `<div class="person"><div class="avatar ${id === "linh" ? "qa" : ""}">${id === "linh" ? "LT" : "MN"}</div><div><strong>${personName(id)}</strong><small>${id === "linh" ? "QA · Kiểm thử" : "Developer · Phát triển"}</small></div><div class="assignment">${list.length ? list.map((t) => tasks[t]).join(" + ") : "Chưa phân công"}${list.length === 2 ? '<small class="gold">Chia đôi thời gian · tập trung −15%</small>' : ""}</div><button class="quiet small" data-action="assign" data-employee="${id}">${ready ? "Xem" : "Đổi việc"}</button></div>`;
+          })
+          .join("");
+      }
+      function renderDone(product) {
+        $("project").innerHTML =
+          `<div class="completed">${badge(product ? "Đã phát hành" : "Đã nghiệm thu", "ok")}<h2>${title()}</h2><p>${product ? "Tính năng đã được phát hành. Theo dõi phản hồi khách hàng và khối lượng hỗ trợ trong những ngày tiếp theo." : "Dự án đã nghiệm thu. Hóa đơn cuối kỳ $12,000 đã được lập; tiền mặt chưa tăng."}</p><div class="next info" style="margin-top:24px"><div class="next-label">${icon("arrow")}BƯỚC TIẾP THEO</div><h3>${product ? "Theo dõi khách hàng & hỗ trợ" : "Theo dõi khoản phải thu"}</h3><p>${product ? "Mở Thị trường để xem phản hồi và nhu cầu sau phát hành." : "Mở Tài chính để theo dõi kỳ hạn và trạng thái thanh toán hóa đơn."}</p><button class="quiet" style="margin-top:14px" data-action="destination">${product ? "Xem khách hàng" : "Xem hóa đơn"} →</button></div></div>`;
+      }
+      function showDialog(id, source) {
+        opener = source;
+        $(id).showModal();
+      }
+      function closeDialog(id) {
+        $(id).close();
+        if (opener?.isConnected) opener.focus();
+        else document.querySelector("#project [data-action]")?.focus();
+      }
+      function assignmentNote() {
+        const id = document.querySelector("input[name=employee]:checked").value;
+        const existing = state.crew[id];
+        $("append-field").hidden = !existing.length;
+        $("linh-assignment").textContent =
+          "QA · " +
+          (state.crew.linh.length
+            ? state.crew.linh.map((t) => tasks[t]).join(" + ")
+            : "Chưa phân công");
+        $("minh-assignment").textContent =
+          "Developer · " +
+          (state.crew.minh.length
+            ? state.crew.minh.map((t) => tasks[t]).join(" + ")
+            : "Chưa phân công");
+        $("linh-fit").hidden = $("task-kind").value !== "qa";
+        $("assignment-note").textContent = existing.length
+          ? $("append").checked
+            ? "Hai việc chia đều thời gian và giảm tập trung 15%."
+            : "Phân công này thay thế công việc hiện tại của " +
+              personName(id) +
+              "."
+          : personName(id) +
+            " sẽ nhận công việc " +
+            tasks[$("task-kind").value] +
+            " của dự án này.";
+      }
+      document.addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (!b) return;
+        if (b.dataset.scene) {
+          state = structuredClone(base);
+          state.scene = b.dataset.scene;
+          state.crew =
+            state.scene === "offer"
+              ? { linh: [], minh: [] }
+              : state.scene === "ready"
+                ? { linh: ["qa"], minh: ["develop"] }
+                : { linh: [], minh: ["develop"] };
+          state.variant = "contract";
+          $("variant").value = "contract";
+          $("toast").hidden = true;
+          render();
+          return;
+        }
+        if (b.dataset.filter) {
+          state.filter = b.dataset.filter;
+          render();
+          return;
+        }
+        if (b.hasAttribute("data-all")) {
+          state.filter = "all";
+          render();
+          return;
+        }
+        if (b.dataset.close) {
+          closeDialog(b.dataset.close);
+          return;
+        }
+        const action = b.dataset.action;
+        if (action === "assign") {
+          $("assign-title").textContent =
+            state.scene === "blocked" ? "Phân công QA" : "Phân công dự án";
+          $("assign-project").textContent = title();
+          $("task-kind").value = state.scene === "blocked" ? "qa" : "develop";
+          document.querySelector(
+            'input[name=employee][value="' +
+              (b.dataset.employee || "linh") +
+              '"]',
+          ).checked = true;
+          $("append").checked = false;
+          assignmentNote();
+          showDialog("assign-dialog", b);
+        }
+        if (["sign", "accept", "release"].includes(action)) {
+          confirmType = action;
+          const map = {
+            sign: [
+              "Ký hợp đồng với Mộc Retail?",
+              "Cam kết giao trước ngày 70.\nTốn 1 lượt CEO · Nhận cọc $6,000 (20%).\n40% giữa kỳ và 40% cuối kỳ tạo hóa đơn; thanh toán có thể chậm.",
+              "Ký · 1 lượt CEO",
+            ],
+            accept: [
+              "Nghiệm thu cuối kỳ?",
+              "Hóa đơn cuối kỳ: $12,000.\nTiền mặt chưa tăng khi nghiệm thu.\nKhông dùng lượt CEO.",
+              "Xác nhận nghiệm thu",
+            ],
+            release: [
+              "Phát hành tính năng?",
+              "Báo cáo doanh thu · Retail SaaS.\nĐã đạt mốc phát triển và QA.\nKhông dùng lượt CEO. Lỗi ẩn vẫn có thể xuất hiện.",
+              "Xác nhận phát hành",
+            ],
+          };
+          $("confirm-title").textContent = map[action][0];
+          $("confirm-copy").textContent = map[action][1];
+          $("confirm-action").textContent = map[action][2];
+          showDialog("confirm-dialog", b);
+        }
+        if (action === "destination")
+          location.href =
+            "../management/index.html#" +
+            (state.variant === "product" ? "market" : "finance");
+      });
+      $("variant").addEventListener("change", (e) => {
+        state.variant = e.target.value;
+        state.accepted = false;
+        state.released = false;
+        state.filter = "all";
+        render();
+      });
+      $("scale").addEventListener("change", (e) => {
+        $("game-frame").style.zoom = Number(e.target.value) / 100;
+        document.documentElement.style.setProperty(
+          "--ui-scale",
+          Number(e.target.value) / 100,
+        );
+      });
+      document.querySelectorAll("dialog").forEach((d) => {
+        d.addEventListener("cancel", (e) => {
+          e.preventDefault();
+          closeDialog(d.id);
+        });
+        d.addEventListener("keydown", (e) => {
+          if (e.key !== "Tab") return;
+          const controls = [
+            ...d.querySelectorAll(
+              'button:not(:disabled),select:not(:disabled),input:not(:disabled),[tabindex="0"]',
+            ),
+          ].filter((el) => el.getClientRects().length);
+          const first = controls[0],
+            last = controls.at(-1);
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        });
+      });
+      $("assign-form").addEventListener("change", assignmentNote);
+      $("assign-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const id = document.querySelector("input[name=employee]:checked").value,
+          kind = $("task-kind").value,
+          existing = state.crew[id];
+        if ($("append").checked && existing.length) {
+          if (existing.length >= 2) {
+            notify(
+              "Mỗi người tối đa hai việc. Hãy thay thế phân công hiện tại.",
+            );
+            return;
+          }
+          if (existing.includes(kind)) {
+            notify("Người này đã nhận loại việc này trong dự án.");
+            return;
+          }
+          state.crew[id] = [...existing, kind];
+        } else state.crew[id] = [kind];
+        state.qaAssigned = Object.values(state.crew).some((list) =>
+          list.includes("qa"),
+        );
+        closeDialog("assign-dialog");
+        render();
+        document.querySelector('#project [data-action="assign"]')?.focus();
+        notify(
+          personName(id) +
+            " đã nhận " +
+            tasks[kind] +
+            ". Tiến độ phát triển và QA giữ nguyên cho đến khi thời gian game chạy.",
+        );
+      });
+      $("confirm-action").addEventListener("click", () => {
+        closeDialog("confirm-dialog");
+        if (confirmType === "sign") state.signed = true;
+        if (confirmType === "accept") state.accepted = true;
+        if (confirmType === "release") state.released = true;
+        render();
+        document.querySelector("#project [data-action]")?.focus();
+        notify(
+          confirmType === "sign"
+            ? "Đã ký hợp đồng · Cọc +$6,000 · Còn 2 lượt CEO."
+            : confirmType === "accept"
+              ? "Đã nghiệm thu · Khoản phải thu +$12,000 · Tiền mặt giữ nguyên."
+              : "Đã phát hành tính năng · Theo dõi phản hồi khách hàng tại Thị trường.",
+        );
+      });
+      render();
+      if (location.hash === "#blocked")
+        document.querySelector('[data-scene="blocked"]').click();
+    </script>
+  </body>
+</html>

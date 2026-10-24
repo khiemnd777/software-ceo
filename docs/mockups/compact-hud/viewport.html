@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Kiểm khung nhìn mockup HUD</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: #0d1117;
+      }
+      iframe {
+        border: 0;
+        transform-origin: top left;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    </style>
+    <script type="module" src="viewport.js"></script>
+  </head>
+  <body>
+    <iframe title="Mockup trong khung kiểm thử"></iframe>
+    <output
+      id="metrics"
+      style="
+        position: fixed;
+        right: 2px;
+        top: 2px;
+        max-width: 110px;
+        color: #b8cce0;
+        background: #0d1117;
+        font: 10px/1.5 monospace;
+        overflow-wrap: anywhere;
+        pointer-events: none;
+      "
+      >Đang đo</output
+    >
+  </body>
+</html>
