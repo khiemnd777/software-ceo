@@ -66,10 +66,16 @@ await context.addInitScript(() => {
 });
 await context.addInitScript(() => {
   window.__ceoPaintCount = 0;
+  window.__ceoWorldPasses = 0;
+  window.__ceoBadgeBlits = 0;
   const original = CanvasRenderingContext2D.prototype.drawImage;
   CanvasRenderingContext2D.prototype.drawImage = function (...args) {
-    if (this.canvas.isConnected && args[0] instanceof HTMLCanvasElement)
+    if (this.canvas.isConnected && args[0] instanceof HTMLCanvasElement) {
       window.__ceoPaintCount++;
+      if (args[0].width === this.canvas.width && args[0].height === this.canvas.height)
+        window.__ceoWorldPasses++;
+      else window.__ceoBadgeBlits++;
+    }
     return original.apply(this, args);
   };
 });
@@ -117,6 +123,7 @@ for (const viewport of [
       new Promise((resolve) => {
         const frames = [];
         const paintStart = window.__ceoPaintCount;
+        const worldStart = window.__ceoWorldPasses, badgeStart = window.__ceoBadgeBlits;
         let last = performance.now(),
           start = last;
         function next(t) {
@@ -127,6 +134,8 @@ for (const viewport of [
             const sorted = [...frames].sort((a, b) => a - b);
             resolve({
               visibleCanvasPaints: window.__ceoPaintCount - paintStart,
+              worldPasses: window.__ceoWorldPasses - worldStart,
+              workingBadgeBlits: window.__ceoBadgeBlits - badgeStart,
               durationMs: t - start,
               frames: frames.length,
               fps: (frames.length / (t - start)) * 1000,
@@ -279,7 +288,7 @@ writeFileSync(
       buildBefore,
       buildAfter,
       cameraInteraction,
-      environment: `Headless ${process.platform}/${process.arch} ${process.env.CEO_BROWSER ?? "default Chromium target"}. Each viewport warms for 4 seconds before a 10-second sample; two repetitions each. Animation and x1 simulation enabled using a public-command fixture after resolving the due event. Not a consumer desktop GPU benchmark. No other browser soak or balance process was active during this final measurement. The display clock is measured separately from actual Canvas repaints: 8 fps authored poses redraw on change; camera/walking interpolate on the display clock; unchanged paused frames are not repainted.`,
+      environment: `Headless ${process.platform}/${process.arch} ${process.env.CEO_BROWSER ?? "default Chromium target"}. Each viewport warms for 4 seconds before a 10-second sample; two repetitions each. Animation and x1 simulation enabled using a public-command fixture after resolving the due event. Not a consumer desktop GPU benchmark. This task runs the probe after E2E/capture, without concurrent soak or balance work in this task. visibleCanvasPaints is the legacy canvas-image-blit counter; worldPasses and workingBadgeBlits distinguish full office passes from cached badge patches. The display clock is measured separately from actual Canvas repaints: 8 fps authored poses redraw the world on change; camera/walking interpolate on the display clock. Working badge patches animate independently at 30 Hz, including during Pause; reduced motion makes them static.`,
       profiles,
       firstPlay,
       firstPlayEncodedBytes: firstPlay.reduce(

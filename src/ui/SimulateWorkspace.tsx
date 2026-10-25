@@ -1,6 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import { Office, type Camera } from "../renderer/Office";
+import {
+  placeOfficeLabel,
+  officeStatus,
+  type OverlayHit,
+} from "../renderer/officeOverlay";
 import {
   title,
   visibleProjects,
@@ -93,6 +98,44 @@ export function SimulateWorkspace({
   const lastView = useRef("office");
   const [camera, setCamera] = useState<Camera | null>(null);
   const [points, setPoints] = useState(true);
+  const worldOverlays = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    if (!camera || !worldOverlays.current) return;
+    const occupied: OverlayHit[] = [];
+    const buttons = [
+      ...worldOverlays.current.querySelectorAll<HTMLButtonElement>("button"),
+    ];
+    buttons.sort(
+      (a, b) =>
+        Number(b.classList.contains("is-selected")) -
+        Number(a.classList.contains("is-selected")),
+    );
+    for (const button of buttons) {
+      const x = Number(button.dataset.anchorX),
+        y = Number(button.dataset.anchorY);
+      // An off-screen destination remains available through the office finder.
+      button.hidden = x < 0 || x > camera.width || y < 0 || y > camera.height;
+      if (button.hidden) continue;
+      const width = button.offsetWidth,
+        height = button.offsetHeight;
+      const box = placeOfficeLabel(
+        {
+          id: button.dataset.place ?? button.dataset.employeePoint ?? "",
+          x: x - width / 2,
+          y: y - height,
+          width,
+          height,
+        },
+        occupied,
+        camera.width,
+        camera.height,
+      );
+      occupied.push(box);
+      button.style.transform = "none";
+      button.style.left = `${box.x}px`;
+      button.style.top = `${box.y}px`;
+    }
+  }, [camera, points, locale, selected, s]);
   const [palette, setPalette] = useState(false);
   const [query, setQuery] = useState("");
   const sheet = useRef<HTMLElement>(null);
@@ -215,6 +258,7 @@ export function SimulateWorkspace({
   };
   const props: PanelProps = { ...panel, navigate, openAssignments };
   const employed = s.employees.filter((e) => e.assignments.length).length;
+  const visualPeople = officePeople(s);
   const active = s.work.filter((w) => w.status !== "released");
   const employee =
     context?.kind === "employee"
@@ -399,13 +443,14 @@ export function SimulateWorkspace({
         aria-label={l("Không gian Simulate", "Simulate workspace")}
       >
         <Office
-          people={officePeople(s)}
+          people={visualPeople}
           tier={s.officeTier}
           companyName={s.name}
           selected={selected}
           language={locale}
           paused={!speed}
           reducedMotion={motion}
+          interactionLabelsVisible={points}
           onCameraChange={setCamera}
           onSelect={(id) => open({ kind: "employee", id })}
           onNavigate={navigate}
@@ -428,6 +473,7 @@ export function SimulateWorkspace({
         </div>
         <div
           className="world-overlays"
+          ref={worldOverlays}
           aria-label={l(
             "Các điểm tương tác trong văn phòng",
             "Office interaction points",
@@ -441,6 +487,8 @@ export function SimulateWorkspace({
                 <button
                   key={p.id}
                   data-place={p.id}
+                  data-anchor-x={pos.x}
+                  data-anchor-y={pos.y}
                   className={`world-point point-${p.id} ${context?.kind === p.id ? "is-selected" : ""}`}
                   style={{ left: pos.x, top: pos.y }}
                   onClick={() => open({ kind: p.id } as Context)}
@@ -462,17 +510,15 @@ export function SimulateWorkspace({
                 <button
                   key={e.id}
                   data-employee-point={e.id}
+                  data-anchor-x={pos.x}
+                  data-anchor-y={pos.y}
                   className={`person-point ${selected === e.id ? "is-selected" : ""}`}
                   style={{ left: pos.x, top: pos.y }}
                   onClick={() => open({ kind: "employee", id: e.id })}
                 >
-                  <span>{e.name.split(" ")[0]}</span>
+                  <span>{e.name}</span>
                   <small>
-                    {e.assignments.length
-                      ? locale === "vi"
-                        ? `${e.assignments.length} việc`
-                        : `${e.assignments.length} tasks`
-                      : l("Chờ phân công", "Unassigned")}
+                    {officeStatus(visualPeople[i], locale === "en").description}
                   </small>
                 </button>
               );

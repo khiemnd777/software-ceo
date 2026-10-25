@@ -346,6 +346,16 @@ kbd {
   transform: translate(-50%, -100%);
   pointer-events: auto;
   white-space: nowrap;
+  max-width: calc(100% - 16px);
+}
+.world-point[hidden],
+.person-point[hidden] {
+  display: none;
+}
+.world-point span,
+.person-point span {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .world-point {
   min-height: 36px;

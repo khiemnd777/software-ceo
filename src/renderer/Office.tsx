@@ -6,6 +6,14 @@ import { resolveAppearance } from "../characters/resolve";
 import type { AppearanceId } from "../characters/catalog";
 import { characterPose as pose, type CharacterPose } from "./characterMotion";
 import type { TaskKind } from "../simulation/types";
+import {
+  drawOfficeOverlay,
+  drawWorkingBadges,
+  officeStatus,
+  type OfficeAnnotation,
+  type OverlayHit,
+  type WorkingBadge,
+} from "./officeOverlay";
 
 export interface OfficePerson {
   id: string;
@@ -36,6 +44,7 @@ export interface OfficeProps {
   reducedMotion?: boolean;
   paused?: boolean;
   language?: "en" | "vi";
+  interactionLabelsVisible?: boolean;
 }
 type Point = { x: number; y: number };
 type SpriteMeta = {
@@ -115,6 +124,8 @@ export function Office(props: OfficeProps) {
       lastLocale = state.current.language,
       lastCompanyName = state.current.companyName;
     let seconds = 0,
+      gearSeconds = 0,
+      lastGearFrame = -1,
       last = performance.now(),
       loaded = 0,
       requested = 0,
@@ -382,6 +393,48 @@ export function Office(props: OfficeProps) {
       );
       ctx.globalAlpha = 1;
     };
+    // Occlusion mask in the locked 512×512 chair sprite's source coordinates.
+    // Only the backrest/spine and camera-facing arm pass in front of the sitter;
+    // The near seat rim also hides the far leg; the near leg, pedestal and
+    // casters retain their existing order. Coordinates belong to this sprite.
+    const chairFront = (p: Point) => {
+      const m = atlas.sprites.chair;
+      const sc = (PX * Math.SQRT2) / m.pixelsPerMeter;
+      ctx.save();
+      ctx.translate(p.x - m.anchor[0] * sc, p.y - m.anchor[1] * sc);
+      ctx.scale(sc, sc);
+      ctx.beginPath();
+      ctx.moveTo(130, 198);
+      ctx.lineTo(205, 198);
+      ctx.lineTo(215, 291);
+      ctx.bezierCurveTo(217, 315, 205, 333, 181, 330);
+      ctx.lineTo(169, 328);
+      ctx.lineTo(169, 349);
+      ctx.lineTo(157, 349);
+      ctx.lineTo(157, 322);
+      ctx.lineTo(130, 310);
+      ctx.closePath();
+      ctx.moveTo(225, 306);
+      ctx.lineTo(267, 287);
+      ctx.lineTo(284, 294);
+      ctx.lineTo(284, 303);
+      ctx.lineTo(254, 319);
+      ctx.lineTo(246, 341);
+      ctx.lineTo(237, 344);
+      ctx.lineTo(243, 319);
+      ctx.lineTo(225, 316);
+      ctx.closePath();
+      ctx.moveTo(142, 326);
+      ctx.lineTo(211, 349);
+      ctx.lineTo(258, 327);
+      ctx.lineTo(258, 344);
+      ctx.lineTo(211, 366);
+      ctx.lineTo(142, 343);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(images.chair, 0, 0);
+      ctx.restore();
+    };
     const personSprite = (
       appearance: AppearanceId,
       p: Point,
@@ -406,29 +459,31 @@ export function Office(props: OfficeProps) {
         height * scale,
       );
     };
-    const label = (text: string, p: Point, highlight = false) => {
-      ctx.font = "600 13px system-ui";
-      const tw = ctx.measureText(text).width;
-      ctx.fillStyle = highlight ? "#f7e8c8" : "#fffdf4";
-      ctx.beginPath();
-      ctx.roundRect(p.x - tw / 2 - 11, p.y - 17, tw + 22, 27, 8);
-      ctx.fill();
-      ctx.fillStyle = "#30564a";
-      ctx.textAlign = "center";
-      ctx.fillText(text, p.x, p.y + 1);
-    };
+    let overlayHits: OverlayHit[] = [];
+    let workingBadges: WorkingBadge[] = [];
+    const badgeBackgrounds = new Map<string, HTMLCanvasElement>();
     let hit: { id: string; x: number; y: number; r: number; top: number }[] =
       [];
     const pick = (e: PointerEvent) => {
       const r = el.getBoundingClientRect(),
-        x = (e.clientX - r.left - pan.x) / zoom,
-        y = (e.clientY - r.top - pan.y) / zoom;
+        screenX = e.clientX - r.left,
+        screenY = e.clientY - r.top,
+        x = (screenX - pan.x) / zoom,
+        y = (screenY - pan.y) / zoom;
       return (
+        overlayHits.find(
+          (a) =>
+            screenX >= a.x &&
+            screenX <= a.x + a.width &&
+            screenY >= a.y &&
+            screenY <= a.y + a.height,
+        )?.id ||
         [...hit]
           .reverse()
           .find(
             (a) => Math.abs(x - a.x) < a.r && y > a.y - a.top && y < a.y + 28,
-          )?.id || ""
+          )?.id ||
+        ""
       );
     };
     const down = (e: PointerEvent) => {
@@ -461,6 +516,9 @@ export function Office(props: OfficeProps) {
     const cancel = () => {
       drag = null;
     };
+    const leave = () => {
+      if (!drag) hover = "";
+    };
     const wheel = (e: WheelEvent) => {
       e.preventDefault();
       changeZoom(Math.exp(-e.deltaY * 0.001));
@@ -481,8 +539,13 @@ export function Office(props: OfficeProps) {
     el.addEventListener("pointermove", move);
     el.addEventListener("pointerup", up);
     el.addEventListener("pointercancel", cancel);
+    el.addEventListener("pointerleave", leave);
     el.addEventListener("wheel", wheel, { passive: false });
     el.addEventListener("keydown", key);
+    const visibility = () => {
+      last = performance.now();
+    };
+    document.addEventListener("visibilitychange", visibility);
     const draw = (now: number) => {
       if (dead) return;
       const cameraKey = [pan.x, pan.y, zoom, w, h].join(":");
@@ -504,6 +567,20 @@ export function Office(props: OfficeProps) {
         !document.hidden
       )
         seconds += dt;
+      // A UI-only clock: Working remains legible during Pause, without ticking
+      // the simulation or repainting the world between authored poses.
+      if (
+        !state.current.reducedMotion &&
+        !document.hidden &&
+        state.current.people.some(
+          (person) => officeStatus(person, false).status === "working",
+        )
+      )
+        gearSeconds += dt;
+      const gearFrame = state.current.reducedMotion
+        ? 0
+        : Math.floor(gearSeconds * 30);
+      const gearTime = gearFrame / 30;
       if (lastTier !== state.current.tier) {
         lastTier = state.current.tier;
         fit();
@@ -526,6 +603,8 @@ export function Office(props: OfficeProps) {
       // Walking offsets and camera input still interpolate on the display clock.
       const visualKey = JSON.stringify([
         state.current.selected,
+        state.current.interactionLabelsVisible,
+        state.current.reducedMotion,
         hover,
         state.current.people.map((person, i) => [
           person.id,
@@ -534,12 +613,19 @@ export function Office(props: OfficeProps) {
           appearances[i],
           person.working,
           person.morale < 30 || person.energy < 25,
+          person.morale < 30,
+          person.energy < 25,
           animations[i].state,
           animations[i].frame,
           animations[i].offset,
         ]),
       ]);
       if (!dirty && visualKey === lastVisualKey) {
+        if (gearFrame !== lastGearFrame) {
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          drawWorkingBadges(ctx, workingBadges, gearTime);
+          lastGearFrame = gearFrame;
+        }
         frame = requestAnimationFrame(draw);
         return;
       }
@@ -553,6 +639,11 @@ export function Office(props: OfficeProps) {
       const s = size(),
         en = state.current.language === "en";
       hit = [];
+      const annotations: OfficeAnnotation[] = [];
+      const screen = (p: Point) => ({
+        x: pan.x + p.x * zoom,
+        y: pan.y + p.y * zoom,
+      });
       const objects: { depth: number; draw: () => void }[] = [];
       const prop = (
         name: string,
@@ -574,7 +665,12 @@ export function Office(props: OfficeProps) {
                 top: 115,
               });
               if (hover === "nav:" + nav && caption)
-                label(caption, { x: p.x, y: p.y + 35 }, true);
+                annotations.push({
+                  id: "nav:" + nav,
+                  name: caption,
+                  active: true,
+                  ...screen(p),
+                });
             }
           },
         });
@@ -588,7 +684,7 @@ export function Office(props: OfficeProps) {
         "people",
         en ? "Team care" : "Chăm sóc nhóm",
       );
-      prop("sofa", 1.2, s.y - 1);
+      prop("sofa", 0.9, s.y - 0.5);
       prop("plant", 0.6, s.y - 2.4);
       prop(
         "meeting",
@@ -648,29 +744,64 @@ export function Office(props: OfficeProps) {
                 ctx.stroke();
               }
               personSprite(appearances[i], location, animation);
-              const alert = person.morale < 30 || person.energy < 25;
-              ctx.fillStyle = alert
-                ? "#ae4f3c"
-                : person.working
-                  ? "#31826c"
-                  : "#92a193";
-              ctx.beginPath();
-              ctx.arc(location.x + 18, location.y - 145, 6, 0, Math.PI * 2);
-              ctx.fill();
-              if (alert) {
-                ctx.fillStyle = "#fff";
-                ctx.font = "bold 10px system-ui";
-                ctx.textAlign = "center";
-                ctx.fillText("!", location.x + 18, location.y - 141);
-              }
-              if (selected)
-                label(person.name, { x: location.x, y: location.y + 32 });
+              const spriteFrame =
+                characters.models[appearances[i]].tracks[animation.state][
+                  animation.frame
+                ];
+              const sc = (PX * Math.SQRT2) / characters.pixelsPerMeter;
+              const top = screen({
+                x:
+                  location.x +
+                  (spriteFrame.offset[0] + spriteFrame.rect[2] / 2) * sc,
+                y: location.y + spriteFrame.offset[1] * sc,
+              });
+              const bottom = screen({
+                x:
+                  location.x +
+                  (spriteFrame.offset[0] + spriteFrame.rect[2]) * sc,
+                y:
+                  location.y +
+                  (spriteFrame.offset[1] + spriteFrame.rect[3]) * sc,
+              });
+              if (
+                bottom.x >= 0 &&
+                top.x - (spriteFrame.rect[2] * sc * zoom) / 2 <= w &&
+                bottom.y >= 0 &&
+                top.y <= h
+              )
+                annotations.push({
+                  id: person.id,
+                  name: person.name,
+                  active: selected && !state.current.interactionLabelsVisible,
+                  ...top,
+                  ...officeStatus(person, en),
+                });
               hit.push({ id: person.id, ...location, r: 48, top: 145 });
+            },
+          });
+          // Keep foreground occlusion in world depth order, including during
+          // stand/turn/walk. Never put the whole chair over the character.
+          objects.push({
+            depth: pos.x + pos.y + 0.7,
+            draw: () => {
+              if (images.chair) chairFront(p);
             },
           });
         }
       });
       objects.sort((a, b) => a.depth - b.depth).forEach((o) => o.draw());
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const overlay = drawOfficeOverlay(
+        ctx,
+        annotations,
+        w,
+        h,
+        gearTime,
+        badgeBackgrounds,
+      );
+      overlayHits = overlay.hits;
+      workingBadges = overlay.workingBadges;
+      lastGearFrame = gearFrame;
       if (loaded < requested) {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.fillStyle = "#30554a";
@@ -688,9 +819,14 @@ export function Office(props: OfficeProps) {
       el.removeEventListener("pointermove", move);
       el.removeEventListener("pointerup", up);
       el.removeEventListener("pointercancel", cancel);
+      el.removeEventListener("pointerleave", leave);
       el.removeEventListener("wheel", wheel);
       el.removeEventListener("keydown", key);
+      document.removeEventListener("visibilitychange", visibility);
       controller.current = undefined;
+      for (const tile of badgeBackgrounds.values())
+        tile.width = tile.height = 0;
+      badgeBackgrounds.clear();
       layer.width = layer.height = 0;
     };
   }, []);
