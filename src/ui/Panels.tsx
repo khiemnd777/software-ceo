@@ -426,6 +426,33 @@ export function FinancePanel(p: PanelProps) {
           </section>
           <section className="panel-card">
             <h2>{l("Dự báo chi phí", "Cost forecast")}</h2>
+            {s.accrual.legacyThroughDay !== null ? (
+              <p>
+                {l(
+                  "Kỳ hiện tại giữ cách chốt chi phí cũ; từ kỳ kế tiếp tính theo thời gian thực hiện.",
+                  "This period retains its previous billing rule; time-based accrual starts next period.",
+                )}
+              </p>
+            ) : (
+              <div className="forecast-row">
+                <span>
+                  {l(
+                    "Đã phát sinh kỳ này · chưa thanh toán",
+                    "Incurred this period · not yet paid",
+                  )}
+                </span>
+                <strong>
+                  {money(s.accrual.payroll + s.accrual.operations, locale)}
+                </strong>
+                <small>
+                  {l(
+                    "Lương và vận hành đang tích lũy; chưa trừ vào tiền mặt.",
+                    "Accruing payroll and operations; not deducted from cash.",
+                  )}
+                </small>
+              </div>
+            )}
+
             <div className="stat-line">
               <span>
                 {l("Chi phí tháng dự kiến", "Expected monthly costs")}
@@ -752,8 +779,8 @@ export function StrategyPanel(p: PanelProps) {
               <h2>{l("Nhịp làm việc", "Working rhythm")}</h2>
               <p>
                 {l(
-                  "Tăng ca tăng 20% năng suất và lương; mỗi tuần mất năng lượng và tinh thần.",
-                  "Overtime adds 20% output and payroll; it drains energy and morale every week.",
+                  "Tăng ca 18:00–20:00 cho thêm tối đa 20% năng lực khi còn việc. Phụ phí lương chỉ phát sinh lúc làm tăng ca; năng lượng và tinh thần giảm theo thời gian.",
+                  "Overtime runs 18:00–20:00, adding up to 20% capacity while work remains. Payroll premiums accrue only while working overtime; energy and morale decline over time.",
                 )}
               </p>
             </div>

@@ -1,3 +1,4 @@
+import { newAccrual } from "./accrual";
 import type { State, NewGameOptions, Role, Candidate } from "./types";
 import { copy, ARCHETYPES, SEGMENTS, BALANCE } from "../content/catalog";
 import { CONCEPTS } from "../content/products";
@@ -30,12 +31,17 @@ export function createGame(o: NewGameOptions): State {
   if (o.mode === "fit") o = { ...o, strategy: "product" };
   const seed = (Number.isFinite(o.seed) ? Math.trunc(o.seed) : 2026) >>> 0;
   const s: State = {
-    version: 2,
+    version: 3,
+    clock: { minute: 0, opened: false, lastClosedDay: 0 },
+    accrual: newAccrual(),
+    workDay: { day: 1, budgets: {} },
+    discovery: {},
+    scene: { officeLightsOn: true },
     balanceVersion: BALANCE.version,
     seed,
     rng: seed,
     nextId: 1,
-    day: 0,
+    day: 1,
     name: o.name.trim().slice(0, 40) || "Evergreen Studio",
     strategy: o.strategy,
     secondary: null,

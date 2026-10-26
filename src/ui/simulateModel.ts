@@ -1,3 +1,4 @@
+import { employeeActivity } from "../simulation/workStatus";
 import type { State, Locale } from "../simulation/types";
 import type { OfficePerson } from "../renderer/Office";
 import type { Camera } from "../renderer/Office";
@@ -114,18 +115,8 @@ export function project(camera: Camera, x: number, y: number, z = 0) {
 
 export function officePeople(s: State): OfficePerson[] {
   return s.employees.map((e) => {
-    const active = e.assignments.find((a) => {
-      const w = s.work.find((w) => w.id === a.target);
-      if (a.target === "market")
-        return a.kind === "support" ? s.product.support > 0 : true;
-      if (!w) return false;
-      if (a.kind === "develop") return w.status === "active";
-      if (a.kind === "fix") return w.bugs.some((b) => b.known);
-      if (a.kind === "refactor") return w.debt + s.product.debt > 0;
-      if (a.kind === "research") return w.status !== "released";
-      return w.qa < w.actual * 0.2 || w.bugs.some((b) => !b.known);
-    });
-    return { ...e, working: !!active, taskKind: active?.kind };
+    const a = employeeActivity(s, e);
+    return { ...e, ...a, shift: a.phase };
   });
 }
 

@@ -11,10 +11,19 @@ const baseURL = process.env.CEO_BASE_URL ?? "http://127.0.0.1:5173";
 const bundled = browser === "bundled-chromium";
 export default defineConfig({
   testDir: "tests/e2e",
+  outputDir: process.env.CEO_TEST_OUTPUT ?? "test-results",
   timeout: 60000,
   fullyParallel: false,
   workers: 1,
-  reporter: [["list"], ["json", { outputFile: "evidence/e2e-results.json" }]],
+  reporter: [
+    ["list"],
+    [
+      "json",
+      {
+        outputFile: process.env.CEO_E2E_RESULTS ?? "evidence/e2e-results.json",
+      },
+    ],
+  ],
   use: {
     baseURL,
     browserName:

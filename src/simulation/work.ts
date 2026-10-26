@@ -1,3 +1,5 @@
+import { allocateLabor } from "./accrual";
+import { runnable } from "./workStatus";
 import type { State, Employee, Assignment, WorkItem, TaskKind } from "./types";
 import { BALANCE, copy } from "../content/catalog";
 import { FEATURES } from "../content/products";
@@ -11,7 +13,7 @@ const fit: Record<TaskKind, string[]> = {
   growth: ["growth", "ops"],
   support: ["ops", "qa", "growth"],
 };
-export function capacity(s: State, e: Employee, a: Assignment) {
+export function baseCapacity(s: State, e: Employee, a: Assignment) {
   const w = s.work.find((w) => w.id === a.target);
   const dev = ["develop", "fix", "refactor"].includes(a.kind);
   const onboard =
@@ -55,9 +57,36 @@ export function capacity(s: State, e: Employee, a: Assignment) {
     debt *
     onboard *
     traits *
-    (s.overtime ? 1.2 : 1) *
     (a.kind === "develop" ? BALANCE.policy[s.policy].speed : 1)
   );
+}
+/** Weekly estimate; interval work uses baseCapacity and the actual shift. */
+export const capacity = (s: State, e: Employee, a: Assignment) =>
+  baseCapacity(s, e, a) * (s.overtime ? 1.2 : 1);
+const workRound = (v: number) => Math.round(v * 1e9) / 1e9;
+function exposure(s: State, key: string, amount: number, cap = 1) {
+  const b = (s.workDay.budgets[key] ??= {
+    roll: rng(s),
+    exposure: 0,
+    emitted: false,
+  });
+  b.exposure += amount;
+  if (!b.emitted && b.roll < Math.min(cap, b.exposure)) {
+    b.emitted = true;
+    return true;
+  }
+  return false;
+}
+function discoveryWork(s: State, e: Employee, a: Assignment, wp: number) {
+  const p = (s.discovery[a.target] ??= {
+    required: Math.min(1, baseCapacity(s, e, a) / 7 / e.assignments.length),
+    done: 0,
+  });
+  const used = Math.min(wp, Math.max(0, p.required - p.done));
+  p.done = workRound(p.done + used);
+  const completed = p.done >= p.required - 1e-8;
+  if (completed) p.done = p.required;
+  return { used, completed };
 }
 export function quality(w: WorkItem) {
   return clamp(
@@ -103,13 +132,14 @@ export function makeWork(
   s.work.push(w);
   return w;
 }
-export function runWork(s: State) {
+export function runWork(s: State, factor: number) {
   for (const e of s.employees) {
     const count = e.assignments.length;
     if (!count) continue;
-    for (const a of e.assignments) {
+    for (const [slot, a] of e.assignments.entries()) {
+      if (!runnable(s, a)) continue;
       const w = s.work.find((w) => w.id === a.target);
-      let wp = capacity(s, e, a) / 7 / count;
+      let wp = (baseCapacity(s, e, a) * factor) / count;
       if (s.venture.pivotUntil > s.day && a.target === "market") continue;
       if (a.target === "market") {
         let used = 0;
@@ -117,19 +147,22 @@ export function runWork(s: State) {
           used = Math.min(wp, (100 - s.product.awareness) / 0.4);
           s.product.awareness = clamp(s.product.awareness + used * 0.4);
         } else if (a.kind === "research" && !s.product.surveyed) {
-          used = Math.min(1, wp);
-          s.product.surveyed = true;
-          s.product.needs = FEATURES.filter(
-            (f) => f.concept === s.product.concept,
-          )
-            .sort((a, b) => b.fit - a.fit)
-            .slice(0, 3)
-            .map((f) => f.id);
+          const result = discoveryWork(s, e, a, wp);
+          used = result.used;
+          if (result.completed) {
+            s.product.surveyed = true;
+            s.product.needs = FEATURES.filter(
+              (f) => f.concept === s.product.concept,
+            )
+              .sort((a, b) => b.fit - a.fit)
+              .slice(0, 3)
+              .map((f) => f.id);
+          }
         } else if (a.kind === "support") {
           used = Math.min(wp, s.product.support);
-          s.product.support = round(Math.max(0, s.product.support - used));
+          s.product.support = workRound(Math.max(0, s.product.support - used));
         }
-        s.metrics.workWeek = round(s.metrics.workWeek + used);
+        s.metrics.workWeek = workRound(s.metrics.workWeek + used);
         gainXP(s, e, a.kind, used);
         continue;
       }
@@ -142,15 +175,18 @@ export function runWork(s: State) {
       const before = wp;
       if (a.kind === "develop" && w.done < w.actual && w.status === "active") {
         wp = Math.min(wp, w.actual - w.done);
-        w.done = round(w.done + wp);
+        w.done = workRound(w.done + wp);
         if (w.kind === "feature" || w.kind === "mvp" || w.kind === "contract") {
           w.debt = clamp(w.debt + (wp / 20) * BALANCE.policy[s.policy].debt);
           if (
-            rng(s) <
-            wp *
-              BALANCE.baseDefects *
-              BALANCE.policy[s.policy].defects *
-              (FEATURES.find((f) => f.id === w.featureId)?.risk ?? 1)
+            exposure(
+              s,
+              `${e.id}:${slot}:develop`,
+              wp *
+                BALANCE.baseDefects *
+                BALANCE.policy[s.policy].defects *
+                (FEATURES.find((f) => f.id === w.featureId)?.risk ?? 1),
+            )
           ) {
             const r = rng(s);
             const severity = r < 0.07 ? 3 : r < 0.35 ? 2 : 1;
@@ -182,8 +218,11 @@ export function runWork(s: State) {
         if (!hidden.length)
           wp = Math.min(wp, Math.max(0, w.actual * 0.25 - w.qa));
         if (wp <= 0) continue;
-        w.qa = round(w.qa + wp);
-        if (hidden.length && rng(s) < Math.min(0.98, wp * 0.9)) {
+        w.qa = workRound(w.qa + wp);
+        if (
+          hidden.length &&
+          exposure(s, `${e.id}:${slot}:qa`, wp * 0.9, 0.98)
+        ) {
           const bug = hidden[0];
           bug.known = true;
           bug.revealed = s.day;
@@ -201,7 +240,7 @@ export function runWork(s: State) {
       } else if (a.kind === "fix") {
         for (const b of w.bugs.filter((b) => b.known)) {
           const used = Math.min(wp, b.remaining);
-          b.remaining = round(b.remaining - used);
+          b.remaining = workRound(b.remaining - used);
           wp -= used;
           if (wp <= 0) break;
         }
@@ -231,21 +270,18 @@ export function runWork(s: State) {
         w.status === "active"
       ) {
         wp = Math.min(wp, w.actual - w.done);
-        w.done = round(w.done + wp);
+        w.done = workRound(w.done + wp);
         if (w.done >= w.actual) w.status = "ready";
       } else if (a.kind === "research") {
         if (w.discovered) continue;
-        wp = Math.min(1, wp);
-        w.discovered = true;
+        const result = discoveryWork(s, e, a, wp);
+        wp = result.used;
+        if (result.completed) w.discovered = true;
       } else continue;
       const used = a.kind === "fix" ? before - wp : wp;
-      w.effort = round(w.effort + used);
-      w.labor += Math.round(
-        (e.salary / 30 / count) *
-          (s.overtime ? 1.2 : 1) *
-          Math.min(1, used / before),
-      );
-      s.metrics.workWeek = round(s.metrics.workWeek + used);
+      w.effort = workRound(w.effort + used);
+      allocateLabor(s, w, e, count, used, before);
+      s.metrics.workWeek = workRound(s.metrics.workWeek + used);
       gainXP(s, e, a.kind, used);
     }
   }

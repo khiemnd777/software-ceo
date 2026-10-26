@@ -2,6 +2,19 @@
 
 State labels refer to implementation and actual evidence, not certification on every target browser. See RELEASE_CHECKLIST.md for final gate decisions.
 
+## T0.4 /24h — 2026-10-26
+
+Evidence mới tại evidence/time-24h/integration-2026-10-26/.105 unit+3 harness,46 Edge E2E,900/1200/270simulation,profileDPR1–2 vàsoak30 phút 23,8 giây PASS. Human/owner acceptance vàcờOutsourcingToughOPEN. Firefox/WebKitlaunchBLOCKEDthiếu runtime; native hidden-tabNOT_RUN. Không dùng số cũ bên dưới để thay bằng chứng của build này.
+
+| Yêu cầu mới | Implementation | Kiểm chứng |
+|---|---|---|
+| 96quarter/ngày, ca/OT/health, RNG/caps, cents/forecasts | simulation/clock,workStatus,health,accrual,work,engine,finance,selectors; gameplay/progression | intraday*,app-clock; replay2/7/30/90; ba playbook1080; rate/tier/hire/budget/carry |
+| v3 và legacy period/backup/quota/conflict | persistence/schema,saves; SaveManager | persistence/intraday; intraday-save E2E export byte gốc; slots/stale/denial/import |
+| Clock15/trời-liên-tục/weather5/switch/monitors/beams | Office,officeOverlay,renderer/lighting | intraday E2E12layout; office-displayghế/8pose; protected301SHA; nativeảnh12 nhân viên |
+| Lifecycle/hiệu năng | GameStore/App/Office; profile/soak harness | emulatedhidden/sleep PASS;8profile samples60FPS;30min30samplesSHA; memorycontrol |
+
+## Ma trận lịch sử và các nhóm chức năng giữ lại
+
 | Requirement | Implementation | Verification / evidence |
 |---|---|---|
 | Simulate thống nhất, hồ sơ dự án, phân công thủ công/draft/batch, quản lý theo người/địa điểm; chọn xem không ghi campaign, nhắc thu không tăng cash | ui/SimulateWorkspace.tsx, ProjectDossier.tsx, ContractDetail.tsx, simulateModel.ts, projectView.ts; Panels.tsx/BusinessPanels.tsx | simulate-ui.test.ts; 30 E2E Edge, gồm work-unified/management-workspace/people-roster/command-center; evidence/simulate-runtime/delivery/; docs/SIMULATE_RUNTIME.md |

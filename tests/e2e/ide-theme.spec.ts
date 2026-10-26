@@ -65,7 +65,8 @@ test("IDE menu, setup and dialogs remain dark, readable and reachable at both de
           .selectOption(String(scale));
         const dialog = page.locator("dialog[open]");
         await expectDark(dialog);
-        await expectDark(dialog.locator("select"));
+        for (const select of await dialog.locator("select").all())
+          await expectDark(select);
         await expectFits(page, dialog);
         await expectAccessible(page, ".settings-dialog");
         await page

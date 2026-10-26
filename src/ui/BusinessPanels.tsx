@@ -882,7 +882,10 @@ export function Progression(p: PanelProps) {
         <p>
           {l("Mục tiêu hiện tại", "Current victory track")}:{" "}
           <strong>{s.strategy.toUpperCase()}</strong> · {l("Tháng", "Month")}{" "}
-          {Math.floor(s.day / 30) + 1} · {l("Ngày tổng kết", "Review day")}:{" "}
+          {Math.floor(
+            ((s.status === "playing" ? s.day : s.clock.lastClosedDay) - 1) / 30,
+          ) + 1}{" "}
+          · {l("Ngày tổng kết", "Review day")}:{" "}
           {s.mode === "career"
             ? 1080
             : s.mode === "fit"

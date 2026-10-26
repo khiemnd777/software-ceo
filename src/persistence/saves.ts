@@ -1,10 +1,11 @@
 import { BALANCE } from "../content/catalog";
-import { validateState } from "./schema";
+import { newAccrual } from "../simulation/accrual";
+import { LegacyStateSchema, validateState } from "./schema";
 import type { State } from "../simulation/types";
 export type Slot = "1" | "2" | "3" | "auto";
 export interface SaveEnvelope {
   format: "software-ceo-save";
-  schemaVersion: 2;
+  schemaVersion: 3;
   savedAt: string;
   checksum: string;
   algorithm: "SHA-256";
@@ -58,7 +59,7 @@ export async function encodeSave(state: State): Promise<string> {
   validateState(state);
   const envelope: SaveEnvelope = {
     format: "software-ceo-save",
-    schemaVersion: 2,
+    schemaVersion: 3,
     savedAt: new Date().toISOString(),
     checksum: await checksum(state),
     algorithm: "SHA-256",
@@ -80,7 +81,7 @@ export async function decodeSave(raw: string): Promise<State> {
   }
   if (!envelope || envelope.format !== "software-ceo-save")
     throw new SaveError("corrupt", "Not a Software CEO save.");
-  if (typeof envelope.schemaVersion !== "number" || envelope.schemaVersion > 2)
+  if (typeof envelope.schemaVersion !== "number" || envelope.schemaVersion > 3)
     throw new SaveError("future", "This save requires a newer game version.");
   if (
     envelope.algorithm !== "SHA-256" ||
@@ -107,9 +108,26 @@ export async function decodeSave(raw: string): Promise<State> {
       balanceVersion: legacy.balanceVersion ?? BALANCE.version,
       tutorial: legacy.tutorial ?? { seen: [], completed: false },
     };
-  } else if (envelope.schemaVersion !== 2)
+  } else if (envelope.schemaVersion !== 2 && envelope.schemaVersion !== 3)
     throw new SaveError("future", "Unsupported save version.");
   try {
+    if (envelope.schemaVersion !== 3) {
+      const old = LegacyStateSchema.parse(state);
+      const accrual = newAccrual();
+      accrual.legacyThroughDay =
+        old.day % 30 === 0 ? null : Math.ceil(old.day / 30) * 30;
+      state = {
+        ...old,
+        version: 3,
+        balanceVersion: BALANCE.version,
+        day: old.day + 1,
+        clock: { minute: 0, opened: false, lastClosedDay: old.day },
+        accrual,
+        workDay: { day: old.day + 1, budgets: {} },
+        discovery: {},
+        scene: { officeLightsOn: true },
+      };
+    }
     return validateState(state);
   } catch (e) {
     throw new SaveError(
@@ -133,13 +151,15 @@ function openDB() {
     }
     let req: IDBOpenDBRequest;
     try {
-      req = indexedDB.open("software-ceo", 2);
+      req = indexedDB.open("software-ceo", 3);
     } catch {
       reject(new SaveError("storage", "Browser storage access was denied."));
       return;
     }
     req.onupgradeneeded = () => {
       const db = req.result;
+      if (!db.objectStoreNames.contains("legacy-backups"))
+        db.createObjectStore("legacy-backups", { keyPath: "id" });
       if (!db.objectStoreNames.contains("saves"))
         db.createObjectStore("saves", { keyPath: "slot" });
     };
@@ -194,7 +214,7 @@ export async function saveGame(
   return new Promise((resolve, reject) => {
     let conflict = false;
     let result: SavedRow;
-    const tx = db.transaction("saves", "readwrite"),
+    const tx = db.transaction(["saves", "legacy-backups"], "readwrite"),
       store = tx.objectStore("saves");
     const get = store.get(slot);
     get.onsuccess = () => {
@@ -203,6 +223,25 @@ export async function saveGame(
         conflict = true;
         tx.abort();
         return;
+      }
+      if (current) {
+        let legacy = true;
+        try {
+          legacy = JSON.parse(current.payload).schemaVersion !== 3;
+        } catch {
+          /* Retain corrupt original bytes before a deliberate repair overwrite. */
+        }
+        if (legacy) {
+          try {
+            tx.objectStore("legacy-backups").put({
+              ...current,
+              id: `${slot}:${current.revision}`,
+            });
+          } catch {
+            tx.abort();
+            return;
+          }
+        }
       }
       result = {
         slot,
@@ -242,4 +281,20 @@ export async function resetConnection() {
     (await dbPromise).close();
     dbPromise = null;
   }
+}
+
+export interface LegacyBackup extends SavedRow {
+  id: string;
+}
+export async function listLegacyBackups(): Promise<LegacyBackup[]> {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const req = db
+      .transaction("legacy-backups", "readonly")
+      .objectStore("legacy-backups")
+      .getAll();
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () =>
+      reject(new SaveError("storage", "Cannot read legacy backups."));
+  });
 }

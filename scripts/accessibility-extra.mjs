@@ -46,8 +46,8 @@ await page
   .locator("input[type=file]")
   .setInputFiles("evidence/fixtures/office-12.json");
 await page.getByRole("button", { name: "Đóng cửa sổ lưu" }).click();
-await page.getByRole("button", { name: "Ngày tiếp" }).click();
-await page.getByRole("button", { name: "Ngày tiếp" }).click();
+await page.getByRole("button", { name: "Qua ngày" }).click();
+await page.getByRole("button", { name: "Qua ngày" }).click();
 await check("critical inbox at 150% VI");
 await page.locator(".inbox-card button").first().click();
 await check("decision confirmation 150% VI");

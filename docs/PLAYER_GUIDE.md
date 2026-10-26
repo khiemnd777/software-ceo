@@ -4,7 +4,11 @@
 
 Tên công ty xuất hiện trên tường văn phòng và cập nhật ngay trong phần xem trước khi tạo công ty. Nếu chưa có tên hoặc tên chỉ là khoảng trắng, tường hiển thị **SOFTWARE CEO**. Tên dài có thể được thu nhỏ hoặc rút gọn bằng dấu … trên tường; tên đầy đủ trong công ty và bản lưu giữ nguyên.
 
-Công ty cần đủ tiền, một đội ngũ có sức làm việc và thứ khách hàng muốn mua. Hãy quan sát thanh KPI, Hộp thư CEO và các màn hình quản trị trước khi cho thời gian chạy. Một ngày game bằng năm giây ở 1×; bạn luôn có thể tạm dừng để đọc hoặc dùng Ngày tiếp. Bảy ngày tạo một tuần, ba mươi ngày tạo một tháng. Lương và thuê bao thu/chi theo tháng; lượt CEO hồi theo tuần.
+Công ty cần đủ tiền, một đội ngũ có sức làm việc và thứ khách hàng muốn mua. Hãy quan sát thanh KPI, Hộp thư CEO và các màn hình quản trị trước khi cho thời gian chạy. Một ngày game mặc định bằng 60 giây ở 1×; có thể chọn 24/60/120 giây trong Cài đặt. Công ty mới bắt đầu ngày 1 lúc 00:00 và tạm dừng. Dùng Chạy/Tạm dừng, +15 phút, Qua ngày hoặc Đến giờ làm. Bảy ngày tạo một tuần, ba mươi ngày tạo một tháng. Lương và vận hành phát sinh theo thời gian, rồi ghi sổ/thanh toán cuối tháng; thuê bao vẫn thu theo tháng, lượt CEO hồi theo tuần.
+
+Lịch làm việc: 09:00–12:00 và 13:00–18:00, nghỉ trưa 12:00–13:00. Khi bật tăng ca, người còn việc làm thêm 18:00–20:00. Ngoài giờ không tạo tiến độ; năng lượng và tinh thần thay đổi theo lịch thực. Đồng hồ HUD/tường hiển thị từng 15 phút, còn bầu trời, nắng, trăng sao và ánh sáng cửa sổ chuyển liên tục. Công tắc bên trái đồng hồ chỉ đổi đèn phòng; màn hình người đang làm vẫn sáng. Thời tiết tự đổi theo ngày, không dùng lượt CEO.
+
++15 phút và các nút tiến thời gian đều xử lý từng khoảng hợp lệ; tình huống quan trọng có thể dừng trước mốc đích. Tab bị ẩn hoặc máy ngừng lâu sẽ tạm dừng, không tự bù nhiều giờ. Khi Pause, thời gian và thiên thể dừng; code trên màn hình và gear tiếp tục chuyển động. Giảm chuyển động giữ code/gear/thời tiết ở khung tĩnh.
 
 **Tiền mặt** là tiền dùng được ngay. **Doanh thu** là phần đã ghi nhận từ công việc hoặc thuê bao. **Lợi nhuận** là doanh thu trừ chi phí. **Dòng tiền** là tiền thật vào/ra trong kỳ. Một dự án có lãi vẫn có thể khiến công ty thiếu tiền trả lương nếu khách chưa thanh toán.
 
@@ -49,7 +53,7 @@ Mỗi nhân viên có chuyên môn, skill, lương, morale, energy và tối đa
 
 Nợ kỹ thuật làm chậm phát triển. Refactor tiêu tốn thời gian để giảm nợ; không tạo thêm tính năng hoặc doanh thu ngay. Một phần lỗi ẩn có thể thoát qua QA và thành incident sau phát hành. Chỉ số chất lượng nói về lỗi đã biết, không chứng nhận không còn lỗi.
 
-Tăng ca có lợi ngắn hạn nhưng làm giảm energy/morale và tăng chi phí lương. Người mới chỉ đạt 50% năng lực tuần đầu và 75% tuần hai. Vì vậy tuyển ngay trước deadline không tạo năng lực đầy đủ ngay lập tức. Người có morale thấp được cảnh báo retention trước khi nghỉ; hỗ trợ họ qua giảm tăng ca, tăng lương, đào tạo hoặc quyết định sự kiện phù hợp.
+Tăng ca thêm tối đa 20% năng lực với cùng trạng thái, khi công việc đủ cho cả ca. Phụ phí lương chỉ phát sinh ở khoảng đang làm tăng ca; tắt tăng ca không xóa khoản đã phát sinh. Làm tăng ca giảm energy/morale và tác động tới ngày tiếp theo. Người mới chỉ đạt 50% năng lực tuần đầu và 75% tuần hai. Vì vậy tuyển ngay trước deadline không tạo năng lực đầy đủ ngay lập tức. Người có morale thấp được cảnh báo retention trước khi nghỉ; hỗ trợ họ qua giảm tăng ca, tăng lương, đào tạo hoặc quyết định sự kiện phù hợp.
 
 ## 4. Product: bán và duy trì sản phẩm
 
@@ -127,3 +131,9 @@ Chọn dự án để mở **Hồ sơ dự án**. Phần đầu có khách hàng
 Bản nháp, bộ lọc, tìm kiếm và sắp xếp giữ trong phiên khi đổi đối tượng. Tạo công ty mới hoặc tải bản lưu khởi tạo lại từ campaign đó. Phần chưa áp dụng không lưu qua tải lại trang. Game chưa lưu lịch sử nhân sự từng dự án, nên mục người đã tham gia thông báo giới hạn dữ liệu này.
 
 **Hợp đồng** giữ các thao tác báo giá, ký, scope, nghiệm thu và hóa đơn theo luật hiện hành. Dự án sản phẩm/thử nghiệm có mục **Chi tiết** tương ứng. **Hoạt động** lọc nhật ký có liên kết với dự án. Nhắc thu tiền vẫn chỉ đổi lịch thu theo luật; tiền về khi kỳ thanh toán được xử lý.
+
+## Save v3 và bản cũ
+
+Save giữa ca giữ mốc 15 phút, tiến độ, năng lượng, tinh thần, chi phí chưa thanh toán và budget RNG. Tải game luôn tạm dừng. Save v1/v2 được nâng trong bộ nhớ; file/slot gốc chưa bị ghi lại khi chỉ tải. Khi ghi đè slot cũ lần đầu, game giữ bản gốc trong cùng giao dịch. Mở “Bản sao giữ trước nâng cấp” để xuất JSON gốc cho phiên bản cũ. Xung đột tab hoặc không đủ bộ nhớ sẽ hủy lần ghi.
+
+Save cũ giữa tháng dùng cách chốt chi phí cũ thêm một kỳ; từ tháng tiếp theo mới phát sinh theo giờ. Không tính lại lịch sử. Bản game cũ không đọc được save v3; dùng bản gốc đã xuất để quay lại phiên bản cũ.

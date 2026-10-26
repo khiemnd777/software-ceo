@@ -1,5 +1,8 @@
+import { clockLabel, phaseAt, nextWorkSteps } from "../simulation/clock";
+import { weatherForDay } from "../renderer/lighting/weatherTimeline";
+import { WEATHER } from "../renderer/lighting/outdoorWeather";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import type { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction, RefObject } from "react";
 import { Office, type Camera } from "../renderer/Office";
 import {
   placeOfficeLabel,
@@ -36,6 +39,7 @@ import { Tutorial } from "./Tutorial";
 import { TooltipButton } from "./TooltipButton";
 import "./simulate.css";
 type Props = {
+  visualTime: RefObject<{ minute: number; weatherSeconds: number }>;
   sessionKey: number;
   panel: PanelProps & {
     workSession: WorkSession;
@@ -68,6 +72,7 @@ function logicalView(context: Context | null) {
   }[context.kind];
 }
 export function SimulateWorkspace({
+  visualTime,
   sessionKey,
   panel,
   speed,
@@ -114,7 +119,12 @@ export function SimulateWorkspace({
       const x = Number(button.dataset.anchorX),
         y = Number(button.dataset.anchorY);
       // An off-screen destination remains available through the office finder.
-      button.hidden = x < 0 || x > camera.width || y < 0 || y > camera.height;
+      button.hidden =
+        button.dataset.away === "true" ||
+        x < 0 ||
+        x > camera.width ||
+        y < 0 ||
+        y > camera.height;
       if (button.hidden) continue;
       const width = button.offsetWidth,
         height = button.offsetHeight;
@@ -212,7 +222,11 @@ export function SimulateWorkspace({
         event.preventDefault();
         setPalette(true);
       }
-      if (event.key === "Escape" && !document.querySelector("dialog[open]"))
+      if (
+        event.key === "Escape" &&
+        contextRef.current &&
+        !document.querySelector("dialog[open]")
+      )
         close();
     };
     window.addEventListener("keydown", key);
@@ -443,6 +457,13 @@ export function SimulateWorkspace({
         aria-label={l("Không gian Simulate", "Simulate workspace")}
       >
         <Office
+          visualTime={visualTime}
+          weatherSeed={s.seed}
+          lightingMinute={s.clock.minute}
+          lightsOn={s.scene.officeLightsOn}
+          onToggleLights={() =>
+            dispatch({ type: "officeLights", enabled: !s.scene.officeLightsOn })
+          }
           people={visualPeople}
           tier={s.officeTier}
           companyName={s.name}
@@ -455,14 +476,57 @@ export function SimulateWorkspace({
           onSelect={(id) => open({ kind: "employee", id })}
           onNavigate={navigate}
         />
+        <div className="office-time-status">
+          {l(
+            {
+              work: "Giờ làm",
+              lunch: "Nghỉ trưa",
+              overtime: s.overtime ? "Tăng ca" : "Đã tan ca",
+              rest: "Ngoài giờ",
+            }[phaseAt(s.clock.minute)],
+            {
+              work: "Working hours",
+              lunch: "Lunch break",
+              overtime: s.overtime ? "Overtime" : "Off duty",
+              rest: "Off duty",
+            }[phaseAt(s.clock.minute)],
+          )}{" "}
+          ·{" "}
+          {l(
+            WEATHER[weatherForDay(s.seed, s.day - 1)].label,
+            {
+              sunny: "Clear",
+              cloudy: "Cloudy",
+              rain: "Rain",
+              wind: "Wind",
+              "rain-wind": "Wind and rain",
+            }[weatherForDay(s.seed, s.day - 1)],
+          )}{" "}
+          ·{" "}
+          {s.scene.officeLightsOn
+            ? l("Đèn bật", "Lights on")
+            : l("Đèn tắt", "Lights off")}
+        </div>
         <div className="scene-toolbar">
           <div>
             <span className={`run-indicator ${speed ? "running" : ""}`} />
             <strong>{s.name}</strong>
             <span className="date">
               {l("THÁNG ", "MONTH ")}
-              {Math.floor(s.day / 30) + 1}
-              {l(" · NGÀY", " · DAY")} <b id="day-value">{s.day}</b>
+              {Math.floor(
+                ((s.status === "playing" ? s.day : s.clock.lastClosedDay) - 1) /
+                  30,
+              ) + 1}
+              {l(" · NGÀY", " · DAY")}{" "}
+              <b id="day-value">
+                {s.status === "playing" ? s.day : s.clock.lastClosedDay}
+              </b>{" "}
+              <time
+                className="game-clock"
+                aria-label={l("Giờ trong game", "Game time")}
+              >
+                {clockLabel(s.clock.minute)}
+              </time>
             </span>
           </div>
           <button className="find-object" onClick={() => setPalette(true)}>
@@ -510,6 +574,9 @@ export function SimulateWorkspace({
                 <button
                   key={e.id}
                   data-employee-point={e.id}
+                  data-away={
+                    visualPeople[i].present === false ? "true" : undefined
+                  }
                   data-anchor-x={pos.x}
                   data-anchor-y={pos.y}
                   className={`person-point ${selected === e.id ? "is-selected" : ""}`}
@@ -997,10 +1064,32 @@ export function SimulateWorkspace({
           <button
             onClick={() => {
               setSpeed(0);
-              dispatch({ type: "tick" });
+              dispatch({
+                type: "advanceTime",
+                steps: 96 - s.clock.minute / 15,
+              });
             }}
           >
-            {l("Ngày tiếp →", "Next day →")}
+            {l("Qua ngày →", "Next day →")}
+          </button>
+          <button
+            onClick={() => {
+              setSpeed(0);
+              dispatch({ type: "advanceTime", steps: 1 });
+            }}
+          >
+            +15 {l("phút", "min")}
+          </button>
+          <button
+            onClick={() => {
+              setSpeed(0);
+              dispatch({
+                type: "advanceTime",
+                steps: nextWorkSteps(s.clock.minute),
+              });
+            }}
+          >
+            {l("Đến giờ làm", "Next shift")}
           </button>
         </div>
       </main>

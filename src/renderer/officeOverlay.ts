@@ -79,9 +79,19 @@ function paintBadge(
     const tile = badge.background.canvas;
     if (tile.width !== width) tile.width = width;
     if (tile.height !== height) tile.height = height;
-    tile
-      .getContext("2d", { alpha: false })!
-      .drawImage(ctx.canvas, left, top, width, height, 0, 0, width, height);
+    const background = tile.getContext("2d")!;
+    background.clearRect(0, 0, width, height);
+    background.drawImage(
+      ctx.canvas,
+      left,
+      top,
+      width,
+      height,
+      0,
+      0,
+      width,
+      height,
+    );
     badge.background.left = left;
     badge.background.top = top;
   }
@@ -122,6 +132,13 @@ export function drawWorkingBadges(
     if (badge.background) {
       ctx.save();
       ctx.setTransform(1, 0, 0, 1, 0, 0);
+      // The office foreground is transparent; restore the cached alpha fringe too.
+      ctx.clearRect(
+        badge.background.left,
+        badge.background.top,
+        badge.background.canvas.width,
+        badge.background.canvas.height,
+      );
       ctx.drawImage(
         badge.background.canvas,
         badge.background.left,
@@ -134,6 +151,16 @@ export function drawWorkingBadges(
 }
 
 export function officeStatus(person: OfficePerson, en: boolean) {
+  if (person.present === false)
+    return {
+      status: "idle" as const,
+      description: en ? "Outside working hours" : "Đang nghỉ ngoài giờ",
+    };
+  if (person.shift === "lunch")
+    return {
+      status: "idle" as const,
+      description: en ? "Lunch break" : "Đang nghỉ trưa",
+    };
   const reasons = [
     ...(person.morale < 30 ? [en ? "Low morale" : "Tinh thần thấp"] : []),
     ...(person.energy < 25 ? [en ? "Low energy" : "Năng lượng thấp"] : []),

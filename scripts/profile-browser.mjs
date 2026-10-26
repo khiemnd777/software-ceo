@@ -14,6 +14,8 @@ const baseURL = process.env.CEO_BASE_URL ?? "http://127.0.0.1:4173/";
 const evidenceDir = process.env.CEO_EVIDENCE_DIR ?? "evidence";
 mkdirSync(evidenceDir, { recursive: true });
 const output = (name) => resolve(evidenceDir, name);
+const fixturePath =
+  process.env.CEO_PROFILE_FIXTURE ?? "evidence/fixtures/office-12-profile.json";
 const digest = (file) =>
   createHash("sha256").update(readFileSync(file)).digest("hex");
 function fixedBuild() {
@@ -28,9 +30,7 @@ function fixedBuild() {
     }
   }
   visit("dist");
-  files["evidence/fixtures/office-12-profile.json"] = digest(
-    "evidence/fixtures/office-12-profile.json",
-  );
+  files[fixturePath] = digest(fixturePath);
   return files;
 }
 const buildBefore = fixedBuild();
@@ -52,7 +52,7 @@ async function openPlace(page, name) {
 }
 const context = await browser.newContext({
   viewport: { width: 1920, height: 1080 },
-  deviceScaleFactor: 1,
+  deviceScaleFactor: Number(process.env.CEO_PROFILE_DPR ?? 1),
 });
 await context.addInitScript(() => {
   const original = window.Audio;
@@ -70,11 +70,15 @@ await context.addInitScript(() => {
   window.__ceoBadgeBlits = 0;
   const original = CanvasRenderingContext2D.prototype.drawImage;
   CanvasRenderingContext2D.prototype.drawImage = function (...args) {
+    if (
+      this.canvas.dataset.officeLayer === "world" &&
+      args[0] instanceof HTMLCanvasElement &&
+      args[0].width === this.canvas.width
+    )
+      window.__ceoWorldPasses++;
     if (this.canvas.isConnected && args[0] instanceof HTMLCanvasElement) {
       window.__ceoPaintCount++;
-      if (args[0].width === this.canvas.width && args[0].height === this.canvas.height)
-        window.__ceoWorldPasses++;
-      else window.__ceoBadgeBlits++;
+      window.__ceoBadgeBlits++;
     }
     return original.apply(this, args);
   };
@@ -101,9 +105,7 @@ const firstPlay = await page.evaluate(() =>
 );
 await page.screenshot({ path: output("W5-office-1920.png"), fullPage: true });
 await page.getByRole("button", { name: "Lưu và tải", exact: true }).click();
-await page
-  .locator("input[type=file]")
-  .setInputFiles(resolve("evidence/fixtures/office-12-profile.json"));
+await page.locator("input[type=file]").setInputFiles(resolve(fixturePath));
 await page.getByRole("button", { name: "Đóng cửa sổ lưu" }).click();
 await page.getByRole("button", { name: "Thu gọn hoặc mở hướng dẫn" }).click();
 await page.getByRole("button", { name: "1×", exact: true }).click();
@@ -116,6 +118,10 @@ for (const viewport of [
   { width: 1280, height: 720 },
   { width: 1920, height: 1080 },
 ]) {
+  await page.getByRole("button", { name: "Lưu và tải", exact: true }).click();
+  await page.locator("input[type=file]").setInputFiles(resolve(fixturePath));
+  await page.getByRole("button", { name: "Đóng cửa sổ lưu" }).click();
+  await page.getByRole("button", { name: "1×", exact: true }).click();
   await page.setViewportSize(viewport);
   await page.waitForTimeout(4000);
   const measurement = await page.evaluate(
@@ -123,7 +129,8 @@ for (const viewport of [
       new Promise((resolve) => {
         const frames = [];
         const paintStart = window.__ceoPaintCount;
-        const worldStart = window.__ceoWorldPasses, badgeStart = window.__ceoBadgeBlits;
+        const worldStart = window.__ceoWorldPasses,
+          badgeStart = window.__ceoBadgeBlits;
         let last = performance.now(),
           start = last;
         function next(t) {
@@ -156,6 +163,11 @@ for (const viewport of [
     staff: 12,
     roles: 5,
     run: profiles.length + 1,
+    weatherAndMonitors: await page.locator("canvas").evaluate((el) => ({
+      clock: el.getAttribute("aria-label"),
+      monitors: JSON.parse(el.dataset.monitors),
+      light: JSON.parse(el.dataset.windowLight),
+    })),
     running: await page
       .getByRole("button", { name: "1×", exact: true })
       .getAttribute("aria-pressed"),
@@ -288,7 +300,7 @@ writeFileSync(
       buildBefore,
       buildAfter,
       cameraInteraction,
-      environment: `Headless ${process.platform}/${process.arch} ${process.env.CEO_BROWSER ?? "default Chromium target"}. Each viewport warms for 4 seconds before a 10-second sample; two repetitions each. Animation and x1 simulation enabled using a public-command fixture after resolving the due event. Not a consumer desktop GPU benchmark. This task runs the probe after E2E/capture, without concurrent soak or balance work in this task. visibleCanvasPaints is the legacy canvas-image-blit counter; worldPasses and workingBadgeBlits distinguish full office passes from cached badge patches. The display clock is measured separately from actual Canvas repaints: 8 fps authored poses redraw the world on change; camera/walking interpolate on the display clock. Working badge patches animate independently at 30 Hz, including during Pause; reduced motion makes them static.`,
+      environment: `Headless ${process.platform}/${process.arch} ${process.env.CEO_BROWSER ?? "default Chromium target"}. Each viewport warms for 4 seconds before a 10-second sample; two repetitions each. Animation and x1 simulation enabled using a public-command fixture after resolving the due event. Not a consumer desktop GPU benchmark. This task runs the probe after E2E/capture, without concurrent soak or balance work in this task. visibleCanvasPaints counts final canvas-image blits; worldPasses counts transparent office rebuilds. workingBadgeBlits is retained as a legacy output name for final composite blits, not a gear-only count. The display clock is measured separately from actual Canvas repaints: 8 fps authored poses redraw the world on change; camera/walking interpolate on the display clock. Working badge patches animate independently at 30 Hz, including during Pause; reduced motion makes them static.`,
       profiles,
       firstPlay,
       firstPlayEncodedBytes: firstPlay.reduce(

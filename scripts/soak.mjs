@@ -1,11 +1,17 @@
 import { launchBrowser } from "./browser-runtime.mjs";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { resolve } from "node:path";
 import { createHash } from "node:crypto";
 import { buildDigest, soakFailures } from "./soak-evidence.mjs";
 
 const minutes = Number(process.argv[2] ?? 30);
 if (!Number.isInteger(minutes) || minutes < 30 || minutes > 60)
   throw Error("Request 30–60 actual wall-clock minutes");
+const evidenceDir = process.env.CEO_EVIDENCE_DIR ?? "evidence";
+mkdirSync(evidenceDir, { recursive: true });
+const output = (name) => resolve(evidenceDir, name);
+const fixturePath =
+  process.env.CEO_SOAK_FIXTURE ?? "evidence/fixtures/office-12.json";
 const initialBuild = buildDigest();
 const browser = await launchBrowser({ cdp: true });
 const context = await browser.newContext({
@@ -36,14 +42,14 @@ await page.evaluate(
     input.files = transfer.files;
     input.dispatchEvent(new Event("change", { bubbles: true }));
   },
-  readFileSync("evidence/fixtures/office-12.json", "utf8"),
+  readFileSync(fixturePath, "utf8"),
 );
 await page.locator(".scene-toolbar").waitFor();
 await page.waitForTimeout(200);
 await page.getByRole("button", { name: "Đóng cửa sổ lưu" }).click();
 await page.getByRole("button", { name: "Thu gọn hoặc mở hướng dẫn" }).click();
 const fixtureDigest = createHash("sha256")
-  .update(readFileSync("evidence/fixtures/office-12.json"))
+  .update(readFileSync(fixturePath))
   .digest("hex");
 const gameDigest = initialBuild.sha256;
 for (let minute = 0; minute < minutes; minute++) {
@@ -59,7 +65,7 @@ for (let minute = 0; minute < minutes; minute++) {
         input.files = transfer.files;
         input.dispatchEvent(new Event("change", { bubbles: true }));
       },
-      readFileSync("evidence/fixtures/office-12.json", "utf8"),
+      readFileSync(fixturePath, "utf8"),
     );
     await page.locator(".scene-toolbar").waitFor();
     await page.waitForTimeout(200);
@@ -120,7 +126,7 @@ for (let minute = 0; minute < minutes; minute++) {
   });
   console.log(JSON.stringify(samples.at(-1)));
   writeFileSync(
-    "evidence/soak-progress.json",
+    output("soak-progress.json"),
     JSON.stringify(
       {
         startedAt: new Date(started).toISOString(),
@@ -136,7 +142,7 @@ for (let minute = 0; minute < minutes; minute++) {
     ),
   );
 }
-await page.screenshot({ path: "evidence/W5-soak-final.png", fullPage: true });
+await page.screenshot({ path: output("W5-soak-final.png"), fullPage: true });
 await cdp.send("HeapProfiler.collectGarbage");
 const finalMetrics = Object.fromEntries(
   (await cdp.send("Performance.getMetrics")).metrics.map((x) => [
@@ -156,7 +162,7 @@ const failures = soakFailures({
 });
 mkdirSync("evidence", { recursive: true });
 writeFileSync(
-  `evidence/soak-${minutes}min.json`,
+  output(`soak-${minutes}min.json`),
   JSON.stringify(
     {
       result: failures.length ? "FAIL" : "PASS",

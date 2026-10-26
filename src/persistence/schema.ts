@@ -83,7 +83,7 @@ const effect = z.strictObject({
   deferInvoice: nonneg.max(1000).optional(),
   marketingBoost: finite.optional(),
 });
-export const StateSchema = z.strictObject({
+export const LegacyStateSchema = z.strictObject({
   version: z.literal(2),
   balanceVersion: z.string().max(40),
   seed: nonneg.max(4294967295),
@@ -355,8 +355,74 @@ export const StateSchema = z.strictObject({
     decisions: nonneg,
   }),
 });
+export const StateSchema = LegacyStateSchema.extend({
+  version: z.literal(3),
+  day: integer.min(1).max(1000001),
+  clock: z.strictObject({
+    minute: nonneg.max(1425).refine((v) => v % 15 === 0),
+    opened: z.boolean(),
+    lastClosedDay: nonneg.max(1000000),
+  }),
+  accrual: z.strictObject({
+    payroll: money,
+    operations: money,
+    payrollRemainder: nonneg.max(14399),
+    operationsRemainder: nonneg.max(2879),
+    legacyThroughDay: integer.min(1).max(1000020).nullable(),
+    laborRemainders: z.record(id, finite.min(0).lt(1)),
+  }),
+  workDay: z.strictObject({
+    day: integer.min(1).max(1000001),
+    budgets: z
+      .record(
+        z.string().min(1).max(240),
+        z.strictObject({
+          roll: finite.min(0).lt(1),
+          exposure: finite.min(0).max(1e12),
+          emitted: z.boolean(),
+        }),
+      )
+      .refine((v) => Object.keys(v).length <= 1024),
+  }),
+  discovery: z.record(
+    id,
+    z.strictObject({
+      required: finite.positive().max(1),
+      done: finite.min(0).max(1),
+    }),
+  ),
+  scene: z.strictObject({ officeLightsOn: z.boolean() }),
+});
 export function invariantErrors(s: State): string[] {
   const errors: string[] = [];
+  if (
+    s.clock.lastClosedDay !== s.day - 1 ||
+    (!s.clock.opened && s.clock.minute !== 0) ||
+    s.workDay.day !== s.day
+  )
+    errors.push("Clock day/phase does not reconcile.");
+  if (
+    s.accrual.legacyThroughDay !== null &&
+    (s.accrual.legacyThroughDay < s.day ||
+      s.accrual.legacyThroughDay % 30 !== 0 ||
+      s.accrual.payroll !== 0 ||
+      s.accrual.operations !== 0)
+  )
+    errors.push("Invalid transitional billing period.");
+  if (
+    Object.entries(s.discovery).some(
+      ([id, p]) =>
+        (id !== "market" && !s.work.some((w) => w.id === id)) ||
+        p.done > p.required + 1e-8,
+    )
+  )
+    errors.push("Invalid discovery budget.");
+  if (
+    Object.keys(s.accrual.laborRemainders).some(
+      (id) => !s.work.some((w) => w.id === id),
+    )
+  )
+    errors.push("Unknown labor allocation.");
   const b = balance(s);
   if (b.cash !== s.cash) errors.push("Cash does not reconcile to ledger.");
   if (

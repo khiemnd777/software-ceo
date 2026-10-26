@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { createGame } from "../../src/simulation/create";
-import { transition, daily } from "../../src/simulation/engine";
+import { advanceFixtureDays } from "../helpers/advance";
+import { transition } from "../../src/simulation/engine";
 import { applyEffect } from "../../src/simulation/events";
 import { funnel } from "../../src/gameplay/product";
 import { invariantErrors, validateState } from "../../src/persistence/schema";
@@ -15,13 +16,14 @@ const game = () =>
     seed: 71,
   });
 const send = (s: State, c: Command) => {
+  if (c.type === "tick") return advanceFixtureDays(s, c.days ?? 1);
   const t = transition(s, c);
   expect(t.ok, t.error?.en).toBe(true);
   return t.state;
 };
 describe("customer support, warnings and untrusted content", () => {
   it("customers create a queue; support consumes shared employee capacity", () => {
-    const idle = game();
+    let idle = game();
     let served = game();
     served = send(served, {
       type: "assign",
@@ -30,8 +32,8 @@ describe("customer support, warnings and untrusted content", () => {
       kind: "support",
     });
     for (let i = 0; i < 30; i++) {
-      daily(idle);
-      daily(served);
+      idle = advanceFixtureDays(idle, 1);
+      served = advanceFixtureDays(served, 1);
     }
     expect(idle.product.support).toBeGreaterThan(4);
     expect(served.product.support).toBeLessThan(1);
@@ -45,7 +47,7 @@ describe("customer support, warnings and untrusted content", () => {
     expect(s.liabilities.some((l) => l.kind === "operations")).toBe(true);
     expect(invariantErrors(s)).toEqual([]);
     const next = send(s, { type: "tick" });
-    expect(next.day).toBe(1);
+    expect(next.clock.lastClosedDay).toBe(1);
   });
   it("scheduled events have warnings, deterministic expiry and visible consequences", () => {
     let s = game();
@@ -98,7 +100,7 @@ describe("customer support, warnings and untrusted content", () => {
       mode: "deadline",
     });
     s = send(s, { type: "sign", contractId: s.contracts[0].id });
-    expect(s.contracts[0].deadline).toBe(56);
+    expect(s.contracts[0].deadline).toBe(s.day + 56);
   });
 });
 it("does not award endless QA effort or XP on exhausted, defect-free work", () => {

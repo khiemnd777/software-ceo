@@ -1,11 +1,40 @@
+// V4 office projection with a simulation-driven exterior and cached indoor lighting.
+// Preserves V4 projection, assets and interactions; separates exterior/window/interior lighting.
 import { assetURL } from "../app/assets";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import atlas from "../../public/assets/manifest.json";
 import characters from "../../public/assets/characters/manifest.json";
 import { resolveAppearance } from "../characters/resolve";
 import type { AppearanceId } from "../characters/catalog";
-import { characterPose as pose, type CharacterPose } from "./characterMotion";
+import {
+  characterPose as pose,
+  type CharacterPose,
+} from "../renderer/characterMotion";
 import type { TaskKind } from "../simulation/types";
+import {
+  scenePalette,
+  drawWindowView,
+  drawWallLamp,
+} from "./lighting/sceneLighting";
+import { drawWallClock } from "./lighting/wallClock";
+import {
+  MonitorLayer,
+  screenPlane,
+  darkScreen,
+} from "./lighting/workingMonitors";
+import {
+  drawWallSwitch,
+  switchBounds,
+  officeShade,
+} from "./lighting/wallSwitch";
+import {
+  drawWindowLight,
+  windowLightFrame,
+  officeWindows,
+} from "./lighting/windowLight";
+import { weatherBlend } from "./lighting/weatherTimeline";
+import { clockLabel } from "../simulation/clock";
+import { drawOutdoorSky, type Weather } from "./lighting/outdoorWeather";
 import {
   drawOfficeOverlay,
   drawWorkingBadges,
@@ -13,13 +42,15 @@ import {
   type OfficeAnnotation,
   type OverlayHit,
   type WorkingBadge,
-} from "./officeOverlay";
+} from "../renderer/officeOverlay";
 
 export interface OfficePerson {
   id: string;
   name: string;
   role: string;
   working: boolean;
+  present?: boolean;
+  shift?: "rest" | "work" | "lunch" | "overtime";
   morale: number;
   energy: number;
   taskKind?: TaskKind;
@@ -33,7 +64,18 @@ export interface Camera {
   width: number;
   height: number;
 }
+export interface VisualTime {
+  minute: number;
+  weatherSeconds: number;
+}
 export interface OfficeProps {
+  visualTime?: RefObject<VisualTime>;
+  weatherSeed?: number;
+  lightsOn?: boolean;
+  onToggleLights?: () => void;
+  lightingMinute?: number;
+  weather?: Weather;
+  weatherSeconds?: number;
   onCameraChange?: (camera: Camera) => void;
   people: OfficePerson[];
   tier: number;
@@ -93,22 +135,57 @@ function loadImage(file: string) {
   return promise;
 }
 export function Office(props: OfficeProps) {
+  const fallbackTime = useRef<VisualTime>({ minute: 540, weatherSeconds: 0 });
+  const effective = {
+    ...props,
+    visualTime: props.visualTime ?? fallbackTime,
+    lightsOn: props.lightsOn ?? true,
+    weather: props.weather ?? ("sunny" as Weather),
+  };
   const canvas = useRef<HTMLCanvasElement>(null),
-    state = useRef(props);
-  state.current = props;
+    state = useRef(effective);
+  state.current = effective;
   const controller = useRef<
     { zoom: (d: number) => void; fit: () => void } | undefined
   >(undefined);
   const [error, setError] = useState("");
+  const [view, setView] = useState<Camera | null>(null);
   useEffect(() => {
     const el = canvas.current!,
-      ctx = el.getContext("2d", { alpha: false });
-    if (!ctx) {
+      output = el.getContext("2d", { alpha: false });
+    if (!output) {
       setError("Canvas 2D is unavailable.");
       return;
     }
-    const layer = document.createElement("canvas"),
-      bg = layer.getContext("2d", { alpha: false })!;
+    const foreground = document.createElement("canvas"),
+      ctx = foreground.getContext("2d", { alpha: true })!,
+      layer = document.createElement("canvas"),
+      bg = layer.getContext("2d", { alpha: true })!,
+      skyLayer = document.createElement("canvas"),
+      skyContext = skyLayer.getContext("2d", { alpha: false })!;
+    const weatherLayer = document.createElement("canvas"),
+      weatherContext = weatherLayer.getContext("2d", { alpha: false })!;
+    foreground.dataset.officeLayer = "world";
+    const floorLayer = document.createElement("canvas"),
+      floorContext = floorLayer.getContext("2d")!,
+      windowLight = document.createElement("canvas"),
+      lightContext = windowLight.getContext("2d")!;
+    let lightBounds = { x: 0, y: 0, width: 0, height: 0 };
+    const monitors = new MonitorLayer();
+    const badgeBackgrounds = new Map<string, HTMLCanvasElement>();
+    const present = () => {
+      output.setTransform(1, 0, 0, 1, 0, 0);
+      output.drawImage(skyLayer, 0, 0);
+      output.drawImage(floorLayer, 0, 0);
+      output.save();
+      output.globalCompositeOperation = "screen";
+      const { x, y, width, height } = lightBounds;
+      if (width > 0 && height > 0)
+        output.drawImage(windowLight, x, y, width, height, x, y, width, height);
+      output.restore();
+      output.drawImage(foreground, 0, 0);
+      monitors.composite(output);
+    };
     let w = 1,
       h = 1,
       dpr = 1,
@@ -122,9 +199,18 @@ export function Office(props: OfficeProps) {
       dirty = true,
       lastTier = state.current.tier,
       lastLocale = state.current.language,
-      lastCompanyName = state.current.companyName;
+      lastCompanyName = state.current.companyName,
+      lastLightKey = "",
+      lastWeatherKey = "",
+      interiorShade = 0,
+      worldPass = 0,
+      windowLightPaints = 0,
+      lastWindowLightKey = "",
+      skyFrame: ReturnType<typeof drawOutdoorSky> | null = null;
     let seconds = 0,
       gearSeconds = 0,
+      monitorSeconds = 0,
+      lastMonitorFrame = -1,
       lastGearFrame = -1,
       last = performance.now(),
       loaded = 0,
@@ -167,13 +253,13 @@ export function Office(props: OfficeProps) {
           1.15,
           Math.min(
             w / (PX * (s.x + s.y) + 130),
-            h / (PX * 0.5 * (s.x + s.y) + 210),
+            (h - 70) / (PX * 0.5 * (s.x + s.y) + 210),
           ),
         ),
       );
       pan = {
         x: w / 2 - ((s.x - s.y) * PX * zoom) / 2,
-        y: h / 2 - ((s.x + s.y) * PX * 0.5 * zoom) / 2 + 85 * zoom,
+        y: h / 2 + 10 - ((s.x + s.y) * PX * 0.5 * zoom) / 2 + 85 * zoom,
       };
       dirty = true;
     };
@@ -182,8 +268,19 @@ export function Office(props: OfficeProps) {
       w = Math.max(1, r.width);
       h = Math.max(1, r.height);
       dpr = Math.max(1, Math.min(devicePixelRatio || 1, 2));
-      el.width = layer.width = Math.round(w * dpr);
-      el.height = layer.height = Math.round(h * dpr);
+      el.width =
+        layer.width =
+        skyLayer.width =
+        foreground.width =
+          Math.round(w * dpr);
+      el.height =
+        layer.height =
+        skyLayer.height =
+        foreground.height =
+          Math.round(h * dpr);
+      floorLayer.width = windowLight.width = weatherLayer.width = el.width;
+      floorLayer.height = windowLight.height = weatherLayer.height = el.height;
+      monitors.resize(el.width, el.height);
       fit();
     };
     const ro = new ResizeObserver(resize);
@@ -236,25 +333,16 @@ export function Office(props: OfficeProps) {
         color,
       );
     const staticScene = () => {
+      const light = scenePalette(state.current.visualTime.current.minute);
+      interiorShade = officeShade(state.current.lightsOn, light.night);
       bg.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const g = bg.createRadialGradient(
-        w * 0.5,
-        h * 0.4,
-        20,
-        w * 0.5,
-        h * 0.4,
-        w * 0.7,
-      );
-      g.addColorStop(0, "#faf9f0");
-      g.addColorStop(1, "#e2eae5");
-      bg.fillStyle = g;
-      bg.fillRect(0, 0, w, h);
+      bg.clearRect(0, 0, w, h);
       bg.translate(pan.x, pan.y);
       bg.scale(zoom, zoom);
       const s = size();
       bg.save();
-      bg.filter = "blur(18px)";
-      tile(bg, 0.2, 0.2, s.x, s.y, "#afbbaf", -0.4);
+      bg.filter = "blur(8px)";
+      tile(bg, 0.12, 0.12, s.x, s.y, "rgba(15,32,24,.23)", -0.15);
       bg.restore();
       poly(
         bg,
@@ -276,6 +364,9 @@ export function Office(props: OfficeProps) {
         ],
         "#a99f88",
       );
+      // An opaque underfloor seals tile seams: rain belongs behind the room,
+      // including the subpixel gaps between individual floor tiles.
+      tile(bg, 0, 0, s.x, s.y, "#eee5d5", 0.13);
       for (let x = 0; x < s.x; x++)
         for (let y = 0; y < s.y; y++)
           tile(
@@ -287,6 +378,22 @@ export function Office(props: OfficeProps) {
             (x + y) % 2 ? "#eee5d5" : "#f3ebdd",
             0.13,
           );
+      // Cache the floor separately: moving window light stays below all room
+      // objects, without rebuilding sprites or an occlusion mask every frame.
+      floorContext.setTransform(1, 0, 0, 1, 0, 0);
+      floorContext.clearRect(0, 0, floorLayer.width, floorLayer.height);
+      floorContext.drawImage(layer, 0, 0);
+      if (interiorShade > 0) {
+        floorContext.save();
+        floorContext.globalCompositeOperation = "source-atop";
+        floorContext.fillStyle = `rgba(12,24,34,${interiorShade})`;
+        floorContext.fillRect(0, 0, floorLayer.width, floorLayer.height);
+        floorContext.restore();
+      }
+      bg.save();
+      bg.setTransform(1, 0, 0, 1, 0, 0);
+      bg.clearRect(0, 0, layer.width, layer.height);
+      bg.restore();
       poly(
         bg,
         [iso(0, 0, 0.13), iso(s.x, 0, 0.13), iso(s.x, 0, 2.1), iso(0, 0, 2.1)],
@@ -297,27 +404,28 @@ export function Office(props: OfficeProps) {
         [iso(0, 0, 0.13), iso(0, s.y, 0.13), iso(0, s.y, 2.1), iso(0, 0, 2.1)],
         "#e4ebe1",
       );
-      for (let x = 1; x < s.x - 1; x += 2.7) {
+      for (const { x, width: windowWidth } of officeWindows(s.x)) {
         poly(
           bg,
           [
             iso(x, 0.01, 0.75),
-            iso(x + 1.9, 0.01, 0.75),
-            iso(x + 1.9, 0.01, 1.8),
+            iso(x + windowWidth, 0.01, 0.75),
+            iso(x + windowWidth, 0.01, 1.8),
             iso(x, 0.01, 1.8),
           ],
           "#fcfcf2",
           "#afc4b7",
         );
-        poly(
+        drawWindowView(
           bg,
           [
             iso(x + 0.08, 0.02, 0.83),
-            iso(x + 1.82, 0.02, 0.83),
-            iso(x + 1.82, 0.02, 1.72),
+            iso(x + windowWidth - 0.08, 0.02, 0.83),
+            iso(x + windowWidth - 0.08, 0.02, 1.72),
             iso(x + 0.08, 0.02, 1.72),
           ],
-          "#b8d9d8",
+          light,
+          true,
         );
         poly(
           bg,
@@ -328,6 +436,32 @@ export function Office(props: OfficeProps) {
             iso(x + 1, 0.025, 1.72),
           ],
           "#f8faf0",
+        );
+      }
+      for (const x of [2, 4.7]) {
+        drawWallLamp(
+          bg,
+          [
+            iso(x, 0.035, 1.95),
+            iso(x + 0.85, 0.035, 1.95),
+            iso(x + 0.85, 0.035, 2.04),
+            iso(x, 0.035, 2.04),
+          ],
+          light,
+          state.current.lightsOn,
+        );
+      }
+      for (const y of [2.1, 5.1]) {
+        drawWallLamp(
+          bg,
+          [
+            iso(0.035, y, 1.95),
+            iso(0.035, y + 0.85, 1.95),
+            iso(0.035, y + 0.85, 2.04),
+            iso(0.035, y, 2.04),
+          ],
+          light,
+          state.current.lightsOn,
         );
       }
       const sign = iso(0.03, 4, 1.65);
@@ -380,8 +514,7 @@ export function Office(props: OfficeProps) {
           (m.pixelsPerMeter ?? atlas.projection.pixelsPerMeter);
       ctx.globalAlpha = alpha;
       const [bx, by, right, bottom] = m.bbox;
-      ctx.drawImage(
-        img,
+      const args = [
         bx,
         by,
         right - bx,
@@ -390,50 +523,56 @@ export function Office(props: OfficeProps) {
         p.y + (by - m.anchor[1]) * sc,
         (right - bx) * sc,
         (bottom - by) * sc,
-      );
+      ] as const;
+      ctx.drawImage(img, ...args);
+      if (monitors.intersects(args[4], args[5], args[6], args[7])) {
+        monitors.ctx.globalAlpha = alpha;
+        monitors.ctx.drawImage(img, ...args);
+        monitors.ctx.globalAlpha = 1;
+      }
       ctx.globalAlpha = 1;
     };
     // Occlusion mask in the locked 512×512 chair sprite's source coordinates.
     // Only the backrest/spine and camera-facing arm pass in front of the sitter;
     // The near seat rim also hides the far leg; the near leg, pedestal and
     // casters retain their existing order. Coordinates belong to this sprite.
-    const chairFront = (p: Point) => {
+    const chairFront = (p: Point, target = ctx) => {
       const m = atlas.sprites.chair;
       const sc = (PX * Math.SQRT2) / m.pixelsPerMeter;
-      ctx.save();
-      ctx.translate(p.x - m.anchor[0] * sc, p.y - m.anchor[1] * sc);
-      ctx.scale(sc, sc);
-      ctx.beginPath();
-      ctx.moveTo(130, 198);
-      ctx.lineTo(205, 198);
-      ctx.lineTo(215, 291);
-      ctx.bezierCurveTo(217, 315, 205, 333, 181, 330);
-      ctx.lineTo(169, 328);
-      ctx.lineTo(169, 349);
-      ctx.lineTo(157, 349);
-      ctx.lineTo(157, 322);
-      ctx.lineTo(130, 310);
-      ctx.closePath();
-      ctx.moveTo(225, 306);
-      ctx.lineTo(267, 287);
-      ctx.lineTo(284, 294);
-      ctx.lineTo(284, 303);
-      ctx.lineTo(254, 319);
-      ctx.lineTo(246, 341);
-      ctx.lineTo(237, 344);
-      ctx.lineTo(243, 319);
-      ctx.lineTo(225, 316);
-      ctx.closePath();
-      ctx.moveTo(142, 326);
-      ctx.lineTo(211, 349);
-      ctx.lineTo(258, 327);
-      ctx.lineTo(258, 344);
-      ctx.lineTo(211, 366);
-      ctx.lineTo(142, 343);
-      ctx.closePath();
-      ctx.clip();
-      ctx.drawImage(images.chair, 0, 0);
-      ctx.restore();
+      target.save();
+      target.translate(p.x - m.anchor[0] * sc, p.y - m.anchor[1] * sc);
+      target.scale(sc, sc);
+      target.beginPath();
+      target.moveTo(130, 198);
+      target.lineTo(205, 198);
+      target.lineTo(215, 291);
+      target.bezierCurveTo(217, 315, 205, 333, 181, 330);
+      target.lineTo(169, 328);
+      target.lineTo(169, 349);
+      target.lineTo(157, 349);
+      target.lineTo(157, 322);
+      target.lineTo(130, 310);
+      target.closePath();
+      target.moveTo(225, 306);
+      target.lineTo(267, 287);
+      target.lineTo(284, 294);
+      target.lineTo(284, 303);
+      target.lineTo(254, 319);
+      target.lineTo(246, 341);
+      target.lineTo(237, 344);
+      target.lineTo(243, 319);
+      target.lineTo(225, 316);
+      target.closePath();
+      target.moveTo(142, 326);
+      target.lineTo(211, 349);
+      target.lineTo(258, 327);
+      target.lineTo(258, 344);
+      target.lineTo(211, 366);
+      target.lineTo(142, 343);
+      target.closePath();
+      target.clip();
+      target.drawImage(images.chair, 0, 0);
+      target.restore();
     };
     const personSprite = (
       appearance: AppearanceId,
@@ -447,8 +586,7 @@ export function Office(props: OfficeProps) {
       const [x, y, width, height] = frame.rect;
       const [ox, oy] = frame.offset;
       const scale = (PX * Math.SQRT2) / characters.pixelsPerMeter;
-      ctx.drawImage(
-        img,
+      const args = [
         x,
         y,
         width,
@@ -457,11 +595,13 @@ export function Office(props: OfficeProps) {
         p.y + oy * scale,
         width * scale,
         height * scale,
-      );
+      ] as const;
+      ctx.drawImage(img, ...args);
+      if (monitors.intersects(args[4], args[5], args[6], args[7]))
+        monitors.ctx.drawImage(img, ...args);
     };
     let overlayHits: OverlayHit[] = [];
     let workingBadges: WorkingBadge[] = [];
-    const badgeBackgrounds = new Map<string, HTMLCanvasElement>();
     let hit: { id: string; x: number; y: number; r: number; top: number }[] =
       [];
     const pick = (e: PointerEvent) => {
@@ -551,13 +691,9 @@ export function Office(props: OfficeProps) {
       const cameraKey = [pan.x, pan.y, zoom, w, h].join(":");
       if (cameraKey !== lastCameraKey) {
         lastCameraKey = cameraKey;
-        state.current.onCameraChange?.({
-          x: pan.x,
-          y: pan.y,
-          zoom,
-          width: w,
-          height: h,
-        });
+        const camera = { x: pan.x, y: pan.y, zoom, width: w, height: h };
+        setView(camera);
+        state.current.onCameraChange?.(camera);
       }
       const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
@@ -577,6 +713,23 @@ export function Office(props: OfficeProps) {
         )
       )
         gearSeconds += dt;
+      if (
+        !state.current.reducedMotion &&
+        !document.hidden &&
+        state.current.people.some((p) => p.working)
+      )
+        monitorSeconds += dt;
+      const monitorFrame = state.current.reducedMotion
+        ? 0
+        : Math.floor(monitorSeconds * 8);
+      const paintMonitors = () => {
+        monitors.redraw(monitorFrame);
+        lastMonitorFrame = monitorFrame;
+        el.dataset.monitors = JSON.stringify({
+          worldPass,
+          ...monitors.snapshot(monitorFrame),
+        });
+      };
       const gearFrame = state.current.reducedMotion
         ? 0
         : Math.floor(gearSeconds * 30);
@@ -592,6 +745,142 @@ export function Office(props: OfficeProps) {
       if (lastCompanyName !== state.current.companyName) {
         lastCompanyName = state.current.companyName;
         dirty = true;
+      }
+      // Window holes and lamp colors are static. Rebuild the room only when
+      // its actual shade or quarter-hour clock changes, not every game minute.
+      const roomShade = officeShade(
+        state.current.lightsOn,
+        scenePalette(Math.floor(state.current.visualTime.current.minute)).night,
+      );
+      const lightKey = `${clockLabel(state.current.visualTime.current.minute)}:${roomShade}:${!!state.current.reducedMotion}:${state.current.lightsOn}`;
+      if (lightKey !== lastLightKey) {
+        lastLightKey = lightKey;
+        dirty = true;
+      }
+      const weatherSeconds = state.current.reducedMotion
+        ? 0
+        : state.current.visualTime.current.weatherSeconds;
+      const weatherMix =
+        state.current.weatherSeed === undefined
+          ? { from: state.current.weather, to: state.current.weather, alpha: 1 }
+          : weatherBlend(
+              state.current.weatherSeed,
+              state.current.visualTime.current.minute,
+            );
+      const weatherKey = `${state.current.visualTime.current.minute}:${weatherMix.from}:${weatherMix.to}:${weatherSeconds}:${!!state.current.reducedMotion}`;
+      const skyChanged = dirty || weatherKey !== lastWeatherKey;
+      if (skyChanged) {
+        skyContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const previous = drawOutdoorSky(
+          skyContext,
+          w,
+          h,
+          state.current.visualTime.current.minute,
+          weatherMix.from,
+          weatherSeconds,
+          !!state.current.reducedMotion,
+        );
+        if (weatherMix.from !== weatherMix.to && weatherMix.alpha > 0) {
+          weatherContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+          const next = drawOutdoorSky(
+            weatherContext,
+            w,
+            h,
+            state.current.visualTime.current.minute,
+            weatherMix.to,
+            weatherSeconds,
+            !!state.current.reducedMotion,
+          );
+          skyContext.save();
+          skyContext.globalAlpha = weatherMix.alpha;
+          skyContext.drawImage(weatherLayer, 0, 0, w, h);
+          skyContext.restore();
+          skyFrame = {
+            ...next,
+            sun: {
+              ...next.sun,
+              alpha:
+                previous.sun.alpha +
+                (next.sun.alpha - previous.sun.alpha) * weatherMix.alpha,
+            },
+            moon: {
+              ...next.moon,
+              alpha:
+                previous.moon.alpha +
+                (next.moon.alpha - previous.moon.alpha) * weatherMix.alpha,
+            },
+          };
+        } else skyFrame = previous;
+        el.dataset.skyFrame = JSON.stringify(skyFrame);
+        lastWeatherKey = weatherKey;
+      }
+      const windowLightKey = `${state.current.visualTime.current.minute}:${weatherMix.from}:${weatherMix.to}:${weatherMix.alpha}:${!!state.current.reducedMotion}:${cameraKey}`;
+      const windowLightChanged = dirty || windowLightKey !== lastWindowLightKey;
+      if (windowLightChanged && skyFrame) {
+        lightContext.setTransform(1, 0, 0, 1, 0, 0);
+        lightContext.clearRect(0, 0, windowLight.width, windowLight.height);
+        lightContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+        lightContext.translate(pan.x, pan.y);
+        lightContext.scale(zoom, zoom);
+        const light = windowLightFrame(
+          state.current.visualTime.current.minute,
+          weatherMix.to,
+          skyFrame,
+        );
+        const patches = drawWindowLight(
+          lightContext,
+          light,
+          size(),
+          iso,
+          !!state.current.reducedMotion,
+        );
+        // Blend only the lit floor region. A full-canvas screen blend also
+        // processes empty sky pixels and is costly on CPU-backed Canvas.
+        const points = patches.flatMap((p) =>
+          p.points.map((point) => {
+            const q = iso(point.x, point.y, 0.13);
+            return {
+              x: (pan.x + q.x * zoom) * dpr,
+              y: (pan.y + q.y * zoom) * dpr,
+            };
+          }),
+        );
+        const left = Math.max(
+          0,
+          Math.floor(Math.min(...points.map((p) => p.x))) - 4,
+        );
+        const top = Math.max(
+          0,
+          Math.floor(Math.min(...points.map((p) => p.y))) - 4,
+        );
+        lightBounds = points.length
+          ? {
+              x: left,
+              y: top,
+              width: Math.max(
+                0,
+                Math.min(
+                  windowLight.width,
+                  Math.ceil(Math.max(...points.map((p) => p.x))) + 4,
+                ) - left,
+              ),
+              height: Math.max(
+                0,
+                Math.min(
+                  windowLight.height,
+                  Math.ceil(Math.max(...points.map((p) => p.y))) + 4,
+                ) - top,
+              ),
+            }
+          : { x: 0, y: 0, width: 0, height: 0 };
+        windowLightPaints++;
+        el.dataset.windowLight = JSON.stringify({
+          ...light,
+          paints: windowLightPaints,
+          bounds: lightBounds,
+          patches,
+        });
+        lastWindowLightKey = windowLightKey;
       }
       const appearances = state.current.people.map(resolveAppearance);
       for (const appearance of appearances)
@@ -612,6 +901,7 @@ export function Office(props: OfficeProps) {
           person.role,
           appearances[i],
           person.working,
+          person.present,
           person.morale < 30 || person.energy < 25,
           person.morale < 30,
           person.energy < 25,
@@ -620,18 +910,26 @@ export function Office(props: OfficeProps) {
           animations[i].offset,
         ]),
       ]);
+      // Weather changes only the exterior. Reuse the transparent office until
+      // a pose, clock, camera, selection or other room content actually changes.
       if (!dirty && visualKey === lastVisualKey) {
+        const badgeChanged = gearFrame !== lastGearFrame;
         if (gearFrame !== lastGearFrame) {
           ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
           drawWorkingBadges(ctx, workingBadges, gearTime);
           lastGearFrame = gearFrame;
         }
+        const monitorChanged = monitorFrame !== lastMonitorFrame;
+        if (monitorChanged) paintMonitors();
+        if (skyChanged || windowLightChanged || badgeChanged || monitorChanged)
+          present();
         frame = requestAnimationFrame(draw);
         return;
       }
       lastVisualKey = visualKey;
       if (dirty) staticScene();
       ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, foreground.width, foreground.height);
       ctx.drawImage(layer, 0, 0);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.translate(pan.x, pan.y);
@@ -639,6 +937,8 @@ export function Office(props: OfficeProps) {
       const s = size(),
         en = state.current.language === "en";
       hit = [];
+      worldPass++;
+      monitors.begin(dpr, pan, zoom);
       const annotations: OfficeAnnotation[] = [];
       const screen = (p: Point) => ({
         x: pan.x + p.x * zoom,
@@ -711,10 +1011,21 @@ export function Office(props: OfficeProps) {
       const positions = state.current.tier === 2 ? seats : seats.slice(0, 5);
       positions.forEach((pos, i) => {
         const p = iso(pos.x, pos.y, 0.13),
-          person = state.current.people[i];
+          candidate = state.current.people[i],
+          person = candidate?.present === false ? undefined : candidate;
         objects.push({
           depth: pos.x + pos.y - 0.5,
-          draw: () => sprite("desk", p, person ? 1 : 0.65),
+          draw: () => {
+            sprite("desk", p, person ? 1 : 0.65);
+            if (images.desk) {
+              const meta = atlas.sprites.desk,
+                scale = (PX * Math.SQRT2) / atlas.projection.pixelsPerMeter;
+              const plane = screenPlane(p, scale, meta.anchor);
+              darkScreen(ctx, plane);
+              monitors.plane(plane);
+              if (person?.working) monitors.plane(plane, i);
+            }
+          },
         });
         objects.push({
           depth: pos.x + pos.y + 0.35,
@@ -784,13 +1095,32 @@ export function Office(props: OfficeProps) {
           objects.push({
             depth: pos.x + pos.y + 0.7,
             draw: () => {
-              if (images.chair) chairFront(p);
+              if (images.chair) {
+                chairFront(p);
+                if (monitors.surfaces.length) chairFront(p, monitors.ctx);
+              }
             },
           });
         }
       });
       objects.sort((a, b) => a.depth - b.depth).forEach((o) => o.draw());
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (interiorShade > 0) {
+        ctx.save();
+        ctx.globalCompositeOperation = "source-atop";
+        ctx.fillStyle = `rgba(12,24,34,${interiorShade})`;
+        ctx.fillRect(0, 0, w, h);
+        ctx.restore();
+      }
+      // Readable wall hardware and UI stay above the ambient room shading.
+      ctx.save();
+      ctx.translate(pan.x, pan.y);
+      ctx.scale(zoom, zoom);
+      drawWallClock(ctx, iso, state.current.visualTime.current.minute);
+      drawWallSwitch(ctx, iso, state.current.lightsOn);
+      ctx.restore();
+      drawWallClock(monitors.ctx, iso, state.current.visualTime.current.minute);
+      drawWallSwitch(monitors.ctx, iso, state.current.lightsOn);
       const overlay = drawOfficeOverlay(
         ctx,
         annotations,
@@ -802,12 +1132,16 @@ export function Office(props: OfficeProps) {
       overlayHits = overlay.hits;
       workingBadges = overlay.workingBadges;
       lastGearFrame = gearFrame;
+      monitors.excludeUI(overlay.hits);
+      monitors.finish();
+      paintMonitors();
       if (loaded < requested) {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.fillStyle = "#30554a";
         ctx.font = "14px system-ui";
         ctx.fillText(en ? "Loading office…" : "Đang mở văn phòng…", 20, h - 20);
       }
+      present();
       frame = requestAnimationFrame(draw);
     };
     frame = requestAnimationFrame(draw);
@@ -824,13 +1158,20 @@ export function Office(props: OfficeProps) {
       el.removeEventListener("keydown", key);
       document.removeEventListener("visibilitychange", visibility);
       controller.current = undefined;
+      layer.width = layer.height = 0;
+      skyLayer.width = skyLayer.height = 0;
+      foreground.width = foreground.height = 0;
+      weatherLayer.width = weatherLayer.height = 0;
+      floorLayer.width = floorLayer.height = 0;
+      windowLight.width = windowLight.height = 0;
+      monitors.destroy();
       for (const tile of badgeBackgrounds.values())
         tile.width = tile.height = 0;
       badgeBackgrounds.clear();
-      layer.width = layer.height = 0;
     };
   }, []);
   const en = props.language === "en";
+  const control = view ? switchBounds(view, iso) : null;
   return (
     <div className="office-canvas">
       <canvas
@@ -838,10 +1179,44 @@ export function Office(props: OfficeProps) {
         tabIndex={0}
         aria-label={
           en
-            ? "Isometric office. Drag or use arrow keys to pan. Scroll or use plus and minus to zoom. Press 0 to fit. All actions are also available in navigation."
-            : "Văn phòng isometric. Kéo hoặc dùng phím mũi tên để di chuyển. Cuộn hoặc phím cộng, trừ để phóng. Phím 0 căn giữa. Mọi thao tác đều có trong menu."
+            ? `Wall clock ${clockLabel(props.lightingMinute ?? effective.visualTime.current.minute)}. Isometric office. Drag or use arrow keys to pan. Scroll or use plus and minus to zoom. Press 0 to fit. All actions are also available in navigation.`
+            : `Đồng hồ treo tường ${clockLabel(props.lightingMinute ?? effective.visualTime.current.minute)}. Văn phòng isometric. Kéo hoặc dùng phím mũi tên để di chuyển. Cuộn hoặc phím cộng, trừ để phóng. Phím 0 căn giữa. Mọi thao tác đều có trong menu.`
         }
       />
+      {control?.visible && props.onToggleLights && (
+        <button
+          className="wall-light-switch"
+          aria-label={en ? "Office light switch" : "Công tắc đèn văn phòng"}
+          aria-pressed={effective.lightsOn}
+          title={
+            effective.lightsOn
+              ? en
+                ? "Turn office lights off"
+                : "Tắt đèn văn phòng"
+              : en
+                ? "Turn office lights on"
+                : "Bật đèn văn phòng"
+          }
+          style={{
+            left: control.x,
+            top: control.y,
+            width: control.width,
+            height: control.height,
+          }}
+          onClick={props.onToggleLights}
+        >
+          <span
+            aria-hidden="true"
+            className="wall-switch-focus"
+            style={{
+              left: control.face.x,
+              top: control.face.y,
+              width: control.face.width,
+              height: control.face.height,
+            }}
+          />
+        </button>
+      )}
       {error && (
         <div className="canvas-error" role="alert">
           {error}

@@ -1,5 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 import { createGame } from "../../src/simulation/create";
+import { transition } from "../../src/simulation/engine";
 import { encodeSave } from "../../src/persistence/saves";
 import { APPEARANCE_IDS } from "../../src/characters/catalog";
 import characterAtlas from "../../public/assets/characters/manifest.json" with { type: "json" };
@@ -56,7 +57,7 @@ test.beforeEach(async ({ page }) => {
       ...coordinates: number[]
     ) {
       const args = [image, ...coordinates] as Parameters<typeof draw>;
-      if (this.canvas.isConnected) {
+      if (this.canvas.dataset.officeLayer === "world") {
         if (
           args[0] instanceof HTMLCanvasElement &&
           args[0].width === this.canvas.width &&
@@ -88,7 +89,7 @@ test.beforeEach(async ({ page }) => {
       y,
       maxWidth,
     ) {
-      if (this.canvas.isConnected)
+      if (this.canvas.dataset.officeLayer === "world")
         window.__officePaint.texts.push({
           text: value,
           x,
@@ -108,7 +109,11 @@ test.beforeEach(async ({ page }) => {
       height,
       radii,
     ) {
-      if (this.canvas.isConnected && width === 24 && height === 24) {
+      if (
+        this.canvas.dataset.officeLayer === "world" &&
+        width === 24 &&
+        height === 24
+      ) {
         const badge = {
           x,
           y,
@@ -141,7 +146,7 @@ test.beforeEach(async ({ page }) => {
       counterclockwise,
     ) {
       if (
-        this.canvas.isConnected &&
+        this.canvas.dataset.officeLayer === "world" &&
         this.fillStyle === "#78dfc1" &&
         radius < 3
       ) {
@@ -161,12 +166,14 @@ test.beforeEach(async ({ page }) => {
 
 function fixture(tier: number) {
   // Synthetic rendering fixture, not economic progression/playtest evidence.
-  const s = createGame({
+  let s = createGame({
     name: "OFFICE DISPLAY QA",
     strategy: "outsourcing",
     difficulty: "standard",
     seed: 42,
   });
+  // Rendering probes require office hours; advance through the public clock.
+  s = transition(s, { type: "advanceTime", steps: 36 }).state;
   s.officeTier = tier === 1 ? 1 : 2;
   const initial = s.employees[0];
   s.employees = Array.from({ length: tier === 1 ? 5 : 12 }, (_, i) => ({
@@ -670,6 +677,12 @@ test("Working has two unequal counter-rotating gears during Pause, without repai
         after = canvas
           .getContext("2d")!
           .getImageData(0, 0, canvas.width, canvas.height).data;
+      const tiles = JSON.parse(canvas.dataset.monitors!).tiles as {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+      }[];
       let changedInside = 0,
         changedOutside = 0;
       for (let i = 0; i < before.length; i += 4) {
@@ -682,6 +695,14 @@ test("Working has two unequal counter-rotating gears during Pause, without repai
           continue;
         const x = (i / 4) % canvas.width,
           y = Math.floor(i / 4 / canvas.width);
+        // Approved terminal/code animation also changes pixels during Pause.
+        if (
+          tiles.some(
+            (t) =>
+              x >= t.x && x < t.x + t.width && y >= t.y && y < t.y + t.height,
+          )
+        )
+          continue;
         if (
           centers.some(
             (c) => Math.abs(x - c.x) <= 25 && Math.abs(y - c.y) <= 25,

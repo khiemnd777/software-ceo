@@ -1,12 +1,16 @@
 import type { State, Command, Transition } from "./types";
 import { copy } from "../content/catalog";
-import { need, RuleError, clamp, log, mean, week } from "./helpers";
+import { need, RuleError, log, mean } from "./helpers";
 import {
   monthlyCosts,
   monthlyExpenses,
   collectDue,
   checkInsolvency,
 } from "./finance";
+import { advanceHealth } from "./health";
+import { accrueQuarter } from "./accrual";
+import { employeeActivity } from "./workStatus";
+import { phaseAt, STEP_MINUTES, STEPS_PER_DAY } from "./clock";
 import { runWork } from "./work";
 import { eventsDay } from "./events";
 import { refreshCandidates } from "./create";
@@ -19,13 +23,6 @@ export function weekly(s: State) {
   s.actions = 3 - s.borrowedActions;
   s.borrowedActions = 0;
   for (const e of s.employees) {
-    e.energy = clamp(
-      e.energy +
-        (s.overtime
-          ? -(e.traits.includes("driven") ? 15 : 12)
-          : 10 + (e.traits.includes("steady") ? 2 : 0)),
-    );
-    e.morale = clamp(e.morale + (s.overtime ? -4 : e.energy < 25 ? -2 : 0.5));
     if (e.morale < 35 && e.retentionSince === null) {
       e.retentionSince = s.day;
       log(
@@ -59,7 +56,7 @@ export function weekly(s: State) {
     s.employees = s.employees.filter((x) => x.id !== e.id);
   }
   s.weeks.push({
-    week: week(s) - 1,
+    week: Math.ceil(s.day / 7),
     cashDelta: s.cash - s.metrics.weekCash,
     work: s.metrics.workWeek,
     morale: mean(s.employees.map((e) => e.morale)),
@@ -73,13 +70,8 @@ export function weekly(s: State) {
   s.metrics.workWeek = 0;
   if (s.day % 28 === 0) refreshCandidates(s);
 }
-export function daily(s: State) {
+function closeDay(s: State) {
   if (s.status !== "playing") return;
-  s.day++;
-  collectDue(s);
-  eventsDay(s);
-  productDay(s);
-  runWork(s);
   contractsDay(s);
   experimentsDay(s);
   if (s.day % 7 === 0) weekly(s);
@@ -138,9 +130,57 @@ export function daily(s: State) {
   checkInsolvency(s);
   progressionDay(s);
 }
+function advanceSteps(s: State, requested: number) {
+  let steps = 0,
+    critical = false;
+  while (steps < requested && s.status === "playing") {
+    const crises = s.metrics.crises;
+    if (!s.clock.opened) {
+      s.clock.opened = true;
+      s.workDay = { day: s.day, budgets: {} };
+      collectDue(s);
+      eventsDay(s);
+      productDay(s);
+      if (
+        s.events.some((e) => !e.resolved && e.due === s.day) ||
+        s.metrics.crises > crises ||
+        s.status !== "playing"
+      ) {
+        critical = true;
+        break;
+      }
+    }
+    const working = new Set(
+      s.employees
+        .filter((e) => employeeActivity(s, e).working)
+        .map((e) => e.id),
+    );
+    const phase = phaseAt(s.clock.minute);
+    if (working.size) runWork(s, (phase === "overtime" ? 0.8 : 1) / 224);
+    advanceHealth(s, working);
+    accrueQuarter(s, working);
+    s.clock.minute += STEP_MINUTES;
+    steps++;
+    if (s.clock.minute >= 1440) {
+      closeDay(s);
+      s.clock.lastClosedDay = s.day;
+      s.day++;
+      s.clock.minute = 0;
+      s.clock.opened = false;
+      s.workDay = { day: s.day, budgets: {} };
+    }
+    if (s.status !== "playing" || s.metrics.crises > crises) {
+      critical = true;
+      break;
+    }
+  }
+  return { steps, critical };
+}
 export function transition(input: State, c: Command): Transition {
   const s = structuredClone(input);
   try {
+    let steps: number | undefined;
+    let clockCritical = false;
     need(
       s.status === "playing" ||
         c.type === "continueSandbox" ||
@@ -148,14 +188,27 @@ export function transition(input: State, c: Command): Transition {
       "Phiên chơi đang ở màn hình tổng kết.",
       "This game is at its outcome review.",
     );
-    if (c.type === "tick") {
-      const days = c.days ?? 1;
+    if (c.type === "tick" || c.type === "advanceTime") {
+      const requested =
+        c.type === "tick" ? (c.days ?? 1) * STEPS_PER_DAY : c.steps;
       need(
-        Number.isInteger(days) && days > 0 && days <= 360,
-        "Số ngày không hợp lệ.",
-        "Invalid day count.",
+        Number.isInteger(requested) &&
+          requested > 0 &&
+          requested <= 360 * STEPS_PER_DAY &&
+          (c.type !== "tick" || Number.isInteger(c.days ?? 1)),
+        "Bước thời gian không hợp lệ.",
+        "Invalid time step count.",
       );
-      for (let i = 0; i < days && s.status === "playing"; i++) daily(s);
+      const result = advanceSteps(s, requested);
+      steps = result.steps;
+      clockCritical = result.critical;
+    } else if (c.type === "officeLights") {
+      need(
+        typeof c.enabled === "boolean",
+        "Trạng thái đèn không hợp lệ.",
+        "Invalid light state.",
+      );
+      s.scene.officeLightsOn = c.enabled;
     } else if (
       !sharedCommand(s, c) &&
       !contractCommand(s, c) &&
@@ -165,12 +218,18 @@ export function transition(input: State, c: Command): Transition {
     )
       unknownCommand();
     const critical =
+      clockCritical ||
       s.status !== input.status ||
       s.events.some(
         (e) => !e.resolved && e.due === s.day && s.day > input.day,
       ) ||
       s.metrics.crises > input.metrics.crises;
-    return { state: s, ok: true, critical };
+    return {
+      state: s,
+      ok: true,
+      critical,
+      ...(steps === undefined ? {} : { steps }),
+    };
   } catch (e) {
     if (e instanceof RuleError)
       return { state: input, ok: false, error: e.copy, critical: false };

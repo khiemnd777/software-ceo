@@ -232,6 +232,14 @@ export function ContractDetail(p: PanelProps & { contractId: string }) {
                 ? l("⚠ Có nguy cơ trễ hạn.", "⚠ Delivery is at risk.")
                 : ""}
             </p>
+            {forecast.maxFinishDay !== null && (
+              <p>
+                {l(
+                  `Ngày dự kiến: ${forecast.minFinishDay}–${forecast.maxFinishDay}, tính cả thời gian làm còn lại hôm nay.`,
+                  `Expected day: ${forecast.minFinishDay}–${forecast.maxFinishDay}, including today's remaining working time.`,
+                )}
+              </p>
+            )}
             <p>
               {l("Cần thêm kiểm thử", "Testing still needed")}:{" "}
               {forecast.qaNeeded.toFixed(1)} WP ·{" "}

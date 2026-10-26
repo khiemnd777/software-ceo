@@ -92,9 +92,11 @@ export function progressionCommand(s: State, c: Command): boolean {
     return true;
   }
   if (c.type === "strategy") {
-    const quarter = Math.floor(s.day / 90);
+    const quarter = Math.floor(s.clock.lastClosedDay / 90);
     need(
-      quarter >= 1 && s.day % 90 < 7 && s.reviewedQuarter < quarter,
+      quarter >= 1 &&
+        s.clock.lastClosedDay % 90 < 7 &&
+        s.reviewedQuarter < quarter,
       "Chỉ đổi trọng tâm trong 7 ngày đầu kỳ quý, một lần mỗi quý.",
       "Change focus during the first 7 days of a new quarter, once per quarter.",
     );

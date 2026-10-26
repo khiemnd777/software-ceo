@@ -1,3 +1,5 @@
+import { mkdirSync as ensureEvidenceDir } from "node:fs";
+import { join as evidencePath } from "node:path";
 import { writeFileSync, readFileSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { createGame } from "../src/simulation/create";
@@ -13,6 +15,9 @@ import type {
   Difficulty,
 } from "../src/simulation/types";
 
+const evidenceDir = process.env.CEO_EVIDENCE_DIR ?? "evidence";
+ensureEvidenceDir(evidenceDir, { recursive: true });
+const output = (name: string) => evidencePath(evidenceDir, name);
 const sourceFiles = ["src/simulation", "src/gameplay", "src/content"].flatMap(
   (dir) =>
     readdirSync(dir)
@@ -43,6 +48,7 @@ const rows: {
   };
   delivery: Delivery | null;
   day: number;
+  activeDay: number;
   status: State["status"];
   cash: number;
   expense: number;
@@ -96,7 +102,7 @@ for (const difficulty of ["friendly", "standard", "tough"] as const)
         qa: number;
         cash: number;
       } = null;
-      while (s.day < 180 && s.status === "playing") {
+      while (s.clock.lastClosedDay < 180 && s.status === "playing") {
         for (const event of s.events.filter(
           (e) => !e.resolved && e.due <= s.day && e.expires > s.day,
         )) {
@@ -177,7 +183,8 @@ for (const difficulty of ["friendly", "standard", "tough"] as const)
         policy,
         initial,
         delivery,
-        day: s.day,
+        day: s.clock.lastClosedDay,
+        activeDay: s.day,
         status: s.status,
         cash: s.cash / 100,
         expense: s.ledger.reduce((n, e) => n + e.expense, 0) / 100,
@@ -248,7 +255,7 @@ const groups = ["friendly", "standard", "tough"].flatMap((difficulty) =>
   }),
 );
 writeFileSync(
-  "evidence/local-policy-matched.json",
+  output("local-policy-matched.json"),
   JSON.stringify(
     {
       createdAt: new Date().toISOString(),

@@ -11,7 +11,7 @@ test("manual slots, real JSON export/import, reload and corrupt import recovery"
   await page.getByLabel("Tên công ty").fill("Save QA Studio");
   await page.getByRole("button", { name: "Mở cửa công ty" }).click();
   for (let i = 0; i < 7; i++)
-    await page.getByRole("button", { name: "Ngày tiếp" }).click();
+    await page.getByRole("button", { name: "Qua ngày" }).click();
   await page.getByRole("button", { name: "Lưu và tải", exact: true }).click();
   const rows = page.locator(".save-slot");
   await rows.nth(0).getByRole("button", { name: "Lưu", exact: true }).click();
@@ -25,7 +25,8 @@ test("manual slots, real JSON export/import, reload and corrupt import recovery"
   const exportPath = testInfo.outputPath("save.json");
   await download.saveAs(exportPath);
   const data = JSON.parse(await readFile(exportPath, "utf8"));
-  expect(data.state.day).toBe(7);
+  expect(data.state.day).toBe(8);
+  expect(data.state.clock.lastClosedDay).toBe(7);
   expect(data.checksum.length).toBe(64);
   await page.getByRole("button", { name: "Đóng cửa sổ lưu" }).click();
   await page.reload();
@@ -33,8 +34,8 @@ test("manual slots, real JSON export/import, reload and corrupt import recovery"
   await expect(page.locator(".scene-toolbar strong")).toContainText(
     "Save QA Studio",
   );
-  await expect(page.locator(".date")).toContainText("7");
-  await page.getByRole("button", { name: "Ngày tiếp" }).click();
+  await expect(page.locator(".date")).toContainText("8");
+  await page.getByRole("button", { name: "Qua ngày" }).click();
   await page.getByRole("button", { name: "Lưu và tải", exact: true }).click();
   await page.locator("input[type=file]").setInputFiles({
     name: "broken.json",
@@ -42,10 +43,10 @@ test("manual slots, real JSON export/import, reload and corrupt import recovery"
     buffer: Buffer.from("{bad"),
   });
   await expect(page.getByRole("status")).toContainText("bị hỏng");
-  await expect(page.locator(".date")).toContainText("8");
+  await expect(page.locator(".date")).toContainText("9");
   await page.locator("input[type=file]").setInputFiles(exportPath);
   await expect(page.getByRole("status")).toContainText("Đã phục hồi");
-  await expect(page.locator(".date")).toContainText("7");
+  await expect(page.locator(".date")).toContainText("8");
   await page.screenshot({
     path: "evidence/simulate-runtime/browser/W4-save-manager.png",
     fullPage: true,

@@ -25,8 +25,8 @@ for (const strategy of ["outsourcing", "product", "startup"])
       .getByRole("button", { name: "Tiếp tục Sandbox", exact: true })
       .click();
     await expect(page.locator(".outcome")).toHaveCount(0);
-    await page.getByRole("button", { name: "Ngày tiếp" }).click();
-    await expect(page.locator(".date")).toContainText("1081");
+    await page.getByRole("button", { name: "Qua ngày" }).click();
+    await expect(page.locator(".date")).toContainText("1082");
   });
 test("insolvency explains payroll failure and permits history review and a new company", async ({
   page,

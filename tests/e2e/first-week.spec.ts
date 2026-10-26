@@ -32,8 +32,8 @@ test("a CEO signs, assigns, chooses a policy and plays the first week", async ({
     .getByRole("button")
     .click();
   for (let i = 0; i < 7; i++)
-    await page.getByRole("button", { name: "Ngày tiếp", exact: false }).click();
-  await expect(page.locator(".date")).toContainText("7");
+    await page.getByRole("button", { name: "Qua ngày", exact: false }).click();
+  await expect(page.locator(".date")).toContainText("8");
   await openOffice(page, "Văn phòng");
   await page.waitForTimeout(500);
   await page.screenshot({
@@ -73,7 +73,7 @@ test("outsourcing reaches acceptance, invoice and cleared cash through real UI",
     .click();
   await page.getByRole("button", { name: "Xác nhận", exact: true }).click();
   await assignWork(page, undefined, ["develop", "qa"]);
-  const next = page.getByRole("button", { name: "Ngày tiếp", exact: false });
+  const next = page.getByRole("button", { name: "Qua ngày", exact: false });
   const final = page.getByRole("button", {
     name: "Nghiệm thu cuối kỳ",
     exact: true,
@@ -129,10 +129,10 @@ test("Product and Startup expose their own playable management loops", async ({
     .click();
   await assignWork(page, "Đồng bộ tồn kho", ["develop", "qa"]);
   for (let i = 0; i < 25; i++)
-    await page.getByRole("button", { name: "Ngày tiếp" }).click();
+    await page.getByRole("button", { name: "Qua ngày" }).click();
   await assignWork(page, "Đồng bộ tồn kho", ["fix"]);
   for (let i = 0; i < 10; i++)
-    await page.getByRole("button", { name: "Ngày tiếp" }).click();
+    await page.getByRole("button", { name: "Qua ngày" }).click();
   await workOverview(page);
   await expect(
     page.getByRole("heading", { name: "Lộ trình tính năng", exact: true }),
@@ -170,7 +170,7 @@ test("Product and Startup expose their own playable management loops", async ({
   await openOffice(page, "Công việc");
   await assignWork(page, "Phỏng vấn khách hàng", ["research", "research"]);
   for (let i = 0; i < 14; i++)
-    await page.getByRole("button", { name: "Ngày tiếp" }).click();
+    await page.getByRole("button", { name: "Qua ngày" }).click();
   if (await page.locator(".work-inspector[open]").count())
     await page.keyboard.press("Escape");
   await openOffice(page, "Thị trường");

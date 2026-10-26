@@ -1,3 +1,5 @@
+import { operationsRate } from "./accrual";
+import { runnable } from "./workStatus";
 import type { State, Entry, Copy, Liability } from "./types";
 import { copy } from "../content/catalog";
 import { uid, need, log, mean } from "./helpers";
@@ -65,13 +67,15 @@ export function spend(
 export const salaryTotal = (s: State) =>
   s.employees.reduce((sum, e) => sum + e.salary, 0);
 export const monthlyCosts = (s: State) =>
-  Math.round(salaryTotal(s) * (s.overtime ? 1.2 : 1)) +
-  (s.officeTier === 2 ? 380000 : 200000) +
-  (s.strategy === "startup" ? 100000 : 0) +
-  s.product.marketing +
-  (s.product.launched
-    ? Math.round((s.product.paid + s.product.free * 0.08) * 50)
-    : 0);
+  salaryTotal(s) +
+  Math.round(
+    s.overtime
+      ? s.employees
+          .filter((e) => e.assignments.some((a) => runnable(s, a)))
+          .reduce((n, e) => n + e.salary, 0) * 0.2
+      : 0,
+  ) +
+  operationsRate(s);
 export const balance = (s: State) =>
   s.ledger.reduce(
     (a, e) => ({
@@ -166,20 +170,26 @@ export function settleLiabilities(s: State) {
   s.liabilities = s.liabilities.filter((l) => l.amount > 0);
 }
 export function monthlyExpenses(s: State) {
+  const legacy = s.accrual.legacyThroughDay !== null;
+  const payroll = legacy
+    ? Math.round(salaryTotal(s) * (s.overtime ? 1.2 : 1))
+    : s.accrual.payroll;
+  const ops = legacy ? operationsRate(s) : s.accrual.operations;
   accrue(
     s,
-    Math.round(salaryTotal(s) * (s.overtime ? 1.2 : 1)),
+    payroll,
     copy("Lương tháng và tăng ca", "Monthly payroll and overtime"),
     "payroll",
   );
-  const ops =
-    monthlyCosts(s) - Math.round(salaryTotal(s) * (s.overtime ? 1.2 : 1));
   accrue(
     s,
     ops,
     copy("Văn phòng, hạ tầng và marketing", "Office, hosting and marketing"),
     "operations",
   );
+  s.accrual.payroll = 0;
+  s.accrual.operations = 0;
+  s.accrual.legacyThroughDay = null;
   const loan = s.liabilities
     .filter((x) => x.kind === "loan")
     .reduce((a, x) => a + x.amount, 0);

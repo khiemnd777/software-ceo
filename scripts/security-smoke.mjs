@@ -10,7 +10,7 @@ for(const strategy of ['outsourcing','product','startup']){
  await page.waitForTimeout(1500);await expect(page.locator('.canvas-error')).toHaveCount(0);
  const canvas=await page.locator('canvas').evaluate(c=>({width:c.width,height:c.height,cssWidth:c.getBoundingClientRect().width,cssHeight:c.getBoundingClientRect().height,dpr:devicePixelRatio}));expect(Math.abs(canvas.width/canvas.cssWidth-Math.min(canvas.dpr,2))).toBeLessThan(.01);
  await page.getByRole('button',{name:'Cài đặt',exact:true}).click();await page.getByLabel('Nhạc nền').check();await page.getByRole('button',{name:'Đóng',exact:true}).click();
- for(let i=0;i<7;i++)await page.getByRole('button',{name:'Ngày tiếp'}).click();await page.getByRole('button',{name:'Lưu và tải',exact:true}).click();await page.locator('.save-slot').first().getByRole('button',{name:'Lưu',exact:true}).click();await expect(page.getByRole('status')).toContainText('Đã lưu');
+ for(let i=0;i<7;i++)await page.getByRole('button',{name:'Qua ngày'}).click();await page.getByRole('button',{name:'Lưu và tải',exact:true}).click();await page.locator('.save-slot').first().getByRole('button',{name:'Lưu',exact:true}).click();await expect(page.getByRole('status')).toContainText('Đã lưu');
  const violations=await page.evaluate(()=>window.__csp);expect(violations).toEqual([]);expect(errors).toEqual([]);expect(network.filter(u=>!u.startsWith('http://127.0.0.1:4174/'))).toEqual([]);
  results.push({strategy,headers,canvas,violations,errors,externalRequests:[],nameEscaped:true,saveWorked:true});await context.close();
 }

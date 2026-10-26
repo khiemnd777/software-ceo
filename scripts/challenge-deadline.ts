@@ -49,7 +49,7 @@ for (const policy of ["quality", "balanced", "fast"] as Policy[]) {
     candidateId: s.candidates.find((c) => c.role === "developer")!.id,
   });
   if (policy !== "balanced") send({ type: "policy", policy });
-  while (s.day < 180 && s.status === "playing") {
+  while (s.clock.lastClosedDay < 180 && s.status === "playing") {
     for (const e of s.events.filter(
       (e) => !e.resolved && e.due <= s.day && e.expires > s.day,
     )) {
@@ -136,7 +136,8 @@ for (const policy of ["quality", "balanced", "fast"] as Policy[]) {
   const row = {
     seed: 42,
     policy,
-    day: s.day,
+    day: s.clock.lastClosedDay,
+    activeDay: s.day,
     won: s.campaignWon,
     contracts: s.metrics.completedContracts,
     onTime: campaignEvaluation(s).onTime,

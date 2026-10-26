@@ -10,7 +10,7 @@ Soak/stress/standalone selectors đã theo UI mới, nhưng các suite này **NO
 
 `npm ci` uses the committed lockfile. `npm run verify` runs TypeScript, ESLint, all Vitest tests and the Vite production build. `npm run test:simulation` runs the pure domain suites independently of a browser. `npm run test:content` validates catalog counts, IDs, localized copy, costs, references and initial scenarios. `python3 scripts/check-assets.py` validates the actual shipped atlas frames and GLB source references; install Pillow from requirements-art.txt if absent.
 
-The 900-run command is `npm run test:balance`. It overwrites evidence/balance-900.json and .csv with seed-level results, group aggregates, a source digest and an explicit methodology. It is a headless simulation test, not a browser benchmark or beginner playtest. T0.2 is retained as historical evidence; T0.3 is the current balance version.
+The 900-run command is `npm run test:balance`. It overwrites evidence/balance-900.json and .csv with seed-level results, group aggregates, a source digest and an explicit methodology. It is a headless simulation test, not a browser benchmark or beginner playtest. T0.2 is retained as historical evidence; T0.4 is the current balance version; T0.3 is retained for comparison.
 
 ## Dev dependency scan — checkpoint 008
 
@@ -88,3 +88,11 @@ Only actual outputs are marked PASS. Scripts existing on disk do not constitute 
 Phiên bản automation đã cài theo Playwright 1.56.1: Firefox 142.0.1 (v1495), WebKit 26.0 (v2215). Không suy ra đã kiểm app Firefox cá nhân hoặc mọi phiên bản mới hơn. Chrome/Edge channel dùng app đã cài trên máy; xem version trong local-browser-matrix.json.
 
 Python hệ thống trên host này chưa có Pillow. Art QA đã chạy bằng `/Users/khiemnguyen/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/check-assets.py`; không cài Python dependency global. Kiểm tra này chỉ đọc art và ghi evidence.
+
+## T0.4 /24h — chạy evidence riêng
+
+Các suite balance/profile/soak nhận CEO_EVIDENCE_DIR; Playwright nhận CEO_E2E_RESULTS và CEO_TEST_OUTPUT. Dùng thư mục mới để giữ lịch sử. Node --import tsx scripts/balance.ts tương đương npm test:balance khi sandbox không cho tsx mở IPC pipe. Không tắt sandbox browser.
+
+Lượt tích hợp2026-10-26 dùng production127.0.0.1:4194 (originQAriêng), Edge. Profile nhận CEO_PROFILE_FIXTURE/CEO_PROFILE_DPR; soak nhận CEO_SOAK_FIXTURE và giữdist. Các fixture 12 nhân viên/mưa gió được tạo bằng publiccommands, trace riêng. scripts/intraday-memory.mjs là chẩn đoán sau soak, tách khỏiFPS; CEO_MEMORY_CONTROL=1 chuyển targetPlaywright sangCanvas để kiểm retainedpanel.
+
+Kết quả: docs/TIME_24H_INTEGRATION_REPORT.md và evidence/time-24h/integration-2026-10-26/receipt.json. Giữ các lượtFAILbanđầu/launchblocked; không cộngrerun thànhseed/testđộc lập. Runtime Firefox/WebKit trong tmp đã thiếu file ởphiênnày, khác bằngchứng2026-10-21. Nativehidden chưa xác minh vìprobe trảhidden=false.

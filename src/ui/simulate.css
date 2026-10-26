@@ -1185,3 +1185,59 @@ kbd {
 .unified-root .person-intro > div:last-child {
   min-width: 0;
 }
+
+/* Physical wall hardware; keyboard target remains transparent. */
+button.wall-light-switch,
+button.wall-light-switch[aria-pressed] {
+  position: absolute;
+  z-index: 4;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+button.wall-light-switch:hover {
+  background: transparent;
+}
+button.wall-light-switch:focus-visible {
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+}
+.wall-switch-focus {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 2px;
+}
+button.wall-light-switch:focus-visible .wall-switch-focus {
+  outline: 1px solid #ffe6a2;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 1px #183d3a;
+}
+
+.office-time-status {
+  position: absolute;
+  left: 20px;
+  top: 62px;
+  height: max-content;
+  z-index: 2;
+  background: #193039e8;
+  color: #e4efef;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+.game-clock {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  color: #fff1bd;
+  margin-inline-start: 8px;
+}
+.time-controls {
+  flex-wrap: wrap;
+  max-width: calc(100% - 28px);
+}

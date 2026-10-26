@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Kiểm bố cục · Thời gian 24h</title>
+    <style>
+      body {
+        margin: 16px;
+        font: 14px/1.5 system-ui;
+        background: #10171e;
+        color: #edf3f8;
+      }
+      label {
+        margin-right: 20px;
+      }
+      select {
+        padding: 8px;
+      }
+      pre {
+        white-space: pre-wrap;
+      }
+      #stage {
+        width: 100%;
+        height: 670px;
+        overflow: auto;
+      }
+      iframe {
+        border: 1px solid #718b85;
+        transform-origin: top left;
+      }
+    </style>
+    <script src="viewport.js" defer></script>
+  </head>
+  <body>
+    <h1>Kiểm bố cục trong viewport thật của iframe</h1>
+    <label
+      >Kích thước
+      <select id="size" aria-label="Kích thước kiểm tra">
+        <option value="1280,720">1280 × 720</option>
+        <option value="1920,1080">1920 × 1080</option>
+      </select></label
+    >
+    <label
+      >Cỡ UI
+      <select id="scale" aria-label="Cỡ UI kiểm tra">
+        <option value="100">100%</option>
+        <option value="150">150%</option>
+      </select></label
+    >
+    <pre id="report" role="status">Đang đo…</pre>
+    <label
+      >Ánh sáng
+      <select id="lighting-time" aria-label="Mốc ánh sáng kiểm tra">
+        <option value="540">09:00</option>
+        <option value="420">07:00 · Nắng sớm</option>
+        <option value="1425">23:45 · Trăng</option>
+        <option value="285">04:45 · trước bình minh</option>
+        <option value="360">06:00 · bình minh</option>
+        <option value="1005">16:45 · trước hoàng hôn</option>
+        <option value="1110">18:30 · hoàng hôn</option>
+        <option value="1410">23:30 · trước nửa đêm</option>
+        <option value="720">12:00 · Nghỉ trưa</option>
+        <option value="1080">18:00</option>
+        <option value="1200">20:00</option>
+        <option value="0">00:00</option>
+      </select></label
+    >
+    <button id="zoom-in">Phóng cảnh kiểm tra</button>
+    <button id="pan">Dịch cảnh kiểm tra</button>
+    <button id="fit">Căn giữa cảnh kiểm tra</button>
+    <label
+      >Thời tiết
+      <select id="weather" aria-label="Thời tiết kiểm tra">
+        <option value="sunny">Nắng</option>
+        <option value="cloudy">Nhiều mây</option>
+        <option value="rain">Mưa</option>
+        <option value="wind">Gió</option>
+        <option value="rain-wind">Mưa gió</option>
+      </select></label
+    >
+    <button id="play-weather">Chạy / Dừng cảnh kiểm tra</button>
+    <button id="reduce-weather">Đổi giảm hiệu ứng kiểm tra</button>
+    <button id="lights-a">Bật/tắt đèn A</button>
+    <button id="lights-b">Bật/tắt đèn B</button>
+    <button id="show-office">Xem cảnh văn phòng kiểm tra</button>
+    <button id="profile-weather">Đo nhịp khung 10 giây</button>
+    <pre id="frames">Chưa đo nhịp khung.</pre>
+    <pre id="pixels">Đang đọc pixel…</pre>
+    <label
+      >Tốc độ kiểm tra
+      <select id="motion-speed" aria-label="Tốc độ kiểm tra">
+        <option value="1">1×</option>
+        <option value="2">2×</option>
+        <option value="4">4×</option>
+      </select></label
+    >
+    <button id="motion-record">Ghi chuyển động 6 giây</button>
+    <pre id="motion-report">Chưa ghi chuyển động.</pre>
+    <div id="stage"><iframe title="Mô phỏng được kiểm bố cục"></iframe></div>
+  </body>
+</html>

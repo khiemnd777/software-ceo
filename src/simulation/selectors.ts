@@ -26,23 +26,34 @@ export function deliveryForecast(s: State, c: Contract) {
     high = w.discovered ? w.actual : w.estimated * 1.3;
   const time = (scope: number) => {
     const d = Math.max(0, scope - w.done),
-      q = Math.max(0, scope * 0.12 - w.qa);
+      q = Math.max(0, Math.max(1, scope * 0.12) - w.qa);
     if ((d && !dev) || (q && !qa) || (knownFix && !fix)) return null;
-    return Math.ceil(
-      Math.max(
-        dev ? (d / dev) * 7 : 0,
-        qa ? (q / qa) * 7 : 0,
-        fix ? (knownFix / fix) * 7 : 0,
-      ),
+    return Math.max(
+      dev ? (d / dev) * 7 : 0,
+      qa ? (q / qa) * 7 : 0,
+      fix ? (knownFix / fix) * 7 : 0,
     );
   };
-  const minDays = time(low),
-    maxDays = time(high),
+  const remainingMinutes =
+    Math.max(0, 720 - Math.max(540, s.clock.minute)) +
+    Math.max(0, 1080 - Math.max(780, s.clock.minute)) +
+    (s.overtime ? 0.8 * Math.max(0, 1200 - Math.max(1080, s.clock.minute)) : 0);
+  const todayFraction = remainingMinutes / (480 + (s.overtime ? 96 : 0));
+  const finishOffset = (days: number | null) =>
+    days === null ? null : Math.ceil(Math.max(0, days - todayFraction));
+  const minWorkDays = time(low),
+    maxWorkDays = time(high);
+  const minDays = minWorkDays === null ? null : Math.ceil(minWorkDays),
+    maxDays = maxWorkDays === null ? null : Math.ceil(maxWorkDays),
     remaining = Math.max(0, high - w.done);
   const active = s.contracts.filter((c) => c.stage === "signed").length || 1;
   const dailyCost = contributors.length
     ? contributors.reduce(
-        (n, e) => n + e.salary / 30 / e.assignments.length,
+        (n, e) =>
+          n +
+          ((e.salary / 30) *
+            e.assignments.filter((a) => a.target === w.id).length) /
+            e.assignments.length,
         0,
       ) +
       (monthlyCosts(s) - s.employees.reduce((n, e) => n + e.salary, 0)) /
@@ -50,15 +61,18 @@ export function deliveryForecast(s: State, c: Contract) {
         active
     : monthlyCosts(s) / 30;
   const cost =
-    maxDays === null ? null : Math.round(w.labor + maxDays * dailyCost);
+    maxDays === null ? null : Math.round(w.labor + maxWorkDays! * dailyCost);
   return {
     minDays,
     maxDays,
     remaining,
     knownFix,
-    qaNeeded: Math.max(0, high * 0.12 - w.qa),
+    qaNeeded: Math.max(0, Math.max(1, high * 0.12) - w.qa),
     cost,
     margin: cost === null ? null : (c.price - cost) / c.price,
-    late: maxDays !== null && s.day + maxDays > c.deadline,
+    late: maxDays !== null && s.day + finishOffset(maxWorkDays)! > c.deadline,
+    remainingShiftHours: remainingMinutes / 60,
+    minFinishDay: minDays === null ? null : s.day + finishOffset(minWorkDays)!,
+    maxFinishDay: maxDays === null ? null : s.day + finishOffset(maxWorkDays)!,
   };
 }

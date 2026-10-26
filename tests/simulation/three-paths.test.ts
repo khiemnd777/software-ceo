@@ -1,3 +1,4 @@
+import { advanceFixtureDays } from "../helpers/advance";
 import { describe, it, expect } from "vitest";
 import { createGame } from "../../src/simulation/create";
 import { transition } from "../../src/simulation/engine";
@@ -14,6 +15,7 @@ const newGame = (strategy: "product" | "startup" | "outsourcing") =>
     seed: 83,
   });
 const run = (s: State, c: Command) => {
+  if (c.type === "tick") return advanceFixtureDays(s, c.days ?? 1);
   const r = transition(s, c);
   expect(r.error, JSON.stringify(c)).toBeUndefined();
   expect(r.ok).toBe(true);
@@ -158,12 +160,13 @@ describe("Product and Startup", () => {
         capital: 100000000,
       });
       for (let i = 0; i < 3; i++) s = run(s, { type: "tick", days: 360 });
-      expect(s.day).toBe(1080);
+      expect(s.clock.lastClosedDay).toBe(1080);
+      expect(s.day).toBe(1081);
       expect(s.status).toBe("review");
       expect(typeof campaignEvaluation(s).success).toBe("boolean");
       s = run(s, { type: "continueSandbox" });
       s = run(s, { type: "tick" });
-      expect(s.day).toBe(1081);
+      expect(s.clock.lastClosedDay).toBe(1081);
       expect(s.mode).toBe("sandbox");
     },
   );

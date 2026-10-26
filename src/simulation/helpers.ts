@@ -3,8 +3,8 @@ import { copy } from "../content/catalog";
 export const clamp = (v: number, lo = 0, hi = 100) =>
   Math.max(lo, Math.min(hi, v));
 export const round = (v: number) => Math.round(v * 1000) / 1000;
-export const month = (s: State) => Math.floor(s.day / 30);
-export const week = (s: State) => Math.floor(s.day / 7) + 1;
+export const month = (s: State) => Math.floor((s.day - 1) / 30);
+export const week = (s: State) => Math.floor((s.day - 1) / 7) + 1;
 export function rng(s: State): number {
   let t = (s.rng += 0x6d2b79f5);
   s.rng >>>= 0;

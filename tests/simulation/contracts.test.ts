@@ -1,9 +1,11 @@
+import { advanceFixtureDays } from "../helpers/advance";
 import { describe, it, expect } from "vitest";
 import { createGame } from "../../src/simulation/create";
 import { transition } from "../../src/simulation/engine";
 import { balance } from "../../src/simulation/finance";
 import type { Command, State, Policy } from "../../src/simulation/types";
 function command(s: State, c: Command) {
+  if (c.type === "tick") return advanceFixtureDays(s, c.days ?? 1);
   const r = transition(s, c);
   expect(r.error, JSON.stringify(c)).toBeUndefined();
   return r.state;

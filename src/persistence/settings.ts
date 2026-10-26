@@ -1,6 +1,7 @@
 import type { Locale } from "../simulation/types";
 export interface Settings {
   locale: Locale;
+  daySeconds: 24 | 60 | 120;
   scale: number;
   reducedMotion: boolean;
   music: boolean;
@@ -9,6 +10,7 @@ export interface Settings {
 }
 const defaults: Settings = {
   locale: "vi",
+  daySeconds: 60,
   scale: 100,
   reducedMotion:
     typeof matchMedia !== "undefined" &&
@@ -24,6 +26,9 @@ export function readSettings(): Settings {
     );
     if (!value || typeof value !== "object") return defaults;
     return {
+      daySeconds: [24, 60, 120].includes(value.daySeconds)
+        ? value.daySeconds
+        : 60,
       locale: value.locale === "en" ? "en" : "vi",
       scale: [100, 125, 150].includes(value.scale) ? value.scale : 100,
       reducedMotion:

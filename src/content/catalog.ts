@@ -1,7 +1,7 @@
 import type { Copy, Role, Segment, Policy } from "../simulation/types";
 export const copy = (vi: string, en: string): Copy => ({ vi, en });
 export const BALANCE = {
-  version: "T0.3",
+  version: "T0.4",
   daySeconds: 5,
   monthDays: 30,
   weekDays: 7,

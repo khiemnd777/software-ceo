@@ -1,5 +1,77 @@
 # Lịch sử checkpoint LOCAL
 
+## TIME-24H-INTEGRATION — 2026-10-26 — T0.4 / save v3, sẵn sàng review LOCAL
+
+Owner đã duyệt D1–D8 và G0–G8. Đã tích hợp lịch 24h theo bước 15 phút; ca 09–12, 13–18 và OT 18–20; work/health theo giờ; accrual và settlement tháng; save v3/migration/backup transaction. Office thật có thời tiết, đồng hồ, công tắc, màn hình đang làm và ánh sáng cửa sổ. Giữ V4, ghế/gears, phân công thủ công tối đa 2 slot, draft và Office mounted. Không đưa model A/B hoặc seek/rewind của mockup vào game.
+
+Verified: npm run verify PASS với 105 unit tests và 3 QA harness tests; typecheck/lint/build PASS. Production Edge E2E 46/46 PASS. Art 8 ngoại hình/1.152 khung; 301 file art/mockup/fixtures giữ SHA. Ba suite 900 + 1.200 market + 270 policy không có lỗi invariant hoặc command bị từ chối; policy đóng đủ ngày 180. Profile 12 nhân viên/mưa gió/DPR1–2 có 8 mẫu khoảng 60 FPS, p95 16,7–16,8 ms; axe 7 ngữ cảnh không báo vi phạm.
+
+Soak 30 phút 23,8 giây/30 mẫu PASS: build SHA giữ nguyên, 0 runtime errors, 1 document, 292 listeners; heap sau warm-up 7,64–8,19 MiB. Memory control xác nhận cây panel bị inspector giữ: 1.839→632 nodes khi đổi target sang Canvas. Không coi kết quả này là chứng nhận mọi loại leak hoặc GPU.
+
+OPEN: owner review; Outsourcing/Tough thắng 98→90/100 seed (8 thiếu khách quay lại, 2 margin<15%); human pacing 24/60/120, novice/campaign, screen reader, native Safari và native hidden-tab. Firefox/WebKit không launch được vì runtime trong thư mục tạm thiếu file. Không chỉnh tham số để xóa cờ balance.
+
+Báo cáo: docs/TIME_24H_INTEGRATION_REPORT.md và docs/ADR-002_INTRADAY_CLOCK.md. Receipt/logs/hashes/diff/ảnh: evidence/time-24h/integration-2026-10-26/. Preview http://127.0.0.1:4194/; tab fixture 12 nhân viên, 09:00/Pause/đèn OFF. Dùng origin riêng; không đổi save ở origin cũ. Giữ mockup 4204. Không Git write/push/upload/deploy hoặc tạo ZIP mới.
+
+Bước tiếp theo khuyến nghị: Khiêm review game LOCAL và cờ balance, chấp nhận hoặc nêu phần cần chỉnh. Thay đổi mới cần kế hoạch/Approve riêng; human playtest cần người tham gia, không thay bằng bot.
+
+## TIME-24H-INTEGRATION-PLAN-001 — 2026-10-26 — kế hoạch, CHƯA TÍCH HỢP
+
+Owner đã Approve toàn bộ mockup và yêu cầu lập kế hoạch tỉ mỉ trước integration; chưa cho triển khai. Đã source-review clock5giây/ngày, work/health theo ngày/tuần, monthly cost và savev2. Báo cáo: [TIME_24H_INTEGRATION_PLAN.md](TIME_24H_INTEGRATION_PLAN.md).
+
+Proposed D1–D8: giữ lịch09–12/13–18/OT18–20;60giây/ngày mặc định với24/60/120setting; giữ7ngày làm/tuần và neoT0.3 khi quy đổi56giờ/tuần, ghiT0.4; health theo giờ hiệu chỉnh; accrual thực và chốt tháng; savev3/backup/cầu nối một kỳ cũ; hình ảnh đã duyệt, weather không tiêu RNG nghiệp vụ. Chín gateG0–G8 có ranh giới, owning files, acceptance/replay/RNG/cents/migration/3playbook/visual/performance/soak.
+
+Verified hiện tại chỉ là source review và kiểm file bảo vệ không đổi. Không chạy verify/E2E/balance/profile của game mới vì chưa implementation. Không đổi source/game/mockup bundle/art/save/settings; không mở server mới hoặc Git/remote write. Gói D1–D8 và triển khai vẫn chờ owner duyệt. Bước tiếp theo: Khiêm đọc báo cáo, Approve gói đề xuất để bắt đầu integration LOCAL, hoặc chỉ định điểm cần chỉnh trước code.
+
+## TIME-24H-WINDOW-LIGHT — 2026-10-26 — ánh nắng/trăng LOCAL chờ review
+
+Owner đã review bản công tắc/màn hình và Approve riêng ánh sáng qua cửa sổ. Đã thêm windowLight.ts: vệt nắng ấm/trăng xanh bạc theo từng ô kính, có khoảng tối của thanh chia cửa; hướng/chiều dài/cường độ theo cùng cung thiên thể và weatherFrame với bầu trời. Góc thấp cho vệt dài, gần trưa ngắn; mây/mưa làm yếu ánh sáng. Công tắc không đổi nguồn sáng ngoài trời. Đây là ánh sáng 2D theo phong cách V4, chưa có mô hình thiên văn/chiếu sáng vật lý hoặc bóng đổ động của nội thất.
+
+Floor được cache riêng, vệt sáng clip vào sàn và vẽ dưới nội thất/nhân vật/tường; vẫn theo camera khi pan/zoom. Chỉ screen-blend vùng có ánh sáng, cache căn phòng theo độ tối thực và clock15 thay vì mọi phút. Ánh sáng theo raw visualTime liên tục, Pause giữ vị trí; Giảm hiệu ứng bỏ viền mềm, không thêm chuyển động độc lập với giờ. Giữ monitor emission, clock15, model/art/save/game. Có mốc xem nhanh07:00 và12:00.
+
+Verified: baseline20 → 23tests, build riêng30inputs, strict typecheck/lint/format PASS. Edge/CUA4bố cục1280/1920 ×UI100/150 không tràn/cắt controls; pan/zoom PASS. Pixel nắng07:00 AOFF: trời quang[221,215,200], nhiều mây[212,207,194], mưa gió[208,204,192]. Pixel trăng00:00 AOFF: quang[88,101,114], mưa gió[73,81,89]; pixel tủ che phía trước giữ[51,52,51]. Toggle đèn giữ sources/geometry. Bản cuối giữ đúng pixel trăng sau tối ưu. Console không warn/error.
+
+Hai bản ghi6s: bình minh756khung và qua00:00 721khung, hai phòng cùng nguồn sáng; ánh sáng đổi trong lúc HUD giữ mốc15phút. Giảm hiệu ứng+Pause6s/721khung giữ rawminute/nguồn sáng/paint count. Hai smoke10s với Canvas hiển thị, bitmap1512×960/canvas, tách đọc pixel: nắng1196mẫu/mean8,36ms/p959ms/max58,4ms; hoàng hôn+mưa gió1191mẫu/mean8,40ms/p959,2ms/max25ms; không gap>100ms. Các lượt đọc pixel đồng thời chậm được giữ làm diagnostic, không dùng để kết luận hiệu năng trang review. Đây là display-rAF trên một host, không chứng nhận GPU/fullgame/thiết bị khác.
+
+193snapshot model bằng bản trước;564file bảo vệ game/art/dist/clock/sky/switch/monitor giữSHA256. Evidence, before, logs, recordings, pixel, ảnh vàreceipt: `evidence/time-24h/window-light-2026-10-26/`. Fullgame verify/E2E/soak/balance/nativeSafariFirefox/hidden-tab mới/axe/human screen reader NOT_RUN. Owner visual acceptance OPEN. Không tích hợp game, push/upload/deploy.
+
+Review http://127.0.0.1:4204/docs/mockups/time-24h/; tab00:00/AOFF/BON/Pause/120giây-ngày/1×. Reload09:00/cảhaiON. Bước tiếp theo khuyến nghị: Khiêm xem07:00/12:00/17:00/00:00, thử công tắc/thời tiết và phản hồi hoặc chốt hình ảnh. Tích hợp game cần kế hoạch và Approve riêng.
+
+## TIME-24H-WORKING-MONITORS — 2026-10-26 — mockup LOCAL chờ review
+
+Khiêm báo công tắc đè lên Project và Approve sửa vị trí, thêm màn hình sáng/code–terminal khi đang làm việc. Công tắc chuyển sang bên trái đồng hồ, plate 24×32 worldpx tại y8,75; target tối thiểu 44px mở rộng về phía tường trống, không lấn clock/Project. Focus ring theo plate. Mỗi màn hình chỉ phát sáng khi người ở bàn có working=true; nghỉ trưa/bàn trống tối, không animate. Mặt kính dùng đúng anchor/skew của desk.png; mask theo thứ tự vật thể/nhân vật/ghế và UI để giữ che khuất. Không sửa art.
+
+Hoạt ảnh code/terminal/cursor chạy bằng nhịp UI 8fps, tiếp tục khi Pause; không làm thời gian/công việc chạy. Giảm hiệu ứng giữ frame tĩnh; guard không tích thời gian khi document.hidden. Cache mask khi phòng thay đổi và chỉ tô lại tile màn hình khi code đổi, không vẽ lại nội thất theo nhịp này. Giữ clock15, trời/thời tiết liên tục và model riêng trong RAM; chưa tích hợp game.
+
+Verified Node24: baseline18 → 20 tests, isolated build29inputs, strict typecheck/lint/format PASS. Edge/CUA: click Project hiện thông báo đúng và không toggle đèn; Tab/Space/Enter PASS; pan/zoom và mặt kính đi cùng camera. 09:00 hai màn hình đang làm sáng khi đèn OFF; 12:00 nghỉ trưa và20:00 nghỉ đều không có tile phát sáng; 18:30 A nghỉ/tối, B tăng ca/sáng dù cả hai OFF. Bốn bố cục1280×720/1920×1080 ×UI100/150 không tràn ngang/cắt controls, target≥44px. Bản ghi Pause6s/639khung giữ09:00, pixel màn hình thay đổi qua code/terminal; sau warmup worldPass giữ4, chỉ paints tăng. Giảm hiệu ứng6s/680khung giữ tick0/pixel/paint count. Console không warn/error.
+
+193 snapshot business giống bản trước;560file bảo vệ (game/art/dist/model/sky/clock) giữ SHA256. Smoke display-rAF10,015s ở1920/UI100,Pause,2phòng/2màn hình hoạt ảnh:598mẫu,mean16,77ms,p9525,3ms,max67,1ms,23khung>33ms,không gap>100ms. Không coi smoke này là chứng nhận60FPS/fullgame/GPU. Fullgame verify/E2E/soak/balance, nhiều nhân viên/8appearances, native hidden-tab/Safari/Firefox, axe/human screen reader NOT_RUN.
+
+Evidence/bản trước/log/pixel/recordings/ảnh/receipt: `evidence/time-24h/working-monitors-2026-10-26/`. Review http://127.0.0.1:4204/docs/mockups/time-24h/; tab18:30, cả haiOFF,Pause,120giây/ngày,1×. Reload mặc định09:00/cả haiON. Owner visual acceptance OPEN; không push/upload/deploy. Bước tiếp theo khuyến nghị: Khiêm xem công tắc và màn hình tăng ca ở18:30, phản hồi hoặc chốt mockup. Tích hợp game cần kế hoạch/Approve riêng.
+
+## TIME-24H-WALL-LIGHT-SWITCH — 2026-10-26 — công tắc trên tường sẵn sàng review
+
+Khiêm đã chấp nhận clock15/bầu trời và Approve dựng công tắc nhỏ bên phải đồng hồ. Mỗi văn phòng có trạng thái đèn riêng, mặc định bật, chỉRAM. Công tắc I/O vẽ cùng mặt phẳng tường; nút HTML trong suốt theo camera, vùng bấm tối thiểu44px, hỗ trợ Tab/Enter/Space, title và aria-pressed. Ẩn target khi ngoài canvas, Căn giữa khôi phục. Nhãn Đèn văn phòng đồng bộ. Tắt: bỏ glow/filament sáng, chỉ tô tối lớp phòng theo sáng tự nhiên; clock/công tắc/overlay giữ đọc rõ. Không đổi bầu trời,clock15,model,cost/save hoặc game.
+
+Verified: baseline16→18tests; build riêng28inputs/typecheck/lint/format PASS. Edge/CUA: click, Tab/Enter/Space; toggle khiPause không đổi time/business; hai phòng độc lập; pan/zoom vẫn click đúng, ra ngoài khung ẩn target vàFit khôi phục. Pixel sàn A: bật[238,229,213],tắt ban ngày[197,192,181],tắt ban đêm[66,73,77]; B không đổi khi chỉtoggleA; sky/exterior giữ nguyên;clockbright1226 ở00:00 giữ đọc rõ.193snapshot business bằng nhau;559file bảo vệ giữSHA256. Smoke display-rAF10giây:325mẫu,mean30,91ms,p9550,1ms,max91,6ms; hiệu năng vẫn dao động, không coi làPASS60FPS/game/GPU. Fullgame verify/E2E/FPS/soak/balance/native browsers/axe/human screen reader NOT_RUN.
+
+Bốn bố cục1280/1920 ×UI100/150 không tràn/cắt controls, target44px; console zero warn/error. Review http://127.0.0.1:4204/docs/mockups/time-24h/;tab00:00/AOFF/BON/Pause/120giây-ngày/1×; reload mặc địnhcảhaiON09:00. Evidence: evidence/time-24h/wall-light-switch-2026-10-26/; chi tiết docs/TIME_24H_LOCAL_PROTOTYPE.md. Bản trước trongbefore;clock15/bầu trời là baseline owner chấp nhận, công tắc chờ review. Chưa tích hợp game/push/upload/deploy. Bước tiếp theo: Khiêm tải lại, thử công tắc cạnh đồng hồ ở00:00, phản hồi/chốt vị trí và độ tối.
+
+## TIME-24H-CLOCK-15 — 2026-10-26 — đồng hồ theo bước 15 phút, chờ review
+
+Khiêm đã review/đồng ý nền trống và bầu trời chuyển động liên tục, rồi Approve riêng chỉnh đồng hồ. Đã thêm displayClock.ts dùng RULES.stepMinutes: làm tròn xuống mốc15phút chỉ khi hiển thị. HUD, nhãn giờ, hai đồng hồ treo tường và nhãn accessible cùng09:00→09:15→09:30→09:45; tại09:07 vẫn09:00. Giữ raw visualTime cho bầu trời/thời tiết. Không đổi model, coefficients, lịch làm, art/save hoặc tích hợp game.
+
+Verified Node24: baseline14→cuối16tests; build riêng27inputs/typecheck/lint/format PASS. Edge/CUA:3bản ghi6giây ở1×/2×/4×,571khung; HUD/nhãn/accessible cùngmốc15, pixel chữ giữ nguyên trong bước và đổi khi qua bước, thiên thể vẫn đổi vị trí trong mỗi bước. Qua23:45→00:00 đúng; Pause thủ công tại09:04 hiển thị09:00 và giữ cả clock/sky; nút+15 đưa tất cả về09:15.193snapshot business giống trước;558file bảo vệ, gồm code bầu trời/thời tiết/lighting/model/game/art/dist, giữSHA256. Console zero warning/error. Không chạy lại fullgame verify/E2E/FPS/soak/balance/native browsers/axe hoặc toàn bộ ma trận layout; giữ các giới hạn hiệu năng/human review từ checkpoint trước.
+
+Review http://127.0.0.1:4204/docs/mockups/time-24h/;09:00/Nắng/120giây-ngày/1×/Pause. Evidence/bản trước/log/recordings/pixel signatures/ảnh: evidence/time-24h/clock-step-15-2026-10-26/; docs/TIME_24H_LOCAL_PROTOTYPE.md. Bầu trời được owner chấp nhận; thay đổi clock15 chờ review. Tích hợp game/push/upload/deploy NOT_AUTHORIZED. Bước tiếp theo: Khiêm tải lại mockup và bấmChạy để xác nhận đồng hồ nhảy15phút trong khi trời/thời tiết liên tục; phản hồi hoặc chốt.
+
+## TIME-24H-SMOOTH-SKY — 2026-10-26 — nền trống và chuyển động liên tục, chờ review
+
+Khiêm không chấp nhận nền sân, sau đó Approve bỏ cảnh mặt đất và làm mượt bầu trời. Đã bỏ sân/cỏ/đường/cây/nhà xa; giữ mây/nắng/trăng/sao và 5 thời tiết. Một visualTime chung cập nhật theo rAF cho hai Canvas; HUD/đồng hồ theo phút game, công việc vẫn theo timeline 15 phút. Màu trời/mây chuyển dần; thiên thể theo cung liên tục, alpha mọc/lặn, sao mờ/sáng dần. Có nút Xem bình minh 05:00 và Xem hoàng hôn 17:00. Foreground có alpha được cache riêng để không vẽ lại toàn bộ nội thất chỉ vì bầu trời đổi. Chỉ mockup; không tích hợp game hoặc đổi art/save/rules.
+
+Verified Node24: baseline 12 → cuối 14 tests; build riêng 26 inputs/typecheck/lint/format PASS. 193 snapshot nghiệp vụ giống trước, 554 file bảo vệ giữ SHA256. Edge/CUA bản cuối: 5 bản ghi 6 giây qua bình minh, hoàng hôn, 00:00 và tốc độ 1×/2×/4×; tổng 1.794 khung, mọi khung kế tiếp có thời gian mới, hai phương án khớp bầu trời. Bố cục 1280/1920 × UI100/150 không tràn ngang/cắt controls. Lượt đo ổn định 1920×1080/UI150 sau cache: 597 mẫu/10,01s, mean16,75ms, p9518,6ms, 2 khung >33ms, không khoảng >100ms. 1280×720/UI100: 552 mẫu, mean18,12ms, p9533,2ms, max52ms, 32 khung >33ms. Mưa gió còn dao động; chỉ smoke display-rAF, không chứng nhận 60FPS/game/GPU. Các lượt trước tối ưu/cold start giữ trong evidence.
+
+48h ở24giây/ngày/4× tự dừng đúng2880phút, kết quả như trước; Phát lại/Pause/pan/zoom/giảm hiệu ứng đạt, console zero warn/error. Review http://127.0.0.1:4204/docs/mockups/time-24h/; tab05:00/Nắng/120giây-ngày/1×/Pause. Evidence/bản trước/ảnh/log/hash/replay/recordings: evidence/time-24h/smooth-sky-2026-10-25/ (bắt đầu 25-10, hoàn thành 26-10); giải thích trong docs/TIME_24H_LOCAL_PROTOTYPE.md. Owner visual acceptance OPEN. Fullgame verify/E2E/FPS/soak/balance/native Safari/Firefox/axe/human playtest/native hidden-tab mới NOT_RUN. Không push/upload/deploy. Bước tiếp theo: Khiêm chọn Xem bình minh hoặc Xem hoàng hôn rồi Chạy để phản hồi/chốt mockup; tích hợp cần kế hoạch và Approve riêng.
+
 ## OFFICE-GEARS-CHAIR-V2 — 2026-10-25 — đã sửa LOCAL, chờ nghiệm thu trực quan
 
 Khiêm Approve hai mục. Working có hai bánh răng to–nhỏ8/6răng quay ngược, chu kỳ4/3giây; nhịpUI30fps riêng tiếp tục khi Pause, static khi giảm chuyển động và ngừng khi document hidden. Cache nền nhỏ theo ID/DPR khôi phục viền trước mỗi frame, không vẽ lại văn phòng theo nhịp UI; tile tái sử dụng/thu hồi theo lifecycle. Mask mép mặt ghế sửa phần chân bên xa còn đè lên ghế, giữ chân gần ở phía trước; không đổi tâm/atlas. Source: Office.tsx/officeOverlay.ts; tests mở rộng office-display.spec.ts; profile-browser.mjs tách world pass/badge blit. Giữ game rules/save/T0.3/V4/G–H; prototype24h thay đổi song song ngoài task được giữ nguyên và ghi riêng trong preservation.

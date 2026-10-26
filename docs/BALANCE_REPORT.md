@@ -1,4 +1,10 @@
-# Báo cáo cân bằng T0.3
+# Báo cáo cân bằng — T0.4 và lịch sử
+
+## T0.4 — đối chứng 24h, 2026-10-26
+
+Owner đã duyệt D1–D8/G0–G8. Engine mới chạy 900 + 1.200 market + 270 policy, không có lỗi invariant hoặc command bị từ chối. So với baseline T0.3 ghép seed: median WP −5,06%…+0,61%, median expense −0,13%…+2,20%; survival 900/900. Outsourcing/Tough thắng 98→90/100 là cờ OPEN; Product/Startup vẫn 100/100 mỗi nhóm. Không chỉnh tham số để bot thắng.
+
+Suite policy đóng đủ 180 ngày; bản before-horizon-correction là diagnostic cũ. Xem TIME_24H_INTEGRATION_REPORT.md và evidence/time-24h/integration-2026-10-26/final-balance/. Các bảng bên dưới là lịch sử T0.3. Human pacing và độ khó chưa được xác nhận.
 
 ## Kết quả đã chạy lại LOCAL macOS (2026-10-21)
 

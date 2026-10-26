@@ -9,7 +9,7 @@ import { resolveAppearance } from "../src/characters/resolve";
 import { ARCHETYPES } from "../src/content/catalog";
 import { createGame } from "../src/simulation/create";
 import { transition } from "../src/simulation/engine";
-import { decodeSave, encodeSave } from "../src/persistence/saves";
+import { decodeSave, encodeSave, checksum } from "../src/persistence/saves";
 import { validateState } from "../src/persistence/schema";
 import before from "./fixtures/character-business-v2.json";
 import legacy from "./fixtures/character-legacy-v2.json";
@@ -41,18 +41,32 @@ describe("authored character identity and legacy saves", () => {
     for (const profile of ARCHETYPES)
       expect(APPEARANCE_IDS).toContain(appearanceForArchetype(profile.id));
   });
-  it("preserves the actual pre-change business/RNG outcomes across strategies and seeds", () => {
+  it("preserves recorded T0.3 snapshots on migration and replays the T0.4 future deterministically", async () => {
     for (const fixture of before) {
-      const state = createGame(fixture.options as NewGameOptions);
-      expect(withoutAppearance(state)).toEqual(fixture.initial);
-      const hired = transition(state, {
-        type: "hire",
-        candidateId: state.candidates[0].id,
-      });
-      expect(hired.ok).toBe(true);
-      const after = transition(hired.state, { type: "tick", days: 35 });
-      expect(after.ok).toBe(true);
-      expect(withoutAppearance(after.state)).toEqual(fixture.after);
+      const current = createGame(fixture.options as NewGameOptions);
+      expect(current.rng).toBe(fixture.initial.rng);
+      expect(current.cash).toBe(fixture.initial.cash);
+      for (const recorded of [fixture.initial, fixture.after]) {
+        const envelope = {
+          format: "software-ceo-save",
+          schemaVersion: 2,
+          algorithm: "SHA-256",
+          checksum: await checksum(recorded),
+          state: recorded,
+        };
+        const restored = await decodeSave(JSON.stringify(envelope));
+        expect(withoutAppearance(restored)).toMatchObject({
+          ...recorded,
+          version: 3,
+          balanceVersion: "T0.4",
+          day: recorded.day + 1,
+        });
+        expect(restored.clock.lastClosedDay).toBe(recorded.day);
+        const copy = await decodeSave(await encodeSave(restored));
+        expect(transition(restored, { type: "tick", days: 35 })).toEqual(
+          transition(copy, { type: "tick", days: 35 }),
+        );
+      }
     }
   });
   it("projects registered legacy identities read-only and honors explicit metadata", () => {
@@ -74,9 +88,19 @@ describe("authored character identity and legacy saves", () => {
       resolveAppearance(structuredClone(unknown)),
     );
   });
-  it("loads the genuine old v2 envelope without adding fields or changing checksum input", async () => {
+  it("loads genuine v2 bytes without changing identities or checksum input", async () => {
     const restored = await decodeSave(JSON.stringify(legacy));
-    expect(restored).toEqual(before[0].initial);
+    expect(restored).toMatchObject({
+      ...before[0].initial,
+      version: 3,
+      balanceVersion: "T0.4",
+      day: 1,
+    });
+    expect(restored.clock).toEqual({
+      minute: 0,
+      opened: false,
+      lastClosedDay: 0,
+    });
     expect(restored.employees[1]).not.toHaveProperty("appearance");
     expect(resolveAppearance(restored.employees[1])).toBe(
       "female-trousers-short",

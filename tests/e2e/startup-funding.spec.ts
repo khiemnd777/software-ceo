@@ -14,8 +14,15 @@ test("Startup learns, ships its MVP, signs one funding round and changes quarter
   await page.getByRole("button", { name: "Thu gọn hoặc mở hướng dẫn" }).click();
   const nav = (name: string) => openOffice(page, name);
   const days = async (n: number) => {
-    for (let i = 0; i < n; i++)
-      await page.getByRole("button", { name: "Ngày tiếp" }).click();
+    const currentDay = async () =>
+      Number(
+        (await page.locator(".date").innerText()).match(/NGÀY\s+(\d+)/)?.[1],
+      );
+    const target = (await currentDay()) + n;
+    let guard = 0;
+    while ((await currentDay()) < target && guard++ < n * 2 + 10)
+      await page.getByRole("button", { name: "Qua ngày" }).click();
+    expect(await currentDay()).toBe(target);
   };
   for (const experiment of [
     "Phỏng vấn khách hàng",
@@ -78,7 +85,9 @@ test("Startup learns, ships its MVP, signs one funding round and changes quarter
   );
   const target = (Math.floor(day / 90) + 1) * 90 + 1;
   await days(target - day);
-  day = target;
+  day = Number(
+    (await page.locator(".date").innerText()).match(/NGÀY\s+(\d+)/)?.[1],
+  );
   await page
     .getByRole("button", {
       name: "Chuyển trọng tâm sang outsourcing",

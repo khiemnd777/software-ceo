@@ -66,7 +66,7 @@ test("blocked IndexedDB explains recovery and still downloads a valid JSON backu
   const downloaded = page.waitForEvent("download");
   await page.getByRole("button", { name: "Xuất JSON", exact: true }).click();
   expect((await downloaded).suggestedFilename()).toMatch(
-    /Software_CEO_.*day0.json/,
+    /Software_CEO_.*day1.json/,
   );
   await expect(page.getByRole("status")).toContainText("Đã xuất");
 });

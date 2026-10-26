@@ -50,6 +50,9 @@ describe("durable and defensive saves", () => {
   it("migrates the documented v1 envelope without dropping pending or RNG state", async () => {
     const current = fresh();
     const legacy: Record<string, unknown> = { ...current, version: 1 };
+    for (const k of ["clock", "accrual", "workDay", "discovery", "scene"])
+      delete legacy[k];
+    legacy.day = current.day - 1;
     delete legacy.balanceVersion;
     delete legacy.tutorial;
     const envelope = {
@@ -67,7 +70,7 @@ describe("durable and defensive saves", () => {
     s.cash++;
     const envelope = {
       format: "software-ceo-save",
-      schemaVersion: 2,
+      schemaVersion: 3,
       algorithm: "SHA-256",
       checksum: await checksum(s),
       state: s,
@@ -97,8 +100,8 @@ describe("durable and defensive saves", () => {
   it("keeps autosave independent of the three manual slots", async () => {
     const s = transition(fresh(), { type: "tick", days: 7 }).state;
     await saveGame("auto", s, null);
-    expect((await loadSave("auto")).day).toBe(7);
-    expect((await loadSave("2")).day).toBe(0);
+    expect((await loadSave("auto")).clock.lastClosedDay).toBe(7);
+    expect((await loadSave("2")).clock.lastClosedDay).toBe(0);
     expect(invariantErrors(s)).toEqual([]);
   });
   it("rejects oversized imports before parsing", async () => {

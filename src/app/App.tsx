@@ -66,11 +66,14 @@ export function App() {
     command: Command;
   } | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    store.setDaySeconds(initialSettings.daySeconds);
+  }, [initialSettings.daySeconds]);
   const l = (vi: string, en: string) => (locale === "vi" ? vi : en);
   const dispatch = (c: Command) => {
     audioPlayer.unlock();
     const ok = store.dispatch(c);
-    if (c.type !== "tick" && c.type !== "tutorial")
+    if (c.type !== "tick" && c.type !== "advanceTime" && c.type !== "tutorial")
       audioPlayer.cue(
         ok
           ? c.type === "release"
@@ -88,11 +91,13 @@ export function App() {
   };
   useEffect(() => {
     let last = performance.now();
-    const timer = window.setInterval(() => {
-      const now = performance.now();
+    let timer = 0;
+    const advance = (now: number) => {
       store.advance(now - last);
       last = now;
-    }, 100);
+      timer = requestAnimationFrame(advance);
+    };
+    timer = requestAnimationFrame(advance);
     const hidden = () => {
       last = performance.now();
       audioPlayer.visibility();
@@ -108,14 +113,20 @@ export function App() {
     };
     document.addEventListener("visibilitychange", hidden);
     return () => {
-      clearInterval(timer);
+      cancelAnimationFrame(timer);
       document.removeEventListener("visibilitychange", hidden);
     };
   }, []);
   useEffect(() => {
-    writeSettings({ locale, scale, reducedMotion: motion, ...audio });
+    writeSettings({
+      locale,
+      scale,
+      reducedMotion: motion,
+      daySeconds: snap.daySeconds,
+      ...audio,
+    });
     audioPlayer.configure(audio.music, audio.sfx, audio.volume);
-  }, [locale, scale, motion, audio]);
+  }, [locale, scale, motion, audio, snap.daySeconds]);
   useEffect(() => {
     const unlock = () => audioPlayer.unlock();
     window.addEventListener("pointerdown", unlock);
@@ -151,10 +162,15 @@ export function App() {
       });
   }, []);
   useEffect(() => {
-    if (!s || s.day === 0 || s.status !== "playing" || !autoReady.current)
+    if (
+      !s ||
+      s.clock.lastClosedDay === 0 ||
+      s.status !== "playing" ||
+      !autoReady.current
+    )
       return;
-    const wk = Math.floor(s.day / 7);
-    if (wk === autoWeek.current || s.day % 7 !== 0) return;
+    const wk = Math.floor(s.clock.lastClosedDay / 7);
+    if (wk === autoWeek.current || s.clock.lastClosedDay % 7 !== 0) return;
     autoWeek.current = wk;
     const snapshot = s;
     saveQueue.current = saveQueue.current.then(async () => {
@@ -179,11 +195,18 @@ export function App() {
   }, [s]);
   const restoreGame = (state: NonNullable<typeof s>) => {
     store.restore(state);
+    if (state.accrual.legacyThroughDay !== null)
+      store.notify(
+        copy(
+          "Đã tải và tạm dừng lúc00:00 ngày tiếp theo. Kỳ hiện tại giữ cách chốt lương cũ; kỳ sau tính theo thời gian làm việc.",
+          "Loaded and paused at00:00 on the following day. The current billing period keeps its previous payroll rule; time-based accrual starts next period.",
+        ),
+      );
     setWorkSession(createWorkSession());
     setUiSession((n) => n + 1);
     setSelected("");
     setOutcomeClosed(false);
-    autoWeek.current = Math.floor(state.day / 7);
+    autoWeek.current = Math.floor(state.clock.lastClosedDay / 7);
     setScreen("game");
     setView("office");
   };
@@ -524,6 +547,8 @@ export function App() {
         )}{" "}
         {settings && (
           <SettingsDialog
+            daySeconds={snap.daySeconds}
+            setDaySeconds={store.setDaySeconds.bind(store)}
             locale={locale}
             scale={scale}
             motion={motion}
@@ -553,6 +578,7 @@ export function App() {
   return (
     <div className="game-runtime">
       <SimulateWorkspace
+        visualTime={store.visualTime}
         sessionKey={uiSession}
         panel={panel}
         speed={snap.speed}
@@ -583,6 +609,8 @@ export function App() {
       )}
       {settings && (
         <SettingsDialog
+          daySeconds={snap.daySeconds}
+          setDaySeconds={store.setDaySeconds.bind(store)}
           locale={locale}
           scale={scale}
           motion={motion}

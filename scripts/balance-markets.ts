@@ -1,3 +1,5 @@
+import { mkdirSync as ensureEvidenceDir } from "node:fs";
+import { join as evidencePath } from "node:path";
 import { writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { readFileSync, readdirSync } from "node:fs";
@@ -6,6 +8,9 @@ import { invariantErrors } from "../src/persistence/schema";
 import { BALANCE } from "../src/content/catalog";
 import { CONCEPTS } from "../src/content/products";
 
+const evidenceDir = process.env.CEO_EVIDENCE_DIR ?? "evidence";
+ensureEvidenceDir(evidenceDir, { recursive: true });
+const output = (name: string) => evidencePath(evidenceDir, name);
 const sourceFiles = ["src/simulation", "src/gameplay", "src/content"].flatMap(
   (dir) =>
     readdirSync(dir)
@@ -53,7 +58,7 @@ for (const concept of CONCEPTS.filter((c) => c.id !== "retail"))
         runs.push(row);
         if (errors.length || r.rejected) {
           writeFileSync(
-            "evidence/balance-markets-failure.json",
+            output("balance-markets-failure.json"),
             JSON.stringify({ row, state: r.state }, null, 2),
           );
           throw Error(
@@ -92,7 +97,7 @@ const groups = CONCEPTS.filter((c) => c.id !== "retail").flatMap((c) =>
   ),
 );
 writeFileSync(
-  "evidence/local-balance-markets.json",
+  output("local-balance-markets.json"),
   JSON.stringify(
     {
       createdAt: new Date().toISOString(),

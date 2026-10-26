@@ -7,6 +7,8 @@ export interface AudioSettings {
   volume: number;
 }
 export function SettingsDialog({
+  daySeconds,
+  setDaySeconds,
   locale,
   scale,
   motion,
@@ -17,6 +19,8 @@ export function SettingsDialog({
   onClose,
   onMenu,
 }: {
+  daySeconds: 24 | 60 | 120;
+  setDaySeconds: (v: 24 | 60 | 120) => void;
   locale: Locale;
   scale: number;
   motion: boolean;
@@ -54,6 +58,22 @@ export function SettingsDialog({
           <option value={100}>100%</option>
           <option value={125}>125%</option>
           <option value={150}>150%</option>
+        </select>
+      </label>
+      <label>
+        {l("Thời gian một ngày ở 1×", "Day length at 1×")}
+        <select
+          aria-label={l("Nhịp thời gian", "Day length")}
+          value={daySeconds}
+          onChange={(e) =>
+            setDaySeconds(Number(e.target.value) as 24 | 60 | 120)
+          }
+        >
+          {([24, 60, 120] as const).map((v) => (
+            <option key={v} value={v}>
+              {v} {l("giây/ngày", "seconds/day")}
+            </option>
+          ))}
         </select>
       </label>
       <label className="check-label">
@@ -142,8 +162,14 @@ export function AboutDialog({
       <h2 id="about-title">Software CEO</h2>
       <p>
         {l(
-          "Bạn điều hành công ty bằng ba lượt CEO mỗi tuần. Phân công nhân viên và thời gian mô phỏng không tốn lượt. Nhịp chuẩn: 5 giây thực cho một ngày game.",
-          "Lead your company with three CEO actions per week. Assignments and advancing time do not spend actions. At normal speed, five seconds advance one game day.",
+          "Bạn điều hành công ty bằng ba lượt CEO mỗi tuần. Phân công nhân viên và thời gian mô phỏng không tốn lượt. Mặc định 60 giây thực cho một ngày game ở 1×. Có thể chọn 24, 60 hoặc 120 giây trong Cài đặt.",
+          "Lead your company with three CEO actions per week. Assignments and advancing time do not spend actions. At 1×, a game day defaults to 60 real seconds. Choose 24, 60 or 120 seconds in Settings.",
+        )}
+      </p>
+      <p>
+        {l(
+          "Làm việc 09:00–12:00 và 13:00–18:00; nghỉ trưa 12:00–13:00. Tăng ca 18:00–20:00 khi bật. Đồng hồ nhảy mỗi 15 phút; bầu trời chuyển động liên tục. Lương và vận hành phát sinh theo thời gian, thanh toán cuối tháng.",
+          "Work runs 09:00–12:00 and 13:00–18:00, with lunch 12:00–13:00. Enabled overtime runs 18:00–20:00. The clock advances every 15 minutes while the sky moves continuously. Payroll and operating costs accrue over time and settle monthly.",
         )}
       </p>
       <h3>{l("Điều khiển", "Controls")}</h3>

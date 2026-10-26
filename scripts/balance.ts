@@ -1,3 +1,5 @@
+import { mkdirSync as ensureEvidenceDir } from "node:fs";
+import { join as evidencePath } from "node:path";
 import { writeFileSync, readFileSync, readdirSync, mkdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { performance } from "node:perf_hooks";
@@ -8,6 +10,9 @@ import { invariantErrors } from "../src/persistence/schema";
 import { BALANCE } from "../src/content/catalog";
 import type { Strategy, Difficulty, Policy } from "../src/simulation/types";
 mkdirSync("evidence", { recursive: true });
+const evidenceDir = process.env.CEO_EVIDENCE_DIR ?? "evidence";
+ensureEvidenceDir(evidenceDir, { recursive: true });
+const output = (name: string) => evidencePath(evidenceDir, name);
 const sourceFiles = ["src/simulation", "src/gameplay", "src/content"].flatMap(
   (dir) =>
     readdirSync(dir)
@@ -36,7 +41,7 @@ for (const strategy of strategies)
       runs.push(scenarioSummary(r));
       if (r.errors.length) {
         writeFileSync(
-          "evidence/balance-failure.json",
+          output("balance-failure.json"),
           JSON.stringify(
             { summary: scenarioSummary(r), state: r.state },
             null,
@@ -117,8 +122,11 @@ for (const strategy of strategies) {
     difficulty: "standard",
     seed: 42,
   });
-  while (s.day < 1080 && s.status === "playing")
-    s = transition(s, { type: "tick", days: Math.min(30, 1080 - s.day) }).state;
+  while (s.clock.lastClosedDay < 1080 && s.status === "playing")
+    s = transition(s, {
+      type: "tick",
+      days: Math.min(30, 1080 - s.clock.lastClosedDay),
+    }).state;
   passive.push(
     scenarioSummary({
       state: s,
@@ -156,10 +164,10 @@ const report = {
   passive,
   challenges,
 };
-writeFileSync("evidence/balance-900.json", JSON.stringify(report, null, 2));
+writeFileSync(output("balance-900.json"), JSON.stringify(report, null, 2));
 const keys = Object.keys(runs[0]);
 writeFileSync(
-  "evidence/balance-900.csv",
+  output("balance-900.csv"),
   [
     keys.join(","),
     ...runs.map((r) =>

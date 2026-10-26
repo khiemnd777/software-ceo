@@ -20,6 +20,7 @@ export interface ScenarioResult {
   commands: number;
   rejected: number;
   errors: string[];
+  rejections?: { day: number; command: Command; error: unknown }[];
 }
 export function playScenario(
   strategy: Strategy,
@@ -41,11 +42,15 @@ export function playScenario(
   let commands = 0,
     rejected = 0;
   const errors: string[] = [];
+  const rejections: NonNullable<ScenarioResult["rejections"]> = [];
   const send = (c: Command) => {
     const r = transition(s, c);
     commands++;
     if (r.ok) s = r.state;
-    else rejected++;
+    else {
+      rejected++;
+      rejections.push({ day: s.day, command: c, error: r.error });
+    }
     return r.ok;
   };
   const assign = (eid: string, target: string, kind: TaskKind) => {
@@ -59,7 +64,7 @@ export function playScenario(
     send({ type: "assign", employeeId: eid, target, kind });
   };
   if (policy !== "balanced") send({ type: "policy", policy });
-  while (s.day < days && s.status === "playing") {
+  while (s.clock.lastClosedDay < days && s.status === "playing") {
     for (const event of s.events.filter(
       (e) => !e.resolved && e.due <= s.day && e.expires > s.day,
     )) {
@@ -206,7 +211,7 @@ export function playScenario(
         w &&
         w.done >= w.actual &&
         !w.bugs.some((b) => b.known) &&
-        w.qa >= w.actual * 0.12
+        w.qa >= Math.max(1, w.actual * 0.12)
       ) {
         send({ type: "release", workId: w.id });
         w = undefined;
@@ -276,7 +281,7 @@ export function playScenario(
           s.reputation >= 50
         )
           send({ type: "upgradeOffice" });
-        else {
+        else if (s.employees.length < (s.officeTier === 1 ? 5 : 12)) {
           const candidate = [...s.candidates].sort(
             (a, b) =>
               (a.role === "ops" ? -2 : a.role === "qa" ? -1 : 0) -
@@ -317,7 +322,7 @@ export function playScenario(
       }
     }
     if (
-      s.day % 90 === 0 &&
+      s.clock.lastClosedDay % 90 === 0 &&
       s.day > 0 &&
       s.actions &&
       s.cash > monthlyCosts(s) * 12
@@ -327,7 +332,7 @@ export function playScenario(
       );
       if (e) send({ type: "raise", employeeId: e.id });
     }
-    send({ type: "tick", days: Math.min(7, days - s.day) });
+    send({ type: "tick", days: Math.min(7, days - s.clock.lastClosedDay) });
     const b = balance(s);
     if (
       b.cash !== s.cash ||
@@ -342,17 +347,19 @@ export function playScenario(
       break;
     }
   }
-  return { state: s, commands, rejected, errors };
+  return { state: s, commands, rejected, errors, rejections };
 }
 export function scenarioSummary(r: ScenarioResult) {
   const s = r.state,
     ev = campaignEvaluation(s);
   return {
+    totalWork: s.weeks.reduce((n, w) => n + w.work, 0) + s.metrics.workWeek,
+    totalExpense: s.ledger.reduce((n, e) => n + e.expense, 0) / 100,
     seed: s.seed,
     strategy: s.strategy,
     difficulty: s.difficulty,
     policy: s.policy,
-    day: s.day,
+    day: s.clock.lastClosedDay,
     status: s.status,
     victory: s.campaignWon ?? ev.success,
     cash: s.cash / 100,

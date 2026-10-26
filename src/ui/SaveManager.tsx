@@ -2,6 +2,8 @@ import { useLayoutEffect, useRef, useState } from "react";
 import type { Locale, State } from "../simulation/types";
 import {
   listSaves,
+  listLegacyBackups,
+  type LegacyBackup,
   loadSave,
   saveGame,
   encodeSave,
@@ -23,6 +25,7 @@ export function SaveManager({
 }) {
   const ref = useRef<HTMLDialogElement>(null),
     file = useRef<HTMLInputElement>(null);
+  const [backups, setBackups] = useState<LegacyBackup[]>([]);
   const [rows, setRows] = useState<SavedRow[]>([]),
     [message, setMessage] = useState(""),
     [busy, setBusy] = useState(false),
@@ -51,7 +54,13 @@ export function SaveManager({
               ),
     );
   };
-  const refresh = () => listSaves().then(setRows).catch(error);
+  const refresh = () =>
+    Promise.all([listSaves(), listLegacyBackups()])
+      .then(([rows, backups]) => {
+        setRows(rows);
+        setBackups(backups);
+      })
+      .catch(error);
   useLayoutEffect(() => {
     const element = ref.current!;
     element.showModal();
@@ -68,6 +77,7 @@ export function SaveManager({
       setRows((prev) => [...prev.filter((r) => r.slot !== slot), result]);
       setMessage(l("Đã lưu công ty.", "Company saved."));
       setOverwrite(null);
+      void refresh();
     } catch (e) {
       error(e);
       void refresh();
@@ -192,6 +202,36 @@ export function SaveManager({
           </div>
         );
       })}
+      {backups.length > 0 && (
+        <details className="legacy-backups">
+          <summary>
+            {l("Bản sao giữ trước nâng cấp", "Backups kept before upgrade")}
+          </summary>
+          <p>
+            {l(
+              "Xuất file gốc để dùng với bản game cũ. Bản sao này không bị ghi đè bởi lần lưu hiện tại.",
+              "Export the original file for the previous game version. Current saves do not overwrite these backups.",
+            )}
+          </p>
+          {backups.map((b) => (
+            <button
+              key={b.id}
+              onClick={() => {
+                const url = URL.createObjectURL(
+                  new Blob([b.payload], { type: "application/json" }),
+                );
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `Software_CEO_legacy_${b.slot}_${b.revision}.json`;
+                a.click();
+                setTimeout(() => URL.revokeObjectURL(url), 5000);
+              }}
+            >
+              {l("Xuất bản gốc", "Export original")} {b.slot} · r{b.revision}
+            </button>
+          ))}
+        </details>
+      )}
       {overwrite && (
         <div className="forecast-box">
           <strong>

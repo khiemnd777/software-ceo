@@ -28,7 +28,7 @@ it.each([
     expect(r.state.product.concept).toBe(concept);
     expect(r.state.product.segment).toBe(segment);
     expect(r.state.product.features.length).toBeGreaterThan(0);
-    expect(r.state.day).toBe(360);
+    expect(r.state.clock.lastClosedDay).toBe(360);
     expect(r.rejected).toBe(0);
     expect([...r.errors, ...invariantErrors(r.state)]).toEqual([]);
   },

@@ -1,3 +1,5 @@
+import type { ClockState } from "./clock";
+import type { AccrualState } from "./accrual";
 import type { AppearanceId } from "../characters/catalog";
 
 export type Strategy = "outsourcing" | "product" | "startup";
@@ -281,8 +283,18 @@ export interface Tutorial {
   seen: string[];
   completed: boolean;
 }
+export interface WorkBudget {
+  roll: number;
+  exposure: number;
+  emitted: boolean;
+}
 export interface State {
-  version: 2;
+  version: 3;
+  clock: ClockState;
+  accrual: AccrualState;
+  workDay: { day: number; budgets: Record<string, WorkBudget> };
+  discovery: Record<string, { required: number; done: number }>;
+  scene: { officeLightsOn: boolean };
   balanceVersion: string;
   seed: number;
   rng: number;
@@ -343,6 +355,8 @@ export interface State {
 }
 export type Command =
   | { type: "tick"; days?: number }
+  | { type: "advanceTime"; steps: number }
+  | { type: "officeLights"; enabled: boolean }
   | {
       type: "assign";
       employeeId: string;
@@ -410,6 +424,7 @@ export interface Transition {
   ok: boolean;
   error?: Copy;
   critical: boolean;
+  steps?: number;
 }
 export interface NewGameOptions {
   name: string;
